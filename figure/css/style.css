@@ -46,6 +46,7 @@ h1 em, h2 em { font-style: normal; color: var(--fire); }
 .ghost span { display: block; will-change: transform; }
 .aura { position: absolute; left: 0; top: 0; width: 90vmin; height: 90vmin; margin: -45vmin 0 0 -45vmin; border-radius: 50%; pointer-events: none; will-change: transform, opacity;
   background: radial-gradient(circle, rgba(255, 122, 26, .30) 0%, rgba(255, 122, 26, .12) 32%, rgba(91, 124, 255, .08) 52%, transparent 70%); }
+.aura.is-gold { background: radial-gradient(circle, rgba(255, 214, 80, .5) 0%, rgba(255, 170, 30, .24) 34%, rgba(255, 120, 0, .08) 56%, transparent 72%); }
 .ring { position: absolute; left: 50%; bottom: clamp(74px, 11vh, 110px); transform: translateX(-50%); color: var(--muted); pointer-events: none; transition: opacity .4s; }
 .ring span { padding: 6px 12px; border: 1px solid var(--line); border-radius: 99px; font-variant-numeric: tabular-nums; background: rgba(18, 18, 18, .7); }
 
@@ -73,7 +74,7 @@ body.intro .nav, body.intro .caps, body.intro .hud, body.intro .ring { opacity: 
 .cap--right, .cap--left { top: 50%; width: min(400px, calc(100% - 2 * var(--gutter))); }
 .cap--right { right: max(var(--gutter), 7vw); } .cap--left { left: max(var(--gutter), 7vw); }
 .cap--right h2, .cap--left h2 { font-size: clamp(2.6rem, 4.6vw, 4.6rem); }
-.cap--right p:not(.tag), .cap--left p:not(.tag) { margin: 18px 0 0; color: #cfccc6; }
+.cap--right p:not(.tag), .cap--left p:not(.tag) { margin: 18px 0 0; color: #dedbd5; text-shadow: 0 0 14px rgba(0, 0, 0, .95), 0 1px 3px rgba(0, 0, 0, .9); }
 .spec { list-style: none; padding: 0; margin: 22px 0 0; border-top: 1px solid var(--line); }
 .spec li { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .spec span { color: var(--muted); }

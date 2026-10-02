@@ -63,7 +63,7 @@
   // turns of the statue by scroll position: slow while we look closely, fast in the open
   const TURN = [[0, 0], [0.3, 1], [0.54, 1.3], [0.76, 1.72], [0.92, 3], [1, 3]];
   function turns(p) { let i = 0; while (i < TURN.length - 2 && p > TURN[i + 1][0]) i++; const a = TURN[i], b = TURN[i + 1]; return lerp(a[1], b[1], range(p, a[0], b[0])); }
-  const CHAP = [[0, '00 · Intro'], [0.14, '01 · Sculpt'], [0.36, '02 · Paint'], [0.58, '03 · Base'], [0.8, '04 · 360°']];
+  const CHAP = [[0, '00 · Intro'], [0.14, '01 · Impact'], [0.36, '02 · Focus'], [0.58, '03 · Ground'], [0.78, '04 · Full power']];
 
   /* ---------- canvases ---------- */
   const stage = $('#stage'), cv = $('#spin'), ctx = cv.getContext('2d'), em = $('#embers'), ectx = em.getContext('2d');
@@ -99,6 +99,8 @@
       ctx.drawImage(a, x, y, w, h);
       if (k > 0.04) { ctx.globalAlpha = k; ctx.drawImage(frame(i0 + 1), x, y, w, h); ctx.globalAlpha = 1; }
     }
+    if (gold > 0.01) { const gl = ctx.createRadialGradient(x + w * 0.5, y + h * 0.42, 0, x + w * 0.5, y + h * 0.42, h * 0.55); gl.addColorStop(0, `rgba(255,205,70,${(0.34 * gold).toFixed(3)})`); gl.addColorStop(1, 'rgba(255,170,30,0)');
+      ctx.globalCompositeOperation = 'overlay'; ctx.fillStyle = gl; ctx.fillRect(x, y, w, h); ctx.globalCompositeOperation = 'source-over'; }
     const fx = w * 0.14, fy = h * 0.12;
     edge(x, 0, x + fx, 0, x - 1, y - 1, fx + 1, h + 2); edge(x + w, 0, x + w - fx, 0, x + w - fx, y - 1, fx + 1, h + 2);
     edge(0, y, 0, y + fy, x - 1, y - 1, w + 2, fy + 1); edge(0, y + h, 0, y + h - fy, x - 1, y + h - fy, w + 2, fy + 1);
@@ -143,13 +145,50 @@
     gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.3, 'rgba(205,228,255,.75)'); gr.addColorStop(0.62, 'rgba(120,165,255,.3)'); gr.addColorStop(1, 'rgba(90,130,255,0)');
     g.fillStyle = gr; g.fillRect(-32, -32, 64, 64); return c;
   })();
+  const sprite = (w, h, stops) => {
+    const c = document.createElement('canvas'); c.width = w; c.height = h; const g = c.getContext('2d');
+    g.translate(w / 2, h / 2); g.scale(1, h / w);
+    const gr = g.createRadialGradient(0, 0, 0, 0, 0, w / 2); stops.forEach(([o, col]) => gr.addColorStop(o, col));
+    g.fillStyle = gr; g.fillRect(-w / 2, -w / 2, w, w); return c;
+  };
+  const flameGold = sprite(64, 128, [[0, 'rgba(255,255,235,1)'], [0.3, 'rgba(255,228,120,.8)'], [0.62, 'rgba(255,170,30,.32)'], [1, 'rgba(255,120,0,0)']]);
+  const orbGlow = sprite(128, 128, [[0, 'rgba(255,255,255,1)'], [0.18, 'rgba(190,230,255,.95)'], [0.45, 'rgba(70,150,255,.5)'], [1, 'rgba(30,90,255,0)']]);
+  // where the open hand is in the frame for each turntable frame it faces us (fractions of the frame)
+  const HAND = [[-12, .70, .25], [-8, .69, .25], [-4, .66, .25], [0, .64, .25], [4, .58, .245], [8, .52, .24], [12, .46, .245], [16, .41, .245], [20, .37, .24], [24, .34, .24], [28, .31, .24], [32, .30, .24], [36, .28, .255], [40, .285, .26], [44, .295, .265], [48, .32, .27]];
+  function handAt(f) {
+    if (f > 60) f -= N;
+    if (f < HAND[0][0] || f > HAND[HAND.length - 1][0]) return null;
+    let i = 0; while (i < HAND.length - 2 && f > HAND[i + 1][0]) i++;
+    const a = HAND[i], b = HAND[i + 1], k = clamp((f - a[0]) / (b[0] - a[0]));
+    return [lerp(a[1], b[1], k), lerp(a[2], b[2], k)];
+  }
+  let orbP = [], charge = 0, curFrame = 0, gold = 0, pulse = 9, clock = 0;
+  function orb(dt) {                                             // energy gathering in the open palm
+    const hp = handAt(curFrame); if (!hp || charge < 0.01) { orbP.length = 0; return; }
+    const x = box.x + hp[0] * box.w, y = box.y + hp[1] * box.h, R = box.w * 0.03 * (0.4 + charge) * (1 + 0.1 * Math.sin(clock * 17));
+    fctx.globalCompositeOperation = 'lighter';
+    fctx.globalAlpha = 0.5 * charge; fctx.drawImage(orbGlow, x - R * 6, y - R * 6, R * 12, R * 12);                     // wide halo
+    fctx.globalAlpha = charge; fctx.drawImage(orbGlow, x - R * 2.2, y - R * 2.2, R * 4.4, R * 4.4);                    // core
+    fctx.strokeStyle = `rgba(170,215,255,${(0.5 * charge).toFixed(3)})`; fctx.lineWidth = dpr;
+    for (let k = 0; k < 7; k++) { const a = clock * 1.6 + k * 0.9, l = R * (3 + 2 * Math.sin(clock * 5 + k * 2)); fctx.beginPath(); fctx.moveTo(x + Math.cos(a) * R * 0.8, y + Math.sin(a) * R * 0.8); fctx.lineTo(x + Math.cos(a) * l, y + Math.sin(a) * l); fctx.stroke(); }
+    if (orbP.length < 46 && Math.random() < charge) { const a = Math.random() * 6.283; orbP.push({ a, d: R * (5 + Math.random() * 5), s: 0.6 + Math.random() * 0.8 }); }
+    orbP = orbP.filter(q => (q.d -= q.s * R * 9 * dt) > R * 0.4);                                                      // motes pulled inward
+    for (const q of orbP) { q.a += dt * 2.4; const r = R * 0.35; fctx.globalAlpha = 0.8 * charge; fctx.drawImage(orbGlow, x + Math.cos(q.a) * q.d - r, y + Math.sin(q.a) * q.d - r, r * 2, r * 2); }
+    fctx.globalCompositeOperation = 'source-over'; fctx.globalAlpha = 1;
+  }
+  function powerUp() {                                           // the moment the aura turns: flash, ring, a column of fire
+    pulse = 0;
+    const cx = box.x + box.w * 0.5, feet = box.y + box.h * FEET;
+    for (let i = 0; i < (small ? 50 : 110); i++) { const s = (Math.random() - 0.5) * 0.6;
+      ki.push({ x: cx + s * box.w, y: feet - Math.random() * 0.1 * box.h, vx: s * box.w * 1.8, vy: -(1 + Math.random() * 1.7) * box.h, r: (0.05 + Math.random() * 0.1) * box.w, life: 0, max: 0.4 + Math.random() * 0.5, w: Math.random() * 6.28, gold: true }); }
+  }
   let ki = [], kiPower = 0, kiCarry = 0, box = { x: 0, y: 0, w: 1, h: 1 };
   function energy(dt, power) {
     const cx = box.x + box.w * 0.5, feet = box.y + box.h * FEET, bw = box.w, bh = box.h;
     kiCarry += power * dt * (small ? 60 : 110);
     while (kiCarry >= 1) { kiCarry--;
       const side = Math.random() < 0.72 ? (Math.random() < 0.5 ? -1 : 1) * (0.07 + Math.random() * 0.1) : (Math.random() - 0.5) * 0.12;   // mostly around the outline
-      ki.push({ x: cx + side * bw, y: feet - Math.random() * 0.16 * bh, vx: side * bw * 0.25, vy: -(0.45 + Math.random() * 0.75) * bh, r: (0.035 + Math.random() * 0.06) * bw, life: 0, max: 0.45 + Math.random() * 0.5, w: Math.random() * 6.28 });
+      ki.push({ gold: gold > 0.5, x: cx + side * bw * (1 + gold * 0.35), y: feet - Math.random() * 0.16 * bh, vx: side * bw * 0.25, vy: -(0.45 + Math.random() * 0.75) * bh * (1 + gold * 0.6), r: (0.035 + Math.random() * 0.06) * bw, life: 0, max: 0.45 + Math.random() * 0.5, w: Math.random() * 6.28 });
     }
     fctx.globalCompositeOperation = 'lighter';
     ki = ki.filter(q => (q.life += dt) < q.max);
@@ -157,13 +196,22 @@
       const k = q.life / q.max; q.x += (q.vx + Math.sin(q.w + q.life * 14) * bw * 0.05) * dt; q.y += q.vy * dt;
       const r = q.r * (1 - k * 0.55);
       fctx.globalAlpha = Math.sin(k * Math.PI) * 0.2 * Math.min(1.4, power + 0.4);
-      fctx.drawImage(flame, q.x - r * 0.7, q.y - r * 3.2, r * 1.4, r * 6.4);   // tall, thin tongues
+      fctx.drawImage(q.gold ? flameGold : flame, q.x - r * 0.7, q.y - r * 3.2, r * 1.4, r * 6.4);   // tall, thin tongues
     }
     fctx.globalCompositeOperation = 'source-over'; fctx.globalAlpha = 1;
   }
   function effects(dt) {
     fctx.clearRect(0, 0, W, H);
+    clock += dt;
     if (kiPower > 0.01 || ki.length) energy(dt, kiPower);
+    orb(dt);
+    if (pulse < 1.2) {                                           // power-up shockwave
+      pulse += dt; const cx = box.x + box.w * 0.5, cy = box.y + box.h * (FEET + 0.03), k = clamp(pulse / 0.7);
+      if (k < 1) { fctx.beginPath(); fctx.ellipse(cx, cy, k * W * 0.55, k * W * 0.15, 0, 0, 6.283); fctx.strokeStyle = `rgba(255,220,110,${(0.85 * (1 - k)).toFixed(3)})`; fctx.lineWidth = (12 * (1 - k) + 1) * dpr; fctx.stroke(); }
+      const sh = Math.exp(-pulse * 6) * 12;
+      if (!intro.on) stage.style.transform = sh > 0.3 ? `translate3d(${((Math.random() - 0.5) * sh).toFixed(1)}px,${((Math.random() - 0.5) * sh).toFixed(1)}px,0)` : '';
+      if (pulse < 0.3) { flash.style.opacity = (0.75 * (1 - pulse / 0.3)).toFixed(3); flash.style.transform = `translate3d(${(cx / dpr).toFixed(1)}px,${((box.y + box.h * 0.4) / dpr).toFixed(1)}px,0)`; return; }
+    }
     if (intro.age > 3) { flash.style.opacity = '0'; return; }
     const A = (intro.age = HOLD && intro.on ? Math.min(intro.age + dt, Math.max(0, HOLD - FALL)) : intro.age + dt), { ix, iy } = intro, g = 2600 * (W / 1400);
     // ground cracks: shoot out, then fade before the statue moves off
@@ -242,6 +290,10 @@
     document.body.classList.toggle('past', r.bottom < innerHeight * 0.55);
     if (!onStage) return;
 
+    charge = ease(range(p, 0.37, 0.45)) * (1 - range(p, 0.545, 0.585));
+    const g2 = ease(range(p, 0.775, 0.8));
+    if (g2 > 0.5 && gold <= 0.5) powerUp();
+    if (g2 !== gold) { gold = g2; dirty = true; aura.classList.toggle('is-gold', gold > 0.5); }
     const c = cam(p), o = { oy: 0, sq: 1, streak: 0, split: false, ground: 1, dip: 0 };
     let ui = intro.waiting ? 0 : 1;
     if (intro.on) {
@@ -262,11 +314,11 @@
       dirty = true;
     }
     if (intro.waiting) { ctx.clearRect(0, 0, W, H); return; }
-    if (!intro.on && !intro.waiting) { const want = 0.6 * (1 - range(p, 0.03, 0.12)) + 0.45 * range(p, 0.9, 0.97); kiPower += (want - kiPower) * (1 - Math.exp(-dt * 4)); }   // the aura belongs to the hero and the finale
+    if (!intro.on && !intro.waiting) { const want = 0.6 * (1 - range(p, 0.03, 0.12)) + 1.35 * gold; kiPower += (want - kiPower) * (1 - Math.exp(-dt * 4)); }   // the aura belongs to the hero and the finale
     if (dirty || Math.abs(p - lastP) > 0.00002) {
       dirty = false; lastP = p;
       const t = turns(p) + dragTurns, f = (((t % 1) + 1) % 1) * N;
-      box = draw(f, c, o);
+      curFrame = f; box = draw(f, c, o);
       if (intro.on && !intro.hit && intro.t >= FALL) { intro.hit = true; impact(box.x + box.w * 0.5, box.y + box.h * (FEET + 0.03)); }
       const cx = (box.x + box.w * 0.5) / dpr, cy = (box.y + box.h * 0.5) / dpr;
       aura.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0) scale(${(c[1] * 0.9).toFixed(3)})`;
@@ -287,6 +339,7 @@
       if (ch !== chap) { chap = ch; hudLabel.textContent = CHAP[ch][1]; }
       hudBar.style.transform = `scaleX(${p.toFixed(4)})`;
     }
+    if (charge > 0.01) dirty = true;
     aura.style.opacity = ((0.55 + vel * 0.45) * (intro.on ? clamp((intro.t - FALL) * 3) : ui)).toFixed(3);
     effects(dt);
     if (!reduced) embers(dt, vel, c[4]);
