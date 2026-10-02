@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Northbeam Construction</title>
+<meta name="description" content="Northbeam Construction: general contractor and design-and-build partner for commercial, residential and civic buildings since 1988.">
+<meta name="theme-color" content="#11151b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Loader -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <div class="loader__mark">NB</div>
+    <div class="loader__bar"><span id="loaderBar"></span></div>
+    <div class="loader__meta"><span id="loaderText">Setting out the site</span><span id="loaderPct">0%</span></div>
+  </div>
+</div>
+
+<!-- Real footage, scrubbed by scroll -->
+<div class="film" id="film" aria-hidden="true">
+  <video class="film__clip" data-clip="hero" muted playsinline preload="auto" poster="media/hero-poster.jpg" loop></video>
+  <video class="film__clip" data-clip="plan" muted playsinline preload="none" poster="media/plan-poster.jpg"></video>
+  <video class="film__clip" data-clip="ground" muted playsinline preload="none" poster="media/ground-poster.jpg"></video>
+  <video class="film__clip" data-clip="frame" muted playsinline preload="none" poster="media/frame-poster.jpg"></video>
+  <video class="film__clip" data-clip="envelope" muted playsinline preload="none" poster="media/envelope-poster.jpg"></video>
+  <video class="film__clip" data-clip="handover" muted playsinline preload="none" poster="media/handover-poster.jpg"></video>
+  <div class="film__grain"></div>
+</div>
+<div class="vignette" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="nav" id="nav">
+  <a href="#top" class="nav__logo" aria-label="Northbeam Construction home">
+    <svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M4 28V8l8-4v24M12 28V12l8-4v20M20 28V16l8-4v16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+    <span>Northbeam<em>Construction</em></span>
+  </a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#story">How we build</a>
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+  </nav>
+  <a href="#contact" class="btn btn--small nav__cta">Start a project</a>
+  <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+</header>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <nav aria-label="Mobile">
+    <a href="#story">How we build</a>
+    <a href="#services">Services</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <p class="menu__foot mono">+44 20 7946 0321 · build@northbeam.co</p>
+</div>
+
+<!-- Build HUD -->
+<aside class="hud" id="hud" aria-hidden="true">
+  <div class="hud__phase mono"><span id="hudPhase">Site</span></div>
+  <div class="hud__gauge"><span id="hudFill"></span></div>
+  <div class="hud__rows mono">
+    <div><span>Complete</span><b id="hudPct">0%</b></div>
+    <div><span>Level</span><b id="hudLevel">00 / 14</b></div>
+    <div><span>Programme</span><b id="hudWeek">Wk 00 / 86</b></div>
+  </div>
+</aside>
+
+<main id="top">
+
+  <!-- ============ STORY (scroll-scrubbed footage) ============ -->
+  <section class="story" id="story">
+
+    <div class="chapter chapter--hero" data-chapter="0" data-img="photo-1777138388622-8f0411f9b71f" data-focus="0.56,0.42">
+      <div class="hero">
+        <p class="eyebrow mono"><span class="dot"></span>General contractor · Since 1988</p>
+        <h1 class="hero__title">
+          <span class="line"><span>We build</span></span>
+          <span class="line"><span>the skyline,</span></span>
+          <span class="line line--accent"><span>floor by floor.</span></span>
+        </h1>
+        <p class="hero__lede">Northbeam takes buildings from an empty plot to handover. Scroll to watch one rise.</p>
+        <div class="hero__actions">
+          <a href="#contact" class="btn">Start a project</a>
+          <a href="#projects" class="btn btn--ghost">See our work</a>
+        </div>
+      </div>
+      <div class="scroll-cue mono" aria-hidden="true"><span></span>Scroll to build</div>
+    </div>
+
+    <div class="chapter" data-chapter="1" id="phase-plan" data-img="photo-1603901622056-0a5bee231395" data-focus="0.45,0.5">
+      <article class="panel panel--right">
+        <p class="panel__num mono">Phase 01 <i></i> Pre-construction</p>
+        <h2>Every beam is drawn before a single one is lifted.</h2>
+        <p>We survey the plot, coordinate the BIM model with architects and engineers, and price the job line by line. Clashes get solved on screen, where they cost nothing.</p>
+        <dl class="specs mono">
+          <div><dt>Model</dt><dd>BIM Level 2, LOD 400</dd></div>
+          <div><dt>Clashes resolved</dt><dd>1,284</dd></div>
+          <div><dt>Programme</dt><dd>86 weeks</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="chapter" data-chapter="2" id="phase-ground" data-img="photo-1517089596392-fb9a9033e05b" data-focus="0.62,0.55">
+      <article class="panel panel--left">
+        <p class="panel__num mono">Phase 02 <i></i> Groundworks</p>
+        <h2>The part nobody sees carries everything else.</h2>
+        <p>Bored piles go down to bedrock, then a reinforced raft is poured in one continuous session. Cubes from every truck are crushed in our lab at 7 and 28 days.</p>
+        <dl class="specs mono">
+          <div><dt>Piles</dt><dd>64 × Ø600 mm, 18 m deep</dd></div>
+          <div><dt>Raft slab</dt><dd>1.2 m, C40/50</dd></div>
+          <div><dt>Concrete poured</dt><dd>1,850 m³ in 22 h</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="chapter" data-chapter="3" id="phase-frame" data-img="photo-1563166423-482a8c14b2d6" data-focus="0.36,0.5">
+      <article class="panel panel--right">
+        <p class="panel__num mono">Phase 03 <i></i> Structural frame</p>
+        <h2>A new floor every eight working days.</h2>
+        <p>Jump-form cores lead, post-tensioned slabs follow. Our tower crane crews work to a takt plan, so trades arrive the day their floor is ready, not the week after.</p>
+        <dl class="specs mono">
+          <div><dt>Floor cycle</dt><dd>8 days</dd></div>
+          <div><dt>Rebar fixed</dt><dd>2,310 t</dd></div>
+          <div><dt>Crane lifts</dt><dd>11,460</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="chapter" data-chapter="4" id="phase-envelope" data-img="photo-1462396240927-52058a6a84ec" data-focus="0.5,0.55">
+      <article class="panel panel--left">
+        <p class="panel__num mono">Phase 04 <i></i> Envelope &amp; services</p>
+        <h2>Sealed, glazed and wired from the ground up.</h2>
+        <p>Unitised curtain-wall panels arrive glazed from the factory and are craned straight into place. Mechanical and electrical fit-out chases the façade up the building.</p>
+        <dl class="specs mono">
+          <div><dt>Façade units</dt><dd>1,120 panels</dd></div>
+          <div><dt>U-value</dt><dd>1.1 W/m²K</dd></div>
+          <div><dt>Air tightness</dt><dd>2.4 m³/h·m² @ 50 Pa</dd></div>
+        </dl>
+      </article>
+    </div>
+
+    <div class="chapter" data-chapter="5" id="phase-handover" data-img="photo-1722851152653-1182e178a81f" data-focus="0.62,0.5">
+      <article class="panel panel--left">
+        <p class="panel__num mono">Phase 05 <i></i> Handover</p>
+        <h2>Lights on. Keys handed over. Two weeks early.</h2>
+        <p>Commissioned, tested and documented, with zero lost-time incidents across 412,000 hours worked. Then it becomes part of the city.</p>
+        <a href="#projects" class="btn">See finished buildings</a>
+      </article>
+    </div>
+
+  </section>
+
+  <!-- ============ CONTENT ============ -->
+  <div class="content">
+
+    <section class="stats" id="about" aria-label="Northbeam in numbers">
+      <div class="wrap">
+        <div class="stats__intro">
+          <p class="eyebrow mono">Northbeam in numbers</p>
+          <h2 class="h-xl reveal">38 years of building<br>what the drawings promise.</h2>
+        </div>
+        <div class="stats__grid">
+          <div class="stat"><b class="count" data-to="214">0</b><span>Projects handed over</span></div>
+          <div class="stat"><b><span class="count" data-to="1.6" data-dec="1">0</span>M</b><span>m² of floor space built</span></div>
+          <div class="stat"><b><span class="count" data-to="96">0</span>%</b><span>Delivered on or ahead of programme</span></div>
+          <div class="stat"><b class="count" data-to="0.08" data-dec="2">0</b><span>Lost-time injury rate per 100k hours</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" aria-label="On site">
+      <div class="band__frame" id="band">
+        <img src="https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?auto=format&amp;fit=crop&amp;w=2000&amp;q=78" srcset="https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?auto=format&amp;fit=crop&amp;w=900&amp;q=75 900w, https://images.unsplash.com/photo-1635249578213-68b0aa67fdf7?auto=format&amp;fit=crop&amp;w=2000&amp;q=78 2000w" sizes="100vw" alt="Site engineer checking reinforcement before a slab pour" loading="lazy">
+        <p class="band__caption mono">Every pour signed off on site by a Northbeam engineer. No exceptions.</p>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow mono">What we do</p>
+          <h2 class="h-xl reveal">One contract.<br>Every trade on site.</h2>
+        </header>
+        <div class="svc-float" id="svcFloat" aria-hidden="true"><img alt="" id="svcImg"></div>
+        <ol class="svc">
+          <li class="svc__row" data-img="https://images.unsplash.com/photo-1769284056541-8fdb6891588f?auto=format&amp;fit=crop&amp;w=640&amp;h=800&amp;q=75">
+            <span class="svc__no mono">A</span>
+            <h3>General contracting</h3>
+            <p>Fixed-price delivery against your design, with one team accountable for cost, quality and programme.</p>
+            <span class="svc__tag mono">JCT / NEC4</span>
+          </li>
+          <li class="svc__row" data-img="https://images.unsplash.com/photo-1542621334-a254cf47733d?auto=format&amp;fit=crop&amp;w=640&amp;h=800&amp;q=75">
+            <span class="svc__no mono">B</span>
+            <h3>Design &amp; build</h3>
+            <p>We take on the design risk and bring the architects and engineers under our contract from day one.</p>
+            <span class="svc__tag mono">Single point</span>
+          </li>
+          <li class="svc__row" data-img="https://images.unsplash.com/photo-1735795798441-89cb505e1970?auto=format&amp;fit=crop&amp;w=640&amp;h=800&amp;q=75">
+            <span class="svc__no mono">C</span>
+            <h3>Pre-construction</h3>
+            <p>Feasibility, cost plans, buildability reviews and planning support before a spade goes in the ground.</p>
+            <span class="svc__tag mono">RIBA 1 to 4</span>
+          </li>
+          <li class="svc__row" data-img="https://images.unsplash.com/photo-1553048686-e3d0396506b9?auto=format&amp;fit=crop&amp;w=640&amp;h=800&amp;q=75">
+            <span class="svc__no mono">D</span>
+            <h3>Construction management</h3>
+            <p>You hold the trade contracts, we run the site. Full transparency on every package and every invoice.</p>
+            <span class="svc__tag mono">Open book</span>
+          </li>
+          <li class="svc__row" data-img="https://images.unsplash.com/photo-1650099661665-36eeb4402420?auto=format&amp;fit=crop&amp;w=640&amp;h=800&amp;q=75">
+            <span class="svc__no mono">E</span>
+            <h3>Fit-out &amp; refurbishment</h3>
+            <p>Cat A and Cat B fit-outs and live-building upgrades, phased so your tenants keep working.</p>
+            <span class="svc__tag mono">Occupied sites</span>
+          </li>
+          <li class="svc__row" data-img="https://images.unsplash.com/photo-1517089258673-4b72e709a9c5?auto=format&amp;fit=crop&amp;w=640&amp;h=800&amp;q=75">
+            <span class="svc__no mono">F</span>
+            <h3>Civil &amp; infrastructure</h3>
+            <p>Earthworks, drainage, highways and utility diversions, delivered by our own plant and civils teams.</p>
+            <span class="svc__tag mono">In-house plant</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="projects" id="projects">
+      <div class="projects__pin">
+        <header class="projects__head wrap">
+          <div>
+            <p class="eyebrow mono">Selected projects</p>
+            <h2 class="h-xl">Built and handed over.</h2>
+          </div>
+          <p class="projects__hint mono">Scroll <span aria-hidden="true">→</span></p>
+        </header>
+        <div class="projects__track" id="track">
+          <article class="proj">
+            <div class="proj__media"><img src="https://images.unsplash.com/photo-1637393932938-b9c209e67d5c?auto=format&amp;fit=crop&amp;w=900&amp;h=675&amp;q=75" srcset="https://images.unsplash.com/photo-1637393932938-b9c209e67d5c?auto=format&amp;fit=crop&amp;w=600&amp;h=450&amp;q=75 600w, https://images.unsplash.com/photo-1637393932938-b9c209e67d5c?auto=format&amp;fit=crop&amp;w=1200&amp;h=900&amp;q=75 1200w" sizes="(max-width: 620px) 82vw, 34vw" alt="Facade of a modern office tower with angled fins" loading="lazy" decoding="async"></div>
+            <div class="proj__body">
+              <p class="mono proj__meta">Commercial · 2025</p>
+              <h3>Meridian Wharf Tower</h3>
+              <dl class="mono"><div><dt>Height</dt><dd>142 m, 34 storeys</dd></div><div><dt>Area</dt><dd>48,600 m²</dd></div><div><dt>Value</dt><dd>£186M</dd></div></dl>
+            </div>
+          </article>
+          <article class="proj">
+            <div class="proj__media"><img src="https://images.unsplash.com/photo-1684403798268-83df9a9b2b6d?auto=format&amp;fit=crop&amp;w=900&amp;h=675&amp;q=75" srcset="https://images.unsplash.com/photo-1684403798268-83df9a9b2b6d?auto=format&amp;fit=crop&amp;w=600&amp;h=450&amp;q=75 600w, https://images.unsplash.com/photo-1684403798268-83df9a9b2b6d?auto=format&amp;fit=crop&amp;w=1200&amp;h=900&amp;q=75 1200w" sizes="(max-width: 620px) 82vw, 34vw" alt="Atrium of a public building under a glass roof" loading="lazy" decoding="async"></div>
+            <div class="proj__body">
+              <p class="mono proj__meta">Civic · 2024</p>
+              <h3>Haldane Public Library</h3>
+              <dl class="mono"><div><dt>Height</dt><dd>4 storeys</dd></div><div><dt>Area</dt><dd>9,200 m²</dd></div><div><dt>Rating</dt><dd>BREEAM Outstanding</dd></div></dl>
+            </div>
+          </article>
+          <article class="proj">
+            <div class="proj__media"><img src="https://images.unsplash.com/photo-1624204386084-dd8c05e32226?auto=format&amp;fit=crop&amp;w=900&amp;h=675&amp;q=75" srcset="https://images.unsplash.com/photo-1624204386084-dd8c05e32226?auto=format&amp;fit=crop&amp;w=600&amp;h=450&amp;q=75 600w, https://images.unsplash.com/photo-1624204386084-dd8c05e32226?auto=format&amp;fit=crop&amp;w=1200&amp;h=900&amp;q=75 1200w" sizes="(max-width: 620px) 82vw, 34vw" alt="Apartment building with glass balconies" loading="lazy" decoding="async"></div>
+            <div class="proj__body">
+              <p class="mono proj__meta">Residential · 2024</p>
+              <h3>Linden Yard Homes</h3>
+              <dl class="mono"><div><dt>Homes</dt><dd>312 apartments</dd></div><div><dt>Area</dt><dd>27,400 m²</dd></div><div><dt>Value</dt><dd>£94M</dd></div></dl>
+            </div>
+          </article>
+          <article class="proj">
+            <div class="proj__media"><img src="https://images.unsplash.com/photo-1780367261654-45395777b560?auto=format&amp;fit=crop&amp;w=900&amp;h=675&amp;q=75" srcset="https://images.unsplash.com/photo-1780367261654-45395777b560?auto=format&amp;fit=crop&amp;w=600&amp;h=450&amp;q=75 600w, https://images.unsplash.com/photo-1780367261654-45395777b560?auto=format&amp;fit=crop&amp;w=1200&amp;h=900&amp;q=75 1200w" sizes="(max-width: 620px) 82vw, 34vw" alt="Row of loading docks on a distribution building" loading="lazy" decoding="async"></div>
+            <div class="proj__body">
+              <p class="mono proj__meta">Logistics · 2023</p>
+              <h3>Eastgate Distribution Hub</h3>
+              <dl class="mono"><div><dt>Span</dt><dd>48 m clear</dd></div><div><dt>Area</dt><dd>61,000 m²</dd></div><div><dt>Value</dt><dd>£72M</dd></div></dl>
+            </div>
+          </article>
+          <article class="proj">
+            <div class="proj__media"><img src="https://images.unsplash.com/photo-1559843788-693858bf7338?auto=format&amp;fit=crop&amp;w=900&amp;h=675&amp;q=75" srcset="https://images.unsplash.com/photo-1559843788-693858bf7338?auto=format&amp;fit=crop&amp;w=600&amp;h=450&amp;q=75 600w, https://images.unsplash.com/photo-1559843788-693858bf7338?auto=format&amp;fit=crop&amp;w=1200&amp;h=900&amp;q=75 1200w" sizes="(max-width: 620px) 82vw, 34vw" alt="Cable-stayed bridge deck under construction" loading="lazy" decoding="async"></div>
+            <div class="proj__body">
+              <p class="mono proj__meta">Infrastructure · 2022</p>
+              <h3>Kelmer River Crossing</h3>
+              <dl class="mono"><div><dt>Span</dt><dd>186 m cable-stayed</dd></div><div><dt>Deck</dt><dd>4 lanes + cycleway</dd></div><div><dt>Value</dt><dd>£58M</dd></div></dl>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote">
+      <div class="wrap">
+        <figure>
+          <blockquote class="reveal">“They found eleven weeks in a programme our last contractor said was already tight. Then they gave us the keys a fortnight early.”</blockquote>
+          <figcaption class="mono">Priya Raman <span>Development Director, Meridian Wharf</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sectors" aria-label="Sectors">
+      <div class="marquee"><div class="marquee__inner">
+        <span>Commercial</span><span>Residential</span><span>Healthcare</span><span>Education</span><span>Logistics</span><span>Civic</span><span>Infrastructure</span><span>Hotels</span>
+        <span>Commercial</span><span>Residential</span><span>Healthcare</span><span>Education</span><span>Logistics</span><span>Civic</span><span>Infrastructure</span><span>Hotels</span>
+      </div></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact__grid">
+        <div class="contact__copy">
+          <p class="eyebrow mono">Start a project</p>
+          <h2 class="h-xl reveal">Got a site?<br>Let's talk about the build.</h2>
+          <p>Send us the basics. A senior estimator replies within two working days with next steps and a rough programme.</p>
+          <ul class="contact__list mono">
+            <li><span>Phone</span>+44 20 7946 0321</li>
+            <li><span>Email</span>build@northbeam.co</li>
+            <li><span>Office</span>14 Foundry Lane, London EC1V 2NX</li>
+          </ul>
+        </div>
+        <form class="form" id="form" novalidate>
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" required autocomplete="email"></div>
+          <div class="field"><label for="f-type">Project type</label>
+            <select id="f-type" name="type">
+              <option>Commercial</option><option>Residential</option><option>Civic / public</option><option>Industrial / logistics</option><option>Fit-out / refurbishment</option><option>Infrastructure</option>
+            </select>
+          </div>
+          <div class="field"><label for="f-budget">Estimated budget</label>
+            <select id="f-budget" name="budget">
+              <option>Under £5M</option><option>£5M to £25M</option><option>£25M to £100M</option><option>Over £100M</option>
+            </select>
+          </div>
+          <div class="field field--full"><label for="f-msg">About the site</label><textarea id="f-msg" name="message" rows="4" placeholder="Location, size, planning status, target start date"></textarea></div>
+          <button class="btn btn--full" type="submit">Send enquiry</button>
+          <p class="form__note mono" id="formNote" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="footer__big" aria-hidden="true">NORTHBEAM</div>
+        <div class="footer__row mono">
+          <span>© 2026 Northbeam Construction Ltd</span>
+          <span>ISO 9001 · 14001 · 45001</span>
+          <span>Registered in England No. 02284716</span>
+          <a href="#top">Back to top ↑</a>
+        </div>
+        <p class="footer__credit mono">Footage via Pexels. Photography via Unsplash: Maxim Tolchinskiy, Lucas Kepner, Shane McLendon, Ivan Henao, Patrick Tomasso, Nic Georgiou, Mina Rad, Willem Chan, Dzmitry Pylypiu, Tobias Wilden, Matthew Jackson, Mason Kimbarovsky, Julia Taubitz, Sven Mieke, K O, Dirk Jutzas, Natalia Marcelewicz.</p>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

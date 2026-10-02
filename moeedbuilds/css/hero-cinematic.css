@@ -1,0 +1,222 @@
+/* Portrait hero — isolated from the rest of the site's styles. */
+#hero.cinematic-hero{--hero-pink:#EA036F;display:block;min-height:0;background:var(--bg-dark);padding:107px 0 0;overflow:hidden;isolation:isolate}
+.cinematic-shell{max-width:1440px;padding:0 56px;margin:auto}
+.cinematic-topline{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 0 22px;border-bottom:1px solid #ffffff20;font-size:10px;letter-spacing:.19em;font-weight:500;color:#a1a1aa}
+.cinematic-kicker{display:flex;align-items:center;gap:10px}.cinematic-kicker>span{width:6px;height:6px;border-radius:50%;background:var(--hero-pink);box-shadow:0 0 15px #ea036f88}
+.cinematic-index{color:#73737b}
+.cinematic-stage{position:relative;display:grid;grid-template-columns:1fr 39% 1fr;align-items:center;min-height:570px}
+.cinematic-title{display:contents;font-family:var(--font-display);font-weight:800;letter-spacing:-.055em;line-height:.99}
+.cinematic-left,.cinematic-right{position:relative;z-index:3;grid-row:1;padding-bottom:35px;font-size:clamp(42px,4.75vw,69px)}
+.cinematic-left{grid-column:1;animation:hero-from-left 1.2s .15s both}.cinematic-right{grid-column:3;animation:hero-from-right 1.2s .3s both;padding-left:12px}
+.stores-word{white-space:nowrap}.title-dot{color:var(--hero-pink)}.sell-title{color:var(--hero-pink)}.sell-title .title-dot{color:#fff}
+.cinematic-sub{display:block;color:#b3b3bd;font-family:var(--font-body);font-weight:400;font-size:clamp(15px,1.48vw,22px);letter-spacing:-.025em;line-height:1.3;margin-top:24px;white-space:nowrap}
+.cinematic-art{position:absolute;inset:0;pointer-events:none;z-index:1}
+.cinematic-orbit{position:absolute;width:440px;height:440px;left:50%;top:38px;transform:translateX(-50%);animation:hero-orbit-in 1.6s both}
+.cinematic-disc{width:100%;height:100%;border-radius:50%;background:var(--hero-pink);box-shadow:0 0 65px #ea036f55,0 0 130px #ea036f25;animation:hero-breathe 5s ease-in-out infinite}
+.portrait-entrance{position:absolute;bottom:0;left:50%;width:555px;margin-left:-277.5px;animation:hero-from-bottom 1.4s .1s both}
+.portrait-motion{position:relative;transform:translate3d(var(--portrait-x,0px),var(--portrait-y,0px),0);transition:transform .35s ease-out}
+.cinematic-portrait{display:block;width:100%;height:auto}
+
+.cinematic-stage:after{content:"";position:absolute;bottom:-1px;left:0;right:0;height:100px;background:linear-gradient(transparent,#000);z-index:2;pointer-events:none}
+.cinematic-footer{position:relative;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid #ffffff26;padding:27px 0 33px;background:transparent;animation:hero-footer-in 1s .65s both}
+#hero .cinematic-stats{display:flex;gap:0;margin:0;justify-content:flex-start;flex-wrap:nowrap}
+#hero .cinematic-stats .hero-stat{padding:0 30px;background:none;border:0;border-radius:0;text-align:left;min-width:0;border-right:1px solid #ffffff20;transition:transform .25s}
+#hero .cinematic-stats .hero-stat:first-child{padding-left:0}#hero .cinematic-stats .hero-stat:last-child{border:0}
+#hero .hero-stat-value{font-size:32px;line-height:1.15;color:var(--hero-pink)}#hero .hero-stat-label{font-size:11px;margin-top:7px;color:#9b9ba5}
+#hero .cinematic-actions{display:flex;gap:12px;margin:0;flex-wrap:nowrap}#hero .cinematic-actions .btn{font-size:13px;min-height:56px;padding:16px 24px;border-radius:9px;white-space:nowrap;gap:20px}
+#hero .btn-primary{background:var(--hero-pink)}#hero .btn-secondary{background:#090909;border-color:#ffffff29}#hero .btn-secondary:hover{border-color:var(--hero-pink);background:#16000a}#hero .btn:focus-visible{outline:2px solid #fff;outline-offset:5px}#hero .btn span{font-size:21px;transition:transform .25s}#hero .btn:hover span{transform:translate(2px,-2px)}
+@keyframes hero-from-left{from{opacity:0;transform:translateX(-65px)}to{opacity:1;transform:translateX(0)}}
+@keyframes hero-from-right{from{opacity:0;transform:translateX(65px)}to{opacity:1;transform:translateX(0)}}
+@keyframes hero-from-bottom{from{opacity:0;transform:translateY(160px)}to{opacity:1;transform:translateY(0)}}
+@keyframes hero-orbit-in{from{opacity:0;transform:translateX(-50%) scale(.75)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+@keyframes hero-footer-in{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@keyframes hero-breathe{0%,100%{transform:scale(.98);opacity:.88}50%{transform:scale(1.025);opacity:1}}
+@keyframes hero-chase{to{stroke-dashoffset:-1000}}
+@media(min-width:1600px){.cinematic-stage{min-height:650px}.portrait-entrance{width:620px;margin-left:-310px}.cinematic-orbit{width:480px;height:480px;top:55px}}
+@media(max-width:1100px) and (min-width:761px){.cinematic-shell{padding:0 30px}.cinematic-stage{min-height:500px;grid-template-columns:1fr 36% 1fr}.portrait-entrance{width:468px;margin-left:-234px}.cinematic-orbit{width:350px;height:350px;top:45px}.cinematic-left,.cinematic-right{font-size:clamp(36px,4.8vw,52px)}.cinematic-footer{gap:24px;flex-direction:column}.cinematic-sub{font-size:15px}}
+@media(max-width:760px){
+#hero.cinematic-hero{padding-top:77px}.cinematic-shell{padding:0 22px}.cinematic-topline{padding:15px 0;font-size:8px;letter-spacing:.13em}.cinematic-index{display:none}
+.cinematic-stage{display:flex;flex-direction:column;min-height:0;padding-top:0}.cinematic-title{display:contents}.cinematic-left{order:0;text-align:center;padding:0;font-size:clamp(38px,9.5vw,65px);line-height:1.02;max-width:100%;letter-spacing:-.06em}.cinematic-left br:first-of-type{display:none}.cinematic-left br:first-of-type:after{content:' '}.cinematic-left br:nth-of-type(2){display:block}.cinematic-left{word-spacing:.02em}
+.cinematic-art{order:1;position:relative;inset:auto;width:100%;height:390px;margin-top:16px;flex:none}.portrait-entrance{width:397px;margin-left:-198.5px}.cinematic-orbit{width:300px;height:300px;top:10px}.cinematic-art:after{content:"";position:absolute;bottom:-1px;left:-22px;right:-22px;height:65px;background:linear-gradient(transparent,#000);z-index:2}
+.cinematic-right{order:2;text-align:center;padding:0 0 25px;margin-top:0;font-size:clamp(35px,8.4vw,56px);line-height:1.05}.sell-title br{display:none}.sell-title br:after{content:' '}.cinematic-sub{font-size:18px;margin-top:12px;letter-spacing:-.02em}.cinematic-stage:after{display:none}
+.cinematic-footer{flex-direction:column;gap:26px;padding:23px 0 30px}.cinematic-actions{order:-1;width:100%}#hero .cinematic-actions .btn{flex:1;justify-content:center;min-height:53px;font-size:12px;padding:12px 10px;gap:9px}#hero .cinematic-stats{width:100%;justify-content:center}#hero .cinematic-stats .hero-stat{flex:1;text-align:center;padding:0 9px}#hero .cinematic-stats .hero-stat:first-child{padding-left:9px}#hero .hero-stat-value{font-size:27px}#hero .hero-stat-label{font-size:10px}
+}
+@media(max-width:380px){.cinematic-shell{padding:0 16px}.cinematic-art{height:340px}.portrait-entrance{width:354px;margin-left:-177px}.cinematic-orbit{width:260px;height:260px}.cinematic-sub{font-size:16px}#hero .cinematic-actions .btn{font-size:11px;gap:6px}}
+@media(prefers-reduced-motion:reduce){#hero *,#hero *:before,#hero *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.portrait-motion{transform:none!important}}
+#hero.hero-paused .cinematic-disc,#hero.hero-paused 
+@media(prefers-reduced-motion:reduce){#hero .btn{transform:none!important}}
+@media(max-width:760px){.cinematic-left{font-size:clamp(32px,8.5vw,58px)}.cinematic-left br:first-of-type{display:block}.cinematic-left br:nth-of-type(2){display:none}}
+
+/* Revision: original atmospheric background and boxed chasing controls. */
+#hero .hero-bg,#hero .hero-grid{z-index:0}
+.cinematic-shell{position:relative;z-index:1}
+.cinematic-stage:after,.cinematic-art:after{display:none}
+.portrait-entrance{mask-image:linear-gradient(to bottom,#000 0%,#000 84%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 84%,transparent 100%)}
+/* Avoid subpixel movement continually resampling the facial detail. */
+.portrait-motion{transform:none;transition:none}
+.cinematic-footer{background:transparent}
+#hero .cinematic-stats{gap:18px}
+#hero .cinematic-stats .hero-stat,#hero .cinematic-stats .hero-stat:first-child,#hero .cinematic-stats .hero-stat:last-child{position:relative;isolation:isolate;min-width:160px;padding:20px 24px;text-align:center;background:#111113;border:1px solid rgba(255,255,255,.08);border-radius:13px;transition:transform .25s,box-shadow .25s}
+#hero .cinematic-stats .hero-stat:hover{transform:translateY(-4px);box-shadow:0 12px 35px #ea036f18}
+#hero .cinematic-actions .btn{position:relative;isolation:isolate;min-height:64px;background:#111113;border:1px solid rgba(255,255,255,.08);border-radius:13px;box-shadow:none;color:#fff}
+#hero .cinematic-actions .btn:hover{background:#171017;box-shadow:0 10px 30px #ea036f20}
+#hero .cinematic-stats .hero-stat::after,#hero .cinematic-actions .btn::after{content:"";position:absolute;inset:-1px;padding:1.5px;border-radius:inherit;background:conic-gradient(from var(--chase-angle,0deg),transparent 0%,#EA036F 7%,transparent 19%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;opacity:1;z-index:3;animation:chase-rotate 3.6s linear infinite}
+#hero .hero-stat:nth-child(2)::after{animation-delay:-1.2s}#hero .hero-stat:nth-child(3)::after{animation-delay:-2.4s}#hero .btn-secondary::after{animation-delay:-1.8s}
+#hero.hero-paused .hero-stat::after,#hero.hero-paused .btn::after{animation-play-state:paused}
+@media(max-width:1200px) and (min-width:761px){#hero .cinematic-stats .hero-stat,#hero .cinematic-stats .hero-stat:first-child,#hero .cinematic-stats .hero-stat:last-child{min-width:140px;padding:19px 17px}.cinematic-footer{flex-wrap:wrap;justify-content:center}}
+@media(max-width:760px){#hero .cinematic-stats{gap:10px}#hero .cinematic-stats .hero-stat,#hero .cinematic-stats .hero-stat:first-child,#hero .cinematic-stats .hero-stat:last-child{min-width:0;padding:18px 6px;flex:1;border-radius:11px}#hero .hero-stat-value{font-size:25px}#hero .hero-stat-label{font-size:9px}#hero .cinematic-actions .btn{min-height:58px}}
+@media(prefers-reduced-motion:reduce){#hero .cinematic-stats .hero-stat::after,#hero .cinematic-actions .btn::after{animation:none!important}}
+
+/* Original portrait displayed intact through a scalable CSS silhouette. */
+.cinematic-portrait{clip-path:none;filter:none;image-rendering:auto}
+#hero .sell-title{animation:textGlow 3s ease-in-out infinite;text-shadow:0 0 20px rgba(236,0,110,.3)}
+#hero.hero-paused .sell-title{animation-play-state:paused}
+/* CTA appearance matches the supplied original website reference. */
+#hero .cinematic-actions{gap:16px}
+#hero .cinematic-actions .btn{font-size:16px;font-weight:600;padding:16px 32px;min-height:60px;border-radius:12px;gap:8px}
+#hero .cinematic-actions .btn-primary{background:var(--primary);color:white;border:1px solid transparent}
+#hero .cinematic-actions .btn-primary:hover{background:var(--primary-light);box-shadow:0 20px 40px var(--primary-glow)}
+#hero .cinematic-actions .btn-secondary{background:var(--bg-card);color:var(--text-primary);border:1px solid var(--border-medium)}
+#hero .cinematic-actions .btn-secondary:hover{background:var(--bg-card-hover);border-color:var(--primary)}
+#hero .cinematic-actions .btn::after{display:none;animation:none}
+#hero .cinematic-actions .btn i{font-size:14px}
+@media(max-width:760px){#hero .cinematic-actions{gap:12px}#hero .cinematic-actions .btn{font-size:12px;padding:14px 10px;min-height:56px;gap:7px}#hero .cinematic-actions .btn i{font-size:12px}}
+@media(max-width:380px){#hero .cinematic-actions .btn{font-size:11px;padding:13px 8px;gap:6px}}
+@media(prefers-reduced-motion:reduce){#hero .sell-title{animation:none}}
+
+/* Ranking badge aligned with the left headline; borders run on hover only. */
+#hero .cinematic-rank{position:absolute;left:0;bottom:calc(100% + 22px);display:inline-flex;align-items:center;gap:9px;max-width:100%;margin:0;padding:8px 14px 8px 8px;border:1px solid var(--border-medium);border-radius:100px;background:var(--bg-card);font-family:var(--font-body);letter-spacing:0;line-height:1.3;text-align:left;animation:none}
+#hero .cinematic-rank .hero-badge-icon{flex:0 0 32px;width:32px;height:32px;font-size:14px}
+#hero .cinematic-rank .hero-badge-text{font-size:12px;font-weight:600;line-height:1.35}
+#hero .cinematic-stats .hero-stat::after{opacity:0;animation:none;transition:opacity .25s ease}
+@media(hover:hover) and (pointer:fine){#hero .cinematic-stats .hero-stat:hover::after{opacity:1;animation:chase-rotate 2.4s linear infinite}}
+@media(max-width:1100px) and (min-width:761px){#hero .cinematic-rank{gap:7px;padding-right:10px;bottom:calc(100% + 18px)}#hero .cinematic-rank .hero-badge-text{font-size:10px}}
+@media(max-width:760px){#hero .cinematic-rank{position:relative;left:auto;bottom:auto;display:flex;width:fit-content;max-width:100%;margin:0 auto 24px;text-align:left}#hero .cinematic-rank .hero-badge-text{font-size:11px}}
+@media(prefers-reduced-motion:reduce){#hero .cinematic-stats .hero-stat:hover::after{animation:none}}
+
+/* ========================================
+   Hero pitch line
+   Title halves stay where they were; the pitch sits under "Not Just Look Good"
+   and the right column is re-centred as one block with it.
+   ======================================== */
+@media (min-width: 761px) {
+    .cinematic-stage { grid-template-rows: 1fr auto auto 1fr; }
+    .cinematic-left { grid-row: 1 / 5; }
+    .cinematic-right { grid-row: 2; padding-bottom: 0; }
+}
+
+.cinematic-pitch {
+    position: relative;
+    z-index: 3;
+    grid-column: 3;
+    grid-row: 3;
+    margin: 22px 0 0 12px;
+    padding-left: 16px;
+    max-width: 30ch;
+    border-left: 2px solid var(--hero-pink, #EC006E);
+    color: #a1a1aa;
+    font-family: var(--font-body);
+    font-size: clamp(14px, 1.06vw, 16px);
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0;
+    animation: hero-from-right 1.2s .45s both;
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+    .cinematic-pitch { font-size: 13px; margin-top: 16px; }
+}
+
+@media (max-width: 760px) {
+    .cinematic-pitch {
+        order: 3;
+        margin: -6px auto 26px;
+        padding: 0;
+        max-width: 32ch;
+        border: 0;
+        text-align: center;
+        font-size: 15px;
+    }
+}
+
+/* ========================================
+   Hero buttons
+   The primary is solid pink, so a pink ring on it is invisible: it keeps its glow.
+   The secondary is a link, and Chromium freezes custom-property driven gradients on
+   links, so it uses a rotating layer behind a cover instead. Hover only.
+   ======================================== */
+#hero .cinematic-actions .btn-primary::after { opacity: 0; animation: none; }
+
+#hero .cinematic-actions .btn-secondary {
+    overflow: hidden;
+    isolation: isolate;
+    background: transparent;
+    transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease, border-color .3s ease;
+}
+
+#hero .cinematic-actions .btn-secondary::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    margin: 0;
+    border-radius: 0;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(transparent 0%, var(--primary) 7%, transparent 19%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+    z-index: -2;
+}
+
+#hero .cinematic-actions .btn-secondary::after {
+    content: "";
+    position: absolute;
+    inset: 1.5px;
+    padding: 0;
+    border-radius: 11px;
+    background: var(--bg-card);
+    -webkit-mask: none;
+    mask: none;
+    opacity: 1;
+    animation: none;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    #hero .cinematic-actions .btn-secondary:hover {
+        transform: translateY(-3px);
+        border-color: transparent;
+        box-shadow: 0 14px 34px -14px var(--primary-glow);
+    }
+    #hero .cinematic-actions .btn-secondary:hover::before {
+        opacity: 1;
+        animation: hero-btn-spin 2.4s linear infinite;
+    }
+}
+
+@keyframes hero-btn-spin { to { transform: translate(-50%, -50%) rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+    #hero .cinematic-actions .btn-secondary:hover::before { animation: none; opacity: .6; }
+}
+
+/* ========================================
+   WhatsApp button on phones
+   Hidden while the hero buttons are on screen, then springs in once you scroll past.
+   Individual transform properties so it composes with the existing bounce animation.
+   ======================================== */
+@media (max-width: 767px) {
+    .whatsapp-float {
+        transition: opacity .35s ease, scale .5s cubic-bezier(.34, 1.56, .64, 1), translate .5s cubic-bezier(.34, 1.56, .64, 1);
+    }
+    body.wa-tucked .whatsapp-float {
+        opacity: 0;
+        scale: .5;
+        translate: 0 24px;
+        pointer-events: none;
+    }
+}

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Liquid Development | Custom Theme Coding | Moeed Irfan</title>
+    <meta name="description" content="Expert Shopify Liquid development for custom themes, sections, templates, and store functionality. 450+ projects, #1 in Shopify Community, 6+ years experience.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moeedbuilds.dev/services/shopify-liquid-development/">
+    <meta property="og:title" content="Shopify Liquid Development | Custom Theme Coding | Moeed Irfan">
+    <meta property="og:description" content="Expert Shopify Liquid development for custom themes, sections, templates, and store functionality. 450+ projects, #1 in Shopify Community, 6+ years experience.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/services/shopify-liquid-development/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <link rel="stylesheet" href="../../css/service-page.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Shopify Liquid Development", "serviceType": "Shopify theme development", "description": "Expert Shopify Liquid development for custom themes, sections, templates, and store functionality. 450+ projects, #1 in Shopify Community, 6+ years experience.", "url": "https://moeedbuilds.dev/services/shopify-liquid-development/", "areaServed": ["United States", "United Kingdom", "Canada", "Australia", "Worldwide"], "provider": {"@type": "Person", "name": "Moeed Irfan", "url": "https://moeedbuilds.dev", "jobTitle": "Shopify Expert & Liquid Developer"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://moeedbuilds.dev/"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://moeedbuilds.dev/#services"}, {"@type": "ListItem", "position": 3, "name": "Liquid Development", "item": "https://moeedbuilds.dev/services/shopify-liquid-development/"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is Shopify Liquid?", "acceptedAnswer": {"@type": "Answer", "text": "Liquid is the templating language every Shopify theme is written in. It takes your store data, such as products, collections, prices and metafields, and turns it into the pages your customers see. Anything a theme does, it does through Liquid."}}, {"@type": "Question", "name": "Can you work on my existing theme?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Most of my work is on existing themes, including Dawn, Horizon, Prestige, Impulse and fully custom ones. I work within your theme's structure so it stays maintainable and can still be updated."}}, {"@type": "Question", "name": "Can custom Liquid replace an app I pay for?", "acceptedAnswer": {"@type": "Answer", "text": "Often, yes. Apps that add a single feature, like product badges, size charts, free shipping bars or simple bundles, can usually be rebuilt in Liquid. You pay once instead of monthly and lose a third party script. Complex apps with their own backend, such as subscriptions or reviews platforms, usually should stay apps."}}, {"@type": "Question", "name": "Will my live store be affected while you work?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything is built on a duplicate of your theme. You review it on a preview link, and it only goes live when you approve it."}}, {"@type": "Question", "name": "How do payments work?", "acceptedAnswer": {"@type": "Answer", "text": "Half upfront to start and half on completion, once you are happy with the result. You get a fixed quote within 24 hours of sending your brief, so there are no surprises."}}, {"@type": "Question", "name": "Do you fix bugs and broken themes?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Layouts that broke after a theme update, app conflicts, mobile display problems and Liquid errors are all common jobs. Send the store URL and a description and I will tell you what is wrong."}}]}</script>
+</head>
+<body class="sv-page">
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="../../index.html?quote=open" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="../../index.html?quote=open" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+    <main>
+        <section class="sv-hero" aria-labelledby="sv-title">
+            <div class="sv-wrap sv-hero-grid">
+                <div>
+                    <nav class="sv-crumbs sv-rise" aria-label="Breadcrumb"><a href="../../index.html">Home</a><span>/</span><a href="../../index.html#services">Services</a><span>/</span>Liquid Development</nav>
+                    <h1 class="sv-h1 sv-rise" id="sv-title">Shopify Liquid development <span class="sv-grad">for what apps cannot do</span></h1>
+                    <p class="sv-lede sv-rise">Custom Liquid coding for themes, templates, metafields and store logic. When an app cannot do it, or does it slowly, I build it straight into your theme.</p>
+                    <div class="sv-ctas sv-rise">
+                        <a href="../../index.html?quote=open" class="sv-btn sv-btn--main">Get a quote in 24 hours <i class="fas fa-arrow-right"></i></a>
+                        <a href="#how" class="sv-btn sv-btn--ghost">See how it works</a>
+                    </div>
+                    <div class="sv-chips sv-rise"><span class="sv-chip"><b>450+</b> projects shipped</span><span class="sv-chip"><b>#1</b> in Shopify Community</span><span class="sv-chip"><b>6+</b> years on Shopify</span></div>
+                </div>
+                <div>
+                    <div class="sv-window" data-demo="liquid">
+                        <div class="sv-window-bar"><i></i><i></i><i></i><span>snippets/</span></div>
+                        <div class="sv-code-tabs" role="tablist"><button type="button" role="tab" class="sv-code-tab is-on" aria-selected="true">badges.liquid</button><button type="button" role="tab" class="sv-code-tab" aria-selected="false">specs.liquid</button><button type="button" role="tab" class="sv-code-tab" aria-selected="false">free-shipping.liquid</button></div>
+                        <div class="sv-code">
+                            <pre aria-label="Liquid code example"><span class="t">{%- for tag in product.tags -%}</span>
+  <span class="t">{%- if tag contains</span> <span class="s">'badge:'</span> <span class="t">-%}</span>
+    &lt;span class="badge"&gt;
+      <span class="t">{{ tag | remove:</span> <span class="s">'badge:'</span> <span class="t">}}</span>
+    &lt;/span&gt;
+  <span class="t">{%- endif -%}</span>
+<span class="t">{%- endfor -%}</span></pre>
+                            <div class="sv-output">
+                                <div class="sv-output-label">Rendered on your store</div>
+                                <div class="sv-output-stage"><div class="sv-out-badges"><span>Bestseller</span><span>Vegan</span><span>Back in stock</span></div></div>
+                            </div>
+                        </div><template data-src><span class="t">{%- for tag in product.tags -%}</span>
+  <span class="t">{%- if tag contains</span> <span class="s">'badge:'</span> <span class="t">-%}</span>
+    &lt;span class="badge"&gt;
+      <span class="t">{{ tag | remove:</span> <span class="s">'badge:'</span> <span class="t">}}</span>
+    &lt;/span&gt;
+  <span class="t">{%- endif -%}</span>
+<span class="t">{%- endfor -%}</span></template><template data-out><div class="sv-out-badges"><span>Bestseller</span><span>Vegan</span><span>Back in stock</span></div></template><template data-src><span class="t">{%- assign s = product.metafields.specs -%}</span>
+&lt;table&gt;
+  &lt;tr&gt;&lt;td&gt;Material&lt;/td&gt;
+      &lt;td&gt;<span class="t">{{ s.material }}</span>&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td&gt;Fit&lt;/td&gt;
+      &lt;td&gt;<span class="t">{{ s.fit }}</span>&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</template><template data-out><table class="sv-out-table"><tr><td>Material</td><td>100% European linen</td></tr><tr><td>Fit</td><td>Relaxed</td></tr><tr><td>Care</td><td>Cold wash</td></tr></table></template><template data-src><span class="t">{%- assign goal = 7500 -%}</span>
+<span class="t">{%- assign left = goal | minus: cart.total_price -%}</span>
+<span class="t">{%- if left &gt; 0 -%}</span>
+  <span class="t">{{ left | money }}</span> away from free shipping
+<span class="t">{%- else -%}</span>
+  You have free shipping
+<span class="t">{%- endif -%}</span></template><template data-out><div class="sv-out-bar">$21.00 away from free shipping<div><i></i></div></div></template>
+                    </div>
+                    <p class="sv-hint"><i class="fas fa-hand-pointer"></i> Switch between the files. Real Liquid, and what it renders on the storefront.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="sv-marquee" aria-hidden="true"><div class="sv-marquee-track"><span>Metafields</span><span>Metaobjects</span><span>Product templates</span><span>Collection filtering</span><span>Cart drawers</span><span>Variant pickers</span><span>Bundles</span><span>Size charts</span><span>Custom badges</span><span>Theme fixes</span><span>Speed cleanup</span><span>App replacement</span><span>Metafields</span><span>Metaobjects</span><span>Product templates</span><span>Collection filtering</span><span>Cart drawers</span><span>Variant pickers</span><span>Bundles</span><span>Size charts</span><span>Custom badges</span><span>Theme fixes</span><span>Speed cleanup</span><span>App replacement</span></div></div>
+        <section class="sv-section" id="how">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Why Liquid</div>
+                        <h2 class="sv-h2">Built into the theme, not bolted on</h2>
+                    </div>
+                    <p class="sv-sub">Liquid is the language Shopify themes are written in. Code written in it behaves like part of your store, because it is.</p>
+                </div>
+                <div class="sv-story">
+                    <div class="sv-stage" aria-hidden="true"><div class="sv-scene"><span class="sv-scene-num"><b>01</b> / 04</span><div class="sv-glyph"><div class="sv-stack"><span><i class="fas fa-user"></i>Customer opens the page</span><span><i class="fas fa-server"></i>Shopify renders your Liquid</span><span><i class="fas fa-check"></i>Finished page arrives</span></div></div></div><div class="sv-scene"><span class="sv-scene-num"><b>02</b> / 04</span><div class="sv-glyph"><div class="sv-bars"><div>App widget<i style="--w:.88"></i></div><div>Custom Liquid<i class="is-grey" style="--w:.3"></i></div></div><p class="sv-glyph-cap">Code the browser downloads, roughly</p></div></div><div class="sv-scene"><span class="sv-scene-num"><b>03</b> / 04</span><div class="sv-glyph"><div class="sv-stack"><span><i class="fas fa-tag"></i>Material: European linen</span><span><i class="fas fa-ruler"></i>Fit: Relaxed</span><span><i class="fas fa-droplet"></i>Care: Cold wash</span></div></div></div><div class="sv-scene"><span class="sv-scene-num"><b>04</b> / 04</span><div class="sv-glyph"><div class="sv-stack"><span><i class="fas fa-layer-group"></i>Dawn and Horizon</span><span><i class="fas fa-layer-group"></i>Prestige and Impulse</span><span><i class="fas fa-layer-group"></i>Custom themes</span></div></div></div></div>
+                    <div class="sv-steps"><article class="sv-step"><div class="sv-step-n">01</div><h3>Rendered before the page arrives</h3><p>Liquid runs on Shopify's servers and sends finished HTML to the browser. Badges, tables and messages are simply there when the page loads, instead of popping in a second later the way an app widget does.</p></article><article class="sv-step"><div class="sv-step-n">02</div><h3>Replace an app, drop a subscription</h3><p>Plenty of apps exist to do one small thing: a badge, a size chart, a shipping bar. Built in Liquid, that feature costs nothing monthly and adds no third party script to your store.</p></article><article class="sv-step"><div class="sv-step-n">03</div><h3>Driven by your own data</h3><p>With metafields and metaobjects, every product can carry its own specs, badges, care notes or related items. One template, the right content on every page, all editable in the admin.</p></article><article class="sv-step"><div class="sv-step-n">04</div><h3>Works on the theme you already have</h3><p>Dawn, Horizon, Prestige, Impulse or a custom build. I work inside your existing theme and match its code style, so the next developer can read it too.</p></article></div>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-top:40px">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Drag the handle</div>
+                        <h2 class="sv-h2">Same product, different page</h2>
+                    </div>
+                    <p class="sv-sub">On the left, a product page straight out of the box. On the right, the same page after a few hours of custom Liquid.</p>
+                </div>
+                <div class="sv-reveal"><div class="sv-compare" data-tool="compare">
+                    <div class="sv-compare-side sv-compare-before" aria-hidden="true">
+                        <div class="sv-compare-img"></div>
+                        <div class="sv-compare-info"><h4>Linen shirt</h4><div class="p">$89.00</div><div class="line"></div><div class="line s"></div><div class="line"></div><div class="btn"></div></div>
+                    </div>
+                    <div class="sv-compare-side sv-compare-after">
+                        <div class="sv-compare-img"></div>
+                        <div class="sv-compare-info"><h4>Linen shirt</h4><div class="p">$89.00</div>
+                            <div class="sv-feat"><span><i class="fas fa-check"></i>100% European linen</span><span><i class="fas fa-ruler"></i>Relaxed fit, size guide included</span><span><i class="fas fa-truck-fast"></i>$21 away from free shipping</span><span><i class="fas fa-rotate-left"></i>Free 30 day returns</span></div>
+                            <div class="btn">Add to cart</div>
+                        </div>
+                    </div>
+                    <span class="sv-compare-tag l">Out of the box</span>
+                    <span class="sv-compare-tag r">With custom Liquid</span>
+                    <div class="sv-compare-handle" aria-hidden="true"></div>
+                    <input type="range" min="0" max="100" value="50" aria-label="Compare before and after">
+                </div></div>
+            </div>
+        </section>
+        <section class="sv-section" style="background:var(--bg-card)">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">What I do</div>
+                        <h2 class="sv-h2">Liquid work, start to finish</h2>
+                    </div>
+                    <p class="sv-sub">From a single fix to a full custom build. Everything written by hand, tested on real devices.</p>
+                </div>
+                <div class="sv-bento sv-reveal-stagger">
+                    <div class="service-feature is-wide">
+                        <div class="sv-ico"><i class="fas fa-puzzle-piece"></i></div>
+                        <h3>Custom sections and blocks</h3>
+                        <p>Online Store 2.0 sections with full schema and theme editor settings, so your team can edit everything without touching code. <a href="../custom-shopify-sections/index.html" style="color:var(--primary-light);font-weight:600">See sections <i class="fas fa-arrow-right" style="font-size:.7rem"></i></a></p>
+                        <div class="sv-tags"><span>OS 2.0</span><span>Schema</span><span>Blocks</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-sliders"></i></div>
+                        <h3>Theme customisation</h3>
+                        <p>Layout changes, new features and design adjustments on any theme, done cleanly so updates stay possible.</p>
+                        <div class="sv-tags"><span>Any theme</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-database"></i></div>
+                        <h3>Metafields and metaobjects</h3>
+                        <p>Product tabs, spec tables, badges and size charts driven by your own data instead of hardcoded text.</p>
+                        <div class="sv-tags"><span>Metafields</span><span>Metaobjects</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-cart-shopping"></i></div>
+                        <h3>Cart and drawer logic</h3>
+                        <p>AJAX cart drawers, upsells, free shipping bars and variant pickers that update without reloading the page.</p>
+                        <div class="sv-tags"><span>AJAX cart</span><span>Upsells</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-gauge-high"></i></div>
+                        <h3>Speed and cleanup</h3>
+                        <p>Removing leftover app code, deferring scripts and lazy loading media, so the store feels quick on a phone.</p>
+                        <div class="sv-tags"><span>Core Web Vitals</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-bug"></i></div>
+                        <h3>Bug fixing</h3>
+                        <p>Broken layouts after an update, app conflicts, mobile display issues and Liquid errors, found and fixed fast.</p>
+                        <div class="sv-tags"><span>Fast turnaround</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">How it works</div>
+                        <h2 class="sv-h2">How a Liquid project runs</h2>
+                    </div>
+                    <p class="sv-sub">Half upfront, half on completion. You only pay the second half when you are satisfied.</p>
+                </div>
+                <div class="sv-process">
+                    <div class="sv-node">
+                        <div class="sv-node-dot">1</div>
+                        <h3>Brief and quote</h3>
+                        <small>Within 24 hours</small>
+                        <p>Send a Figma file, a screenshot of something you like, or just a description. You get a fixed price and a timeline, not an hourly estimate.</p>
+                    </div>
+                    <div class="sv-node">
+                        <div class="sv-node-dot">2</div>
+                        <h3>Build on a copy</h3>
+                        <small>Your live store stays safe</small>
+                        <p>Everything is built on a duplicate of your theme, so customers never see work in progress and nothing can break mid-sale.</p>
+                    </div>
+                    <div class="sv-node">
+                        <div class="sv-node-dot">3</div>
+                        <h3>Review and refine</h3>
+                        <small>On a preview link</small>
+                        <p>You click through the real thing on desktop and mobile before anything goes live, and ask for changes until it is right.</p>
+                    </div>
+                    <div class="sv-node">
+                        <div class="sv-node-dot">4</div>
+                        <h3>Go live</h3>
+                        <small>Then I stay reachable</small>
+                        <p>We publish together, I walk you through editing it, and if something comes up afterwards I am a message away.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-top:40px">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Proof, not promises</div>
+                        <h2 class="sv-h2">Built from scratch in Liquid</h2>
+                    </div>
+                </div>
+                <div class="sv-proof sv-reveal-stagger">
+                    <a href="../../case-studies/clear-id-laboratory/index.html" class="sv-case">
+                        <img src="../../images/clearid.webp" alt="Clear ID Laboratory Shopify store" loading="lazy" width="1200" height="750">
+                        <div class="sv-case-body">
+                            <small>Case study</small>
+                            <h3>Clear ID Laboratory</h3>
+                            <p>A full Shopify build from scratch for a lab equipment business: clean modern design, custom sections for their catalogue, and a site optimised for search.</p>
+                            <span>Read the case study <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <figure class="sv-quote">
+                        <div>
+                            <div class="sv-quote-mark">&ldquo;</div>
+                            <blockquote>I had an amazing experience working with Moeed! He programmed a feature for my shop and got it done immediately with no waiting time. Incredibly fast, reliable, and highly professional.</blockquote>
+                        </div>
+                        <figcaption class="sv-quote-who">
+                            <span class="author-name">M</span>
+                            <div><b>Marius</b><small>Germany &middot; <span class="sv-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></small></div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="background:var(--bg-card)">
+            <div class="sv-wrap sv-faq-grid">
+                <div class="sv-head sv-reveal">
+                    <div class="sv-kicker">FAQ</div>
+                    <h2 class="sv-h2">Liquid development questions</h2>
+                    <p class="sv-sub">Still unsure? <a href="https://wa.me/923353061236" style="color:var(--primary-light);font-weight:600">Message me on WhatsApp</a> and you will get a straight answer, usually the same day.</p>
+                </div>
+                <div class="sv-faq sv-reveal">
+                        <details>
+                            <summary>What is Shopify Liquid?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Liquid is the templating language every Shopify theme is written in. It takes your store data, such as products, collections, prices and metafields, and turns it into the pages your customers see. Anything a theme does, it does through Liquid.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>Can you work on my existing theme?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Yes. Most of my work is on existing themes, including Dawn, Horizon, Prestige, Impulse and fully custom ones. I work within your theme's structure so it stays maintainable and can still be updated.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>Can custom Liquid replace an app I pay for?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Often, yes. Apps that add a single feature, like product badges, size charts, free shipping bars or simple bundles, can usually be rebuilt in Liquid. You pay once instead of monthly and lose a third party script. Complex apps with their own backend, such as subscriptions or reviews platforms, usually should stay apps.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>Will my live store be affected while you work?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>No. Everything is built on a duplicate of your theme. You review it on a preview link, and it only goes live when you approve it.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>How do payments work?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Half upfront to start and half on completion, once you are happy with the result. You get a fixed quote within 24 hours of sending your brief, so there are no surprises.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>Do you fix bugs and broken themes?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Yes. Layouts that broke after a theme update, app conflicts, mobile display problems and Liquid errors are all common jobs. Send the store URL and a description and I will tell you what is wrong.</p></div></div>
+                        </details>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-bottom:60px">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Keep exploring</div>
+                        <h2 class="sv-h2">Related services and guides</h2>
+                    </div>
+                </div>
+                <div class="related-grid sv-reveal-stagger">
+                    <a href="../custom-shopify-sections/index.html" class="related-card">
+                        <span class="tag">Service</span>
+                        <h3>Custom Shopify Sections</h3>
+                        <p>Editable, app free sections built to your design for any Online Store 2.0 theme.</p>
+                        <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="../shopify-checkout-customization/index.html" class="related-card">
+                        <span class="tag">Service</span>
+                        <h3>Checkout and Tracking Recovery</h3>
+                        <p>Rebuild Thank you page tracking and customisations after the August 26 upgrade.</p>
+                        <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="../../blog/shopify-metafields-product-page-liquid/index.html" class="related-card">
+                        <span class="tag">Guide</span>
+                        <h3>Metafields on Product Pages</h3>
+                        <p>Custom tabs, badges and spec tables driven by metafields, with the Liquid to do it.</p>
+                        <span class="read-more">Read guide <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-top:40px">
+            <div class="sv-wrap">
+                <div class="sv-cta sv-reveal">
+                    <div>
+                        <h2>Need something your theme cannot do?</h2>
+                        <p>Describe it, screenshot it, or link to a store that does it. Fixed quote within 24 hours.</p>
+                    </div>
+                    <div class="sv-cta-btns">
+                        <a href="../../index.html?quote=open" class="sv-btn sv-btn--main">Get a quote <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://wa.me/923353061236" target="_blank" rel="noopener noreferrer" class="sv-btn sv-btn--ghost"><i class="fab fa-whatsapp"></i> WhatsApp me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="index.html">Liquid Development</a></li>
+                        <li><a href="../shopify-checkout-customization/index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../blog/shopify-contact-form-custom-fields/index.html">Contact Form Custom Fields</a></li>
+                        <li><a href="../../blog/shopify-checkout-migration-non-plus-stores/index.html">Checkout Migration Guide</a></li>
+                        <li><a href="../../blog/shopify-metafields-product-page-liquid/index.html">Metafields Tutorial</a></li>
+                        <li><a href="../../blog/custom-sections-shopify-dawn-theme/index.html">Dawn Sections Guide</a></li>
+                        <li><a href="../../case-studies/clear-id-laboratory/index.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/service-page.js"></script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

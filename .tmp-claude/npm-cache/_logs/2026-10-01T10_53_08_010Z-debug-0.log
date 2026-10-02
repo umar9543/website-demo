@@ -1,0 +1,227 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.0.0
+2 info using node@v22.11.0
+3 silly config load:file:C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:E:\React\wordpress\.tmp-claude\.npmrc
+5 silly config load:file:C:\Users\mumer\.npmrc
+6 silly config load:file:C:\Users\mumer\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm i ffmpeg-static@5
+8 verbose argv "i" "ffmpeg-static@5"
+9 verbose logfile logs-max:10 dir:E:\React\wordpress\.tmp-claude\npm-cache\_logs\2026-10-01T10_53_08_010Z-
+10 verbose logfile E:\React\wordpress\.tmp-claude\npm-cache\_logs\2026-10-01T10_53_08_010Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest ffmpeg-static@5
+15 silly packumentCache full:https://registry.npmjs.org/ffmpeg-static cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/ffmpeg-static 684ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/ffmpeg-static set size:undefined disposed:false
+18 silly placeDep ROOT ffmpeg-static@5.3.0 OK for: tmp-tools@1.0.0 want: 5
+19 silly fetch manifest @derhuerst/http-basic@^8.2.0
+20 silly packumentCache full:https://registry.npmjs.org/@derhuerst%2fhttp-basic cache-miss
+21 silly fetch manifest env-paths@^2.2.0
+22 silly packumentCache full:https://registry.npmjs.org/env-paths cache-miss
+23 silly fetch manifest https-proxy-agent@^5.0.0
+24 silly packumentCache full:https://registry.npmjs.org/https-proxy-agent cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/@derhuerst%2fhttp-basic 313ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/@derhuerst%2fhttp-basic set size:undefined disposed:false
+27 silly fetch manifest progress@^2.0.3
+28 silly packumentCache full:https://registry.npmjs.org/progress cache-miss
+29 http fetch GET 200 https://registry.npmjs.org/env-paths 408ms (cache miss)
+30 silly packumentCache full:https://registry.npmjs.org/env-paths set size:undefined disposed:false
+31 http fetch GET 200 https://registry.npmjs.org/https-proxy-agent 412ms (cache miss)
+32 silly packumentCache full:https://registry.npmjs.org/https-proxy-agent set size:undefined disposed:false
+33 http fetch GET 200 https://registry.npmjs.org/progress 124ms (cache miss)
+34 silly packumentCache full:https://registry.npmjs.org/progress set size:undefined disposed:false
+35 silly placeDep ROOT @derhuerst/http-basic@8.2.4 OK for: ffmpeg-static@5.3.0 want: ^8.2.0
+36 silly placeDep ROOT env-paths@2.2.1 OK for: ffmpeg-static@5.3.0 want: ^2.2.0
+37 silly placeDep ROOT https-proxy-agent@5.0.1 OK for: ffmpeg-static@5.3.0 want: ^5.0.0
+38 silly placeDep ROOT progress@2.0.3 OK for: ffmpeg-static@5.3.0 want: ^2.0.3
+39 silly fetch manifest caseless@^0.12.0
+40 silly packumentCache full:https://registry.npmjs.org/caseless cache-miss
+41 silly fetch manifest concat-stream@^2.0.0
+42 silly packumentCache full:https://registry.npmjs.org/concat-stream cache-miss
+43 silly fetch manifest http-response-object@^3.0.1
+44 silly packumentCache full:https://registry.npmjs.org/http-response-object cache-miss
+45 http fetch GET 200 https://registry.npmjs.org/caseless 125ms (cache miss)
+46 silly packumentCache full:https://registry.npmjs.org/caseless set size:undefined disposed:false
+47 silly fetch manifest parse-cache-control@^1.0.1
+48 silly packumentCache full:https://registry.npmjs.org/parse-cache-control cache-miss
+49 http fetch GET 200 https://registry.npmjs.org/concat-stream 138ms (cache miss)
+50 silly packumentCache full:https://registry.npmjs.org/concat-stream set size:undefined disposed:false
+51 silly fetch manifest debug@4
+52 silly packumentCache full:https://registry.npmjs.org/debug cache-miss
+53 http fetch GET 200 https://registry.npmjs.org/parse-cache-control 125ms (cache miss)
+54 silly packumentCache full:https://registry.npmjs.org/parse-cache-control set size:undefined disposed:false
+55 silly fetch manifest agent-base@6
+56 silly packumentCache full:https://registry.npmjs.org/agent-base cache-miss
+57 http fetch GET 200 https://registry.npmjs.org/debug 142ms (cache miss)
+58 silly packumentCache full:https://registry.npmjs.org/debug set size:undefined disposed:false
+59 http fetch GET 200 https://registry.npmjs.org/http-response-object 308ms (cache miss)
+60 silly packumentCache full:https://registry.npmjs.org/http-response-object set size:undefined disposed:false
+61 http fetch GET 200 https://registry.npmjs.org/agent-base 125ms (cache miss)
+62 silly packumentCache full:https://registry.npmjs.org/agent-base set size:undefined disposed:false
+63 silly placeDep ROOT caseless@0.12.0 OK for: @derhuerst/http-basic@8.2.4 want: ^0.12.0
+64 silly placeDep ROOT concat-stream@2.0.0 OK for: @derhuerst/http-basic@8.2.4 want: ^2.0.0
+65 silly placeDep ROOT http-response-object@3.0.2 OK for: @derhuerst/http-basic@8.2.4 want: ^3.0.1
+66 silly placeDep ROOT parse-cache-control@1.0.1 OK for: @derhuerst/http-basic@8.2.4 want: ^1.0.1
+67 silly fetch manifest buffer-from@^1.0.0
+68 silly packumentCache full:https://registry.npmjs.org/buffer-from cache-miss
+69 silly fetch manifest inherits@^2.0.3
+70 silly packumentCache full:https://registry.npmjs.org/inherits cache-miss
+71 silly fetch manifest readable-stream@^3.0.2
+72 silly packumentCache full:https://registry.npmjs.org/readable-stream cache-miss
+73 http fetch GET 200 https://registry.npmjs.org/buffer-from 126ms (cache miss)
+74 silly packumentCache full:https://registry.npmjs.org/buffer-from set size:undefined disposed:false
+75 silly fetch manifest typedarray@^0.0.6
+76 silly packumentCache full:https://registry.npmjs.org/typedarray cache-miss
+77 http fetch GET 200 https://registry.npmjs.org/inherits 130ms (cache miss)
+78 silly packumentCache full:https://registry.npmjs.org/inherits set size:undefined disposed:false
+79 silly fetch manifest @types/node@^10.0.3
+80 silly packumentCache full:https://registry.npmjs.org/@types%2fnode cache-miss
+81 http fetch GET 200 https://registry.npmjs.org/readable-stream 152ms (cache miss)
+82 silly packumentCache full:https://registry.npmjs.org/readable-stream set size:undefined disposed:false
+83 http fetch GET 200 https://registry.npmjs.org/typedarray 122ms (cache miss)
+84 silly packumentCache full:https://registry.npmjs.org/typedarray set size:undefined disposed:false
+85 http fetch GET 200 https://registry.npmjs.org/@types%2fnode 648ms (cache miss)
+86 silly packumentCache full:https://registry.npmjs.org/@types%2fnode set size:undefined disposed:false
+87 silly placeDep ROOT buffer-from@1.1.2 OK for: concat-stream@2.0.0 want: ^1.0.0
+88 silly placeDep ROOT inherits@2.0.4 OK for: concat-stream@2.0.0 want: ^2.0.3
+89 silly placeDep ROOT readable-stream@3.6.2 OK for: concat-stream@2.0.0 want: ^3.0.2
+90 silly placeDep ROOT typedarray@0.0.6 OK for: concat-stream@2.0.0 want: ^0.0.6
+91 silly fetch manifest string_decoder@^1.1.1
+92 silly packumentCache full:https://registry.npmjs.org/string_decoder cache-miss
+93 silly fetch manifest util-deprecate@^1.0.1
+94 silly packumentCache full:https://registry.npmjs.org/util-deprecate cache-miss
+95 http fetch GET 200 https://registry.npmjs.org/util-deprecate 118ms (cache miss)
+96 silly packumentCache full:https://registry.npmjs.org/util-deprecate set size:undefined disposed:false
+97 http fetch GET 200 https://registry.npmjs.org/string_decoder 121ms (cache miss)
+98 silly packumentCache full:https://registry.npmjs.org/string_decoder set size:undefined disposed:false
+99 silly placeDep ROOT @types/node@10.17.60 OK for: http-response-object@3.0.2 want: ^10.0.3
+100 silly placeDep ROOT agent-base@6.0.2 OK for: https-proxy-agent@5.0.1 want: 6
+101 silly placeDep ROOT debug@4.4.3 OK for: https-proxy-agent@5.0.1 want: 4
+102 silly fetch manifest ms@^2.1.3
+103 silly packumentCache full:https://registry.npmjs.org/ms cache-miss
+104 http fetch GET 200 https://registry.npmjs.org/ms 112ms (cache miss)
+105 silly packumentCache full:https://registry.npmjs.org/ms set size:undefined disposed:false
+106 silly placeDep ROOT ms@2.1.3 OK for: debug@4.4.3 want: ^2.1.3
+107 silly placeDep ROOT string_decoder@1.3.0 OK for: readable-stream@3.6.2 want: ^1.1.1
+108 silly placeDep ROOT util-deprecate@1.0.2 OK for: readable-stream@3.6.2 want: ^1.0.1
+109 silly fetch manifest safe-buffer@~5.2.0
+110 silly packumentCache full:https://registry.npmjs.org/safe-buffer cache-miss
+111 http fetch GET 200 https://registry.npmjs.org/safe-buffer 114ms (cache miss)
+112 silly packumentCache full:https://registry.npmjs.org/safe-buffer set size:undefined disposed:false
+113 silly placeDep ROOT safe-buffer@5.2.1 OK for: string_decoder@1.3.0 want: ~5.2.0
+114 silly reify moves {}
+115 silly audit bulk request {
+115 silly audit   'ffmpeg-static': [ '5.3.0' ],
+115 silly audit   '@derhuerst/http-basic': [ '8.2.4' ],
+115 silly audit   'env-paths': [ '2.2.1' ],
+115 silly audit   'https-proxy-agent': [ '5.0.1' ],
+115 silly audit   progress: [ '2.0.3' ],
+115 silly audit   caseless: [ '0.12.0' ],
+115 silly audit   'concat-stream': [ '2.0.0' ],
+115 silly audit   'http-response-object': [ '3.0.2' ],
+115 silly audit   'parse-cache-control': [ '1.0.1' ],
+115 silly audit   'buffer-from': [ '1.1.2' ],
+115 silly audit   inherits: [ '2.0.4' ],
+115 silly audit   'readable-stream': [ '3.6.2' ],
+115 silly audit   typedarray: [ '0.0.6' ],
+115 silly audit   '@types/node': [ '10.17.60' ],
+115 silly audit   'agent-base': [ '6.0.2' ],
+115 silly audit   debug: [ '4.4.3' ],
+115 silly audit   ms: [ '2.1.3' ],
+115 silly audit   string_decoder: [ '1.3.0' ],
+115 silly audit   'util-deprecate': [ '1.0.2' ],
+115 silly audit   'safe-buffer': [ '5.2.1' ]
+115 silly audit }
+116 http cache safe-buffer@https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz 1ms (cache hit)
+117 http cache string_decoder@https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz 0ms (cache hit)
+118 http cache util-deprecate@https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz 0ms (cache hit)
+119 http cache debug@https://registry.npmjs.org/debug/-/debug-4.4.3.tgz 0ms (cache hit)
+120 http cache @types/node@https://registry.npmjs.org/@types/node/-/node-10.17.60.tgz 0ms (cache hit)
+121 http cache agent-base@https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz 0ms (cache hit)
+122 http cache ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 0ms (cache hit)
+123 http cache typedarray@https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz 0ms (cache hit)
+124 http cache readable-stream@https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.2.tgz 1ms (cache hit)
+125 http cache inherits@https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz 0ms (cache hit)
+126 http cache buffer-from@https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz 0ms (cache hit)
+127 http cache concat-stream@https://registry.npmjs.org/concat-stream/-/concat-stream-2.0.0.tgz 0ms (cache hit)
+128 http cache http-response-object@https://registry.npmjs.org/http-response-object/-/http-response-object-3.0.2.tgz 0ms (cache hit)
+129 http cache parse-cache-control@https://registry.npmjs.org/parse-cache-control/-/parse-cache-control-1.0.1.tgz 0ms (cache hit)
+130 http cache caseless@https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz 0ms (cache hit)
+131 http cache progress@https://registry.npmjs.org/progress/-/progress-2.0.3.tgz 0ms (cache hit)
+132 http cache https-proxy-agent@https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz 0ms (cache hit)
+133 http cache env-paths@https://registry.npmjs.org/env-paths/-/env-paths-2.2.1.tgz 0ms (cache hit)
+134 http cache @derhuerst/http-basic@https://registry.npmjs.org/@derhuerst/http-basic/-/http-basic-8.2.4.tgz 0ms (cache hit)
+135 http cache ffmpeg-static@https://registry.npmjs.org/ffmpeg-static/-/ffmpeg-static-5.3.0.tgz 1ms (cache hit)
+136 silly tarball no local data for safe-buffer@https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz. Extracting by manifest.
+137 silly tarball no local data for string_decoder@https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz. Extracting by manifest.
+138 silly tarball no local data for util-deprecate@https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz. Extracting by manifest.
+139 silly tarball no local data for debug@https://registry.npmjs.org/debug/-/debug-4.4.3.tgz. Extracting by manifest.
+140 silly tarball no local data for @types/node@https://registry.npmjs.org/@types/node/-/node-10.17.60.tgz. Extracting by manifest.
+141 silly tarball no local data for agent-base@https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz. Extracting by manifest.
+142 silly tarball no local data for ms@https://registry.npmjs.org/ms/-/ms-2.1.3.tgz. Extracting by manifest.
+143 silly tarball no local data for typedarray@https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz. Extracting by manifest.
+144 silly tarball no local data for readable-stream@https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.2.tgz. Extracting by manifest.
+145 silly tarball no local data for inherits@https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz. Extracting by manifest.
+146 silly tarball no local data for buffer-from@https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz. Extracting by manifest.
+147 silly tarball no local data for concat-stream@https://registry.npmjs.org/concat-stream/-/concat-stream-2.0.0.tgz. Extracting by manifest.
+148 silly tarball no local data for http-response-object@https://registry.npmjs.org/http-response-object/-/http-response-object-3.0.2.tgz. Extracting by manifest.
+149 silly tarball no local data for parse-cache-control@https://registry.npmjs.org/parse-cache-control/-/parse-cache-control-1.0.1.tgz. Extracting by manifest.
+150 silly tarball no local data for caseless@https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz. Extracting by manifest.
+151 silly tarball no local data for progress@https://registry.npmjs.org/progress/-/progress-2.0.3.tgz. Extracting by manifest.
+152 silly tarball no local data for https-proxy-agent@https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz. Extracting by manifest.
+153 silly tarball no local data for env-paths@https://registry.npmjs.org/env-paths/-/env-paths-2.2.1.tgz. Extracting by manifest.
+154 silly tarball no local data for @derhuerst/http-basic@https://registry.npmjs.org/@derhuerst/http-basic/-/http-basic-8.2.4.tgz. Extracting by manifest.
+155 silly tarball no local data for ffmpeg-static@https://registry.npmjs.org/ffmpeg-static/-/ffmpeg-static-5.3.0.tgz. Extracting by manifest.
+156 http fetch GET 200 https://registry.npmjs.org/safe-buffer/-/safe-buffer-5.2.1.tgz 192ms (cache miss)
+157 http fetch GET 200 https://registry.npmjs.org/string_decoder/-/string_decoder-1.3.0.tgz 192ms (cache miss)
+158 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 355ms
+159 silly audit report {}
+160 http fetch GET 200 https://registry.npmjs.org/caseless/-/caseless-0.12.0.tgz 417ms (cache miss)
+161 http fetch GET 200 https://registry.npmjs.org/progress/-/progress-2.0.3.tgz 555ms (cache miss)
+162 http fetch GET 200 https://registry.npmjs.org/https-proxy-agent/-/https-proxy-agent-5.0.1.tgz 590ms (cache miss)
+163 http fetch GET 200 https://registry.npmjs.org/env-paths/-/env-paths-2.2.1.tgz 616ms (cache miss)
+164 http fetch GET 200 https://registry.npmjs.org/ms/-/ms-2.1.3.tgz 664ms (cache miss)
+165 http fetch GET 200 https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz 666ms (cache miss)
+166 http fetch GET 200 https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz 676ms (cache miss)
+167 http fetch GET 200 https://registry.npmjs.org/buffer-from/-/buffer-from-1.1.2.tgz 675ms (cache miss)
+168 http fetch GET 200 https://registry.npmjs.org/concat-stream/-/concat-stream-2.0.0.tgz 692ms (cache miss)
+169 http fetch GET 200 https://registry.npmjs.org/parse-cache-control/-/parse-cache-control-1.0.1.tgz 689ms (cache miss)
+170 http fetch GET 200 https://registry.npmjs.org/ffmpeg-static/-/ffmpeg-static-5.3.0.tgz 704ms (cache miss)
+171 http fetch GET 200 https://registry.npmjs.org/typedarray/-/typedarray-0.0.6.tgz 745ms (cache miss)
+172 http fetch GET 200 https://registry.npmjs.org/http-response-object/-/http-response-object-3.0.2.tgz 749ms (cache miss)
+173 http fetch GET 200 https://registry.npmjs.org/agent-base/-/agent-base-6.0.2.tgz 778ms (cache miss)
+174 http fetch GET 200 https://registry.npmjs.org/debug/-/debug-4.4.3.tgz 785ms (cache miss)
+175 http fetch GET 200 https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.2.tgz 869ms (cache miss)
+176 http fetch GET 200 https://registry.npmjs.org/@derhuerst/http-basic/-/http-basic-8.2.4.tgz 861ms (cache miss)
+177 http fetch GET 200 https://registry.npmjs.org/@types/node/-/node-10.17.60.tgz 1013ms (cache miss)
+178 info run ffmpeg-static@5.3.0 install node_modules/ffmpeg-static node install.js
+179 info run ffmpeg-static@5.3.0 install { code: 0, signal: null }
+180 silly ADD node_modules/safe-buffer
+181 silly ADD node_modules/util-deprecate
+182 silly ADD node_modules/string_decoder
+183 silly ADD node_modules/ms
+184 silly ADD node_modules/debug
+185 silly ADD node_modules/agent-base
+186 silly ADD node_modules/@types/node
+187 silly ADD node_modules/typedarray
+188 silly ADD node_modules/readable-stream
+189 silly ADD node_modules/inherits
+190 silly ADD node_modules/buffer-from
+191 silly ADD node_modules/parse-cache-control
+192 silly ADD node_modules/http-response-object
+193 silly ADD node_modules/concat-stream
+194 silly ADD node_modules/caseless
+195 silly ADD node_modules/progress
+196 silly ADD node_modules/https-proxy-agent
+197 silly ADD node_modules/env-paths
+198 silly ADD node_modules/@derhuerst/http-basic
+199 silly ADD node_modules/ffmpeg-static
+200 verbose cwd E:\React\wordpress\.tmp-claude
+201 verbose os Windows_NT 10.0.19045
+202 verbose node v22.11.0
+203 verbose npm  v11.0.0
+204 verbose exit 0
+205 info ok

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Build Custom Sections in Shopify Dawn Theme (Developer Guide)</title>
+    <meta name="description" content="Step-by-step guide to creating custom Liquid sections for Shopify Dawn theme. Includes section file structure, schema setup, blocks, CSS, and real code examples.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moeedbuilds.dev/blog/custom-sections-shopify-dawn-theme/">
+    <meta property="og:title" content="How to Build Custom Sections in Shopify Dawn Theme (Developer Guide)">
+    <meta property="og:description" content="Step-by-step guide to creating custom Liquid sections for Shopify Dawn theme. Includes section file structure, schema setup, blocks, CSS, and real code examples.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/blog/custom-sections-shopify-dawn-theme/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Build Custom Sections in Shopify Dawn Theme","author":{"@type":"Person","name":"Moeed Irfan","url":"https://moeedbuilds.dev"},"datePublished":"2026-05-11","description":"Developer guide to building custom Liquid sections for Shopify Dawn theme."}</script>
+</head>
+<body> 
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="mailto:moeed.shopify@gmail.com" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="mailto:moeed.shopify@gmail.com" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+<div class="breadcrumbs"><div class="container"><a href="../../index.html">Home</a><span class="sep">/</span><a href="../../index.html#blog">Blog</a><span class="sep">/</span><span class="current">Custom Sections in Dawn</span></div></div>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge"><i class="fas fa-code"></i> Developer Guide</div>
+            <h1>Build Custom Sections in <span class="text-gradient">Shopify Dawn</span> Theme</h1>
+            <p class="subtitle">Dawn is Shopify's default free theme and the foundation for most Online Store 2.0 stores. Here is how to create custom sections that integrate cleanly with Dawn's architecture.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="article-content">
+                <h2>Understanding Dawn's Section Architecture</h2>
+                <p>Dawn uses JSON templates and Liquid section files. Every page is a JSON template (like <code>product.json</code> or <code>index.json</code>) that references section files from the <code>/sections</code> directory. When you create a custom section, you are adding a new Liquid file to this directory that merchants can add to any page through the theme editor.</p>
+                <p>A section file has three parts: the Liquid/HTML markup, CSS styles (optional, inside <code>&lt;style&gt;</code> tags), and the schema (a JSON block that defines settings, blocks, and presets).</p>
+
+                <h2>Step 1: Create the Section File</h2>
+                <p>In your Shopify admin, go to <strong>Online Store > Themes > Edit code</strong>. Scroll to the Sections folder and click "Add a new section." Name it something descriptive with dashes between words, like <code>custom-features</code>.</p>
+                <p>The file will be created with a basic template. Replace it with your section structure:</p>
+                <pre><code>&lt;section class="custom-features section-{{ section.id }}"&gt;
+  &lt;div class="page-width"&gt;
+    {%- if section.settings.heading != blank -%}
+      &lt;h2 class="custom-features__heading"&gt;
+        {{ section.settings.heading }}
+      &lt;/h2&gt;
+    {%- endif -%}
+    
+    &lt;div class="custom-features__grid"&gt;
+      {%- for block in section.blocks -%}
+        &lt;div class="custom-features__item" {{ block.shopify_attributes }}&gt;
+          {%- if block.settings.icon != blank -%}
+            &lt;div class="custom-features__icon"&gt;
+              {{ block.settings.icon }}
+            &lt;/div&gt;
+          {%- endif -%}
+          &lt;h3&gt;{{ block.settings.title }}&lt;/h3&gt;
+          &lt;p&gt;{{ block.settings.text }}&lt;/p&gt;
+        &lt;/div&gt;
+      {%- endfor -%}
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+
+                <h2>Step 2: Add the Schema</h2>
+                <p>The schema defines what merchants can customize in the theme editor. Add it at the bottom of your section file inside <code>{% schema %}</code> tags:</p>
+                <pre><code>{% schema %}
+{
+  "name": "Custom Features",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Choose Us"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon emoji"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Features"
+    }
+  ]
+}
+{% endschema %}</code></pre>
+
+                <div class="info-box tip">
+                    <div class="info-box-title"><i class="fas fa-lightbulb"></i> The Presets Key</div>
+                    <p>The <code>presets</code> array is what makes your section available in the "Add section" picker in the theme editor. Without it, the section exists but merchants cannot add it to pages. Name it clearly so it is easy to find.</p>
+                </div>
+
+                <h2>Step 3: Add CSS</h2>
+                <p>Add styles inside <code>&lt;style&gt;</code> tags at the top or bottom of your section file. Use the <code>section-{{ section.id }}</code> class to scope your CSS and avoid conflicts with other sections:</p>
+                <pre><code>&lt;style&gt;
+  .custom-features.section-{{ section.id }} {
+    padding: 60px 0;
+  }
+  .custom-features__heading {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 2rem;
+  }
+  .custom-features__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+  }
+  .custom-features__item {
+    background: var(--color-background);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+  }
+&lt;/style&gt;</code></pre>
+
+                <h2>Step 4: Use Dawn's CSS Variables</h2>
+                <p>Dawn defines CSS custom properties for colors, fonts, and spacing. Use them instead of hardcoding values so your section automatically adapts to the merchant's theme settings:</p>
+                <ul>
+                    <li><code>var(--color-foreground)</code> for text color</li>
+                    <li><code>var(--color-background)</code> for background</li>
+                    <li><code>var(--font-heading-family)</code> for heading font</li>
+                    <li><code>var(--font-body-family)</code> for body font</li>
+                </ul>
+
+                <h2>Step 5: Restrict to Specific Templates (Optional)</h2>
+                <p>If your section should only appear on certain page types, use the <code>templates</code> attribute in the schema:</p>
+                <pre><code>"templates": ["product", "collection"]</code></pre>
+                <p>This prevents merchants from accidentally adding a product-specific section to blog pages where the data would not exist.</p>
+
+                <h2>Common Mistakes</h2>
+                <ul>
+                    <li><strong>Not scoping CSS.</strong> Without a unique selector, your styles will bleed into other sections. Always scope with <code>.section-{{ section.id }}</code>.</li>
+                    <li><strong>Missing <code>shopify_attributes</code> on blocks.</strong> This attribute is required for the theme editor to highlight and select blocks. Without it, click-to-edit does not work.</li>
+                    <li><strong>Hardcoding colors.</strong> Use Dawn's CSS variables or add color picker settings in your schema. Hardcoded colors break when merchants change their theme palette.</li>
+                </ul>
+
+                <p>If you want custom sections built for your store without doing the development yourself, <a href="../../services/custom-shopify-sections/index.html">check out my custom section development service</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-section">
+        <div class="container">
+            <h2>Related Resources</h2>
+            <div class="related-grid">
+                <a href="../shopify-metafields-product-page-liquid/index.html" class="related-card">
+                    <span class="tag">Blog</span>
+                    <h3>Shopify Metafields on Product Pages</h3>
+                    <p>How to add custom data fields and display them with Liquid code.</p>
+                    <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../services/custom-shopify-sections/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Custom Section Development</h3>
+                    <p>I build custom Liquid sections that work in the Shopify theme editor. No page builders needed.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../case-studies/tanning-club/index.html" class="related-card">
+                    <span class="tag">Case Study</span>
+                    <h3>Tanning Club: Product Experience Revamp</h3>
+                    <p>Rebuilt navigation, metafield-driven product pages, and custom sections for a sun care brand.</p>
+                    <span class="read-more">View case study <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need Custom Sections <span class="text-gradient">Built?</span></h2>
+            <p>Send me a design or description and I will quote you within 24 hours.</p>
+            <a href="../../index.html?quote=open" class="btn-primary">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../../services/custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="../../services/shopify-liquid-development/index.html">Liquid Development</a></li>
+                        <li><a href="../../services/shopify-checkout-customization/index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../shopify-checkout-migration-non-plus-stores/index.html">Checkout Migration Guide</a></li>
+                        <li><a href="../shopify-metafields-product-page-liquid/index.html">Metafields Tutorial</a></li>
+                        <li><a href="index.html">Dawn Sections Guide</a></li>
+                        <li><a href="../../case-studies/clear-id-laboratory/index.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Nav scroll behavior
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+            lastScroll = y;
+        });
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileBackdrop').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+        }
+    </script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

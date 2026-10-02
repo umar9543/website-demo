@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Checkout Migration for Non-Plus Stores: What Broke on August 26, 2026</title>
+    <meta name="description" content="Shopify upgraded non-Plus Thank you and Order status pages on August 26, 2026, and Additional Scripts stopped running. How to check what broke and rebuild your tracking with web pixels.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moeedbuilds.dev/blog/shopify-checkout-migration-non-plus-stores/">
+    <meta property="og:title" content="Shopify Checkout Migration for Non-Plus Stores: What Broke on August 26, 2026">
+    <meta property="og:description" content="Shopify upgraded non-Plus Thank you and Order status pages on August 26, 2026, and Additional Scripts stopped running. How to check what broke and rebuild your tracking with web pixels.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/blog/shopify-checkout-migration-non-plus-stores/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Shopify Checkout Migration for Non-Plus Stores: What Broke on August 26, 2026", "author": {"@type": "Person", "name": "Moeed Irfan", "url": "https://moeedbuilds.dev"}, "datePublished": "2026-05-11", "dateModified": "2026-09-22", "mainEntityOfPage": "https://moeedbuilds.dev/blog/shopify-checkout-migration-non-plus-stores/", "description": "Shopify upgraded non-Plus Thank you and Order status pages on August 26, 2026, and Additional Scripts stopped running. How to check what broke and rebuild your tracking with web pixels."}</script>
+</head>
+<body> 
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="mailto:moeed.shopify@gmail.com" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="mailto:moeed.shopify@gmail.com" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+<div class="breadcrumbs"><div class="container"><a href="../../index.html">Home</a><span class="sep">/</span><a href="../../index.html#blog">Blog</a><span class="sep">/</span><span class="current">Checkout Migration Guide</span></div></div>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge"><i class="fas fa-rotate"></i> Updated September 2026</div>
+            <h1>Shopify Checkout Migration Guide for <span class="text-gradient">Non-Plus Stores</span></h1>
+            <p class="subtitle">The deadline has passed. If your store never upgraded, Shopify did it for you on August 26, 2026, and anything in Additional Scripts stopped running that day. Here is how to find out what broke and fix it.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="article-content">
+
+                <div class="info-box tip">
+                    <div class="info-box-title"><i class="fas fa-circle-info"></i> This guide has been rewritten</div>
+                    <p>It was first published in May 2026 to help stores prepare before the deadline. It now covers the situation most stores are actually in: the upgrade has already happened, and some of your tracking may have quietly stopped.</p>
+                </div>
+
+                <h2>What Happened on August 26</h2>
+                <p>August 26, 2026 was Shopify's deadline for stores on non-Plus plans (Basic, Shopify and Advanced) to upgrade their Thank you and Order status pages. Stores that had not upgraded by then were switched to the new pages automatically.</p>
+                <p>The new pages do not run code from Additional Scripts, and apps that customised those pages with script tags stopped working on them too. Tracking and page content now have to be built with Shopify's supported tools: web pixels for tracking, and blocks in the checkout and accounts editor for anything shown on the page.</p>
+                <p>Shopify Plus stores went through the same change earlier, with a deadline of August 28, 2025. If you are on Plus, everything below still applies.</p>
+
+                <div class="info-box warning">
+                    <div class="info-box-title"><i class="fas fa-exclamation-triangle"></i> Your checkout still works</div>
+                    <p>Customers can still buy and orders still arrive. That is exactly why this goes unnoticed. What stops is the reporting and the extras: conversion pixels, affiliate postbacks, post-purchase surveys and custom Thank you page messages.</p>
+                </div>
+
+                <h2>How to Tell If Your Tracking Stopped</h2>
+                <p>The quickest check takes five minutes. Compare the number of orders in Shopify with the purchases your ad platforms reported, for the week before August 26 and the week after.</p>
+                <ul>
+                    <li><strong>Shopify orders steady, ad platform purchases dropped</strong> from around August 26: your conversion tracking almost certainly lived in Additional Scripts.</li>
+                    <li><strong>Your affiliate or influencer network</strong> started reporting fewer sales than you actually made.</li>
+                    <li><strong>Something disappeared from the Thank you page</strong>, like a survey, an upsell, a review request or a custom message.</li>
+                    <li><strong>Google Ads shows conversions but at $0 value</strong>, which usually means a rushed migration that never mapped revenue.</li>
+                </ul>
+                <p>If none of these match, you are probably fine. Tracking that came from Shopify's own sales channel apps, like Google &amp; YouTube or Facebook &amp; Instagram, was not affected.</p>
+
+                <h2>How to Rebuild What Broke</h2>
+
+                <h3>Step 1: List what used to fire</h3>
+                <p>Find out what was in your old setup. A developer's handover notes, your own records, or the Additional Scripts box itself if it is still visible in your admin will do. Write down every script and what it did: conversion tracking, analytics, affiliate attribution, or page content.</p>
+
+                <h3>Step 2: Use the official apps first</h3>
+                <p>For Google Analytics 4 and Google Ads, install the Google &amp; YouTube app. For Meta, install the Facebook &amp; Instagram app, which also handles the Conversions API. TikTok, Pinterest and Microsoft Ads have official apps too. These are the easiest path and they keep working through future Shopify updates.</p>
+
+                <h3>Step 3: Build custom pixels for everything else</h3>
+                <p>Anything without an official app, most often affiliate networks and smaller ad platforms, needs a custom pixel. Go to <strong>Settings &gt; Customer events &gt; Add custom pixel</strong>, name it clearly, and subscribe it to the right event, usually <code>checkout_completed</code> for purchases.</p>
+
+                <div class="info-box tip">
+                    <div class="info-box-title"><i class="fas fa-lightbulb"></i> Old scripts will not paste straight in</div>
+                    <p>Custom pixels run in a sandbox. They cannot read or change the page, so code written for Additional Scripts usually has to be rewritten to use the event data Shopify passes in. Google Tag Manager containers are limited in the same way: fine for conversion events, not for tags that depend on page content.</p>
+                </div>
+
+                <h3>Step 4: Rebuild Thank you page content with blocks</h3>
+                <p>Surveys, messages and review prompts now come from blocks, added in the checkout and accounts editor under <strong>Settings &gt; Checkout &gt; Customize</strong>. Many survey and upsell apps have released blocks for this. Anything custom needs a checkout UI extension built by a developer.</p>
+
+                <h3>Step 5: Test with a real order</h3>
+                <p>A preview is not enough. Place a real order, then confirm each event arrived with the right value using Google Tag Assistant, Meta Events Manager and each platform's own debugger. Check the revenue value specifically, since $0 conversions quietly wreck Smart Bidding.</p>
+
+                <h3>Step 6: Compare the numbers a week later</h3>
+                <p>After seven days, repeat the check from the top of this guide. Shopify orders and ad platform purchases will never match exactly, but the gap should be back to where it was before August 26.</p>
+
+                <h2>Can You Recover the Missing Data?</h2>
+                <p>Your orders are safe. Every one is still in Shopify. The conversion events that never reached your ad platforms are harder: most platforms cannot easily be backfilled with purchases they never saw. That is why speed matters more than perfection here. Every day tracking stays broken, your campaigns keep optimising on incomplete data.</p>
+                <p>One thing worth doing right away: if your ad results dropped around August 26 and you have been cutting budgets because of it, pause those decisions until tracking is confirmed working. The campaigns may have been performing fine the whole time.</p>
+
+                <h2>Common Mistakes to Avoid</h2>
+                <ul>
+                    <li><strong>Blaming the ads.</strong> A sudden drop in reported conversions from late August is far more likely to be tracking than performance.</li>
+                    <li><strong>Double firing.</strong> Running an official app and a custom pixel for the same platform inflates conversions and confuses bidding.</li>
+                    <li><strong>Forgetting affiliates.</strong> Most merchants fix Google and Meta, then find out weeks later their affiliates were never credited for sales.</li>
+                    <li><strong>Skipping the revenue check.</strong> A conversion that fires at $0 looks fixed and is not.</li>
+                </ul>
+
+                <h2>Do You Need a Developer for This?</h2>
+                <p>If your setup was simple, just Google and Meta through Additional Scripts, you can usually fix it yourself with the official apps. If you had affiliate postbacks, several ad platforms, server-side tracking or custom Thank you page content, it is worth getting help.</p>
+                <p>I audit what stopped firing, rebuild it with web pixels and blocks, and verify every event with real orders. See the <a href="../../services/shopify-checkout-customization/index.html">checkout and tracking recovery service</a>, or <a href="../../index.html?quote=open">send me your store URL</a> and I will tell you what broke within 24 hours.</p>
+
+            </div>
+        </div>
+    </section>
+
+    
+<section class="related-section">
+        <div class="container">
+            <h2>Related Resources</h2>
+            <div class="related-grid">
+                <a href="../../services/shopify-checkout-customization/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Shopify Checkout Customization</h3>
+                    <p>Professional checkout migration and customization using Checkout Extensibility, UI Extensions, and Shopify Functions.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../shopify-metafields-product-page-liquid/index.html" class="related-card">
+                    <span class="tag">Blog</span>
+                    <h3>Using Metafields on Shopify Product Pages</h3>
+                    <p>How to add custom data fields to your products and display them with Liquid code.</p>
+                    <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../services/shopify-liquid-development/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Shopify Liquid Development</h3>
+                    <p>Custom Liquid coding for themes, sections, templates, and advanced store functionality.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need Help With Your <span class="text-gradient">Migration?</span></h2>
+            <p>I will audit your checkout, migrate your tracking, and test everything so nothing breaks on August 26.</p>
+            <a href="../../index.html?quote=open" class="btn-primary">Get a Free Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../../services/custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="../../services/shopify-liquid-development/index.html">Liquid Development</a></li>
+                        <li><a href="../../services/shopify-checkout-customization/index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="index.html">Checkout Migration Guide</a></li>
+                        <li><a href="../shopify-metafields-product-page-liquid/index.html">Metafields Tutorial</a></li>
+                        <li><a href="../custom-sections-shopify-dawn-theme/index.html">Dawn Sections Guide</a></li>
+                        <li><a href="../../case-studies/clear-id-laboratory/index.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Nav scroll behavior
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+            lastScroll = y;
+        });
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileBackdrop').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+        }
+    </script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

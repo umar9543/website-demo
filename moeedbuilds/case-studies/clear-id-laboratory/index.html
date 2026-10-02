@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear ID Laboratory Shopify Build: Custom Product Page Sections | Case Study</title>
+    <meta name="description" content="How I built and debugged custom product page sections for Clear ID Laboratory, a laser clinic on Shopify, including treatment-specific layouts and rich content displays.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moeedbuilds.dev/case-studies/clear-id-laboratory/">
+    <meta property="og:title" content="Clear ID Laboratory Shopify Build: Custom Product Page Sections | Case Study">
+    <meta property="og:description" content="How I built and debugged custom product page sections for Clear ID Laboratory, a laser clinic on Shopify, including treatment-specific layouts and rich content displays.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/case-studies/clear-id-laboratory/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    
+</head>
+<body> 
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="mailto:moeed.shopify@gmail.com" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="mailto:moeed.shopify@gmail.com" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+<div class="breadcrumbs"><div class="container"><a href="../../index.html">Home</a><span class="sep">/</span><a href="../../index.html#case-studies">Case Studies</a><span class="sep">/</span><span class="current">Clear ID Laboratory</span></div></div>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge"><i class="fas fa-briefcase"></i> Case Study</div>
+            <h1>Clear ID Laboratory: Custom <span class="text-gradient">Product Page Sections</span></h1>
+            <p class="subtitle">A laser clinic needed unique product page layouts for different treatment types, with rich content sections that work within Shopify's theme editor.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="case-meta">
+                <div class="case-meta-item">
+                    <span class="case-meta-label">Client</span>
+                    <span class="case-meta-value">Clear ID Laboratory</span>
+                </div>
+                <div class="case-meta-item">
+                    <span class="case-meta-label">Industry</span>
+                    <span class="case-meta-value">Laser Clinic / Beauty</span>
+                </div>
+                <div class="case-meta-item">
+                    <span class="case-meta-label">Scope</span>
+                    <span class="case-meta-value">Product Page Sections</span>
+                </div>
+                <div class="case-meta-item">
+                    <span class="case-meta-label">Tech</span>
+                    <span class="case-meta-value">Liquid, CSS, JS</span>
+                </div>
+            </div>
+
+            <div class="article-content">
+                <h2>The Challenge</h2>
+                <p>Clear ID Laboratory is a laser clinic that sells treatments as products on Shopify. Each treatment has unique information: procedure details, expected results, aftercare instructions, and pricing tiers. The default Shopify product page could not display this content in a way that felt professional and trustworthy for a medical aesthetics business.</p>
+
+                <h2>What I Built</h2>
+                <p>Custom product page sections designed specifically for service-based businesses:</p>
+                <ul>
+                    <li><strong>Treatment overview sections</strong> with structured content blocks for procedure description, duration, recovery time, and expected results</li>
+                    <li><strong>Before/after displays</strong> with clean layout and proper image handling</li>
+                    <li><strong>FAQ sections</strong> specific to each treatment, editable per product via the theme editor</li>
+                    <li><strong>Pricing tiers</strong> for different session packages with clear comparison</li>
+                    <li><strong>Booking CTAs</strong> positioned throughout the page to maximize appointment conversions</li>
+                </ul>
+
+                <h2>Technical Challenges</h2>
+                <p>The main technical challenge was a Shopify Customizer rich text validation error that was preventing the client from saving changes. The theme editor was rejecting certain content in richtext fields. I resolved this by switching affected fields from richtext type to textarea type in the section schema, which eliminated the validation issue while maintaining the ability to format content.</p>
+                <p>I also built the sections to work across multiple treatments without requiring code changes for each new service. The client can duplicate a product, update the content in the theme editor, and have a fully formatted treatment page ready in minutes.</p>
+
+                <h2>The Result</h2>
+                <p>A professional, trust-building product page experience that properly communicates the value and details of each laser treatment. The client can add new treatments without developer help, maintaining their content independently through the Shopify theme editor.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-section">
+        <div class="container">
+            <h2>Related</h2>
+            <div class="related-grid">
+                <a href="../tanning-club/index.html" class="related-card">
+                    <span class="tag">Case Study</span>
+                    <h3>Tanning Club: Product Experience Revamp</h3>
+                    <p>Rebuilt navigation, metafield-driven product pages, and custom sections for a sun care brand.</p>
+                    <span class="read-more">View case study <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../services/custom-shopify-sections/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Custom Section Development</h3>
+                    <p>Custom Liquid sections built for the Shopify theme editor.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../services/shopify-liquid-development/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Shopify Liquid Development</h3>
+                    <p>Full-scope Liquid coding for themes, sections, and store functionality.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need Custom <span class="text-gradient">Product Pages?</span></h2>
+            <p>Whether you sell products or services, I will build product page sections that convert.</p>
+            <a href="../../index.html?quote=open" class="btn-primary">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../../services/custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="../../services/shopify-liquid-development/index.html">Liquid Development</a></li>
+                        <li><a href="../../services/shopify-checkout-customization/index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../blog/shopify-checkout-migration-non-plus-stores/index.html">Checkout Migration Guide</a></li>
+                        <li><a href="../../blog/shopify-metafields-product-page-liquid/index.html">Metafields Tutorial</a></li>
+                        <li><a href="../../blog/custom-sections-shopify-dawn-theme/index.html">Dawn Sections Guide</a></li>
+                        <li><a href="../tanning-club/index.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Nav scroll behavior
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+            lastScroll = y;
+        });
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileBackdrop').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+        }
+    </script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

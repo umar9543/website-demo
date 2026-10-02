@@ -1,0 +1,28 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+1 info using npm@11.0.0
+2 info using node@v22.11.0
+3 silly config load:file:C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\npmrc
+4 silly config load:file:E:\React\wordpress\.tmp-claude\.npmrc
+5 silly config load:file:C:\Users\mumer\.npmrc
+6 silly config load:file:C:\Users\mumer\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm init
+8 verbose argv "init" "--yes"
+9 verbose logfile logs-max:10 dir:E:\React\wordpress\.tmp-claude\npm-cache\_logs\2026-10-01T10_52_53_508Z-
+10 verbose logfile E:\React\wordpress\.tmp-claude\npm-cache\_logs\2026-10-01T10_52_53_508Z-debug-0.log
+11 silly logfile done cleaning log files
+12 verbose stack Error: Invalid name: ".tmp-claude"
+12 verbose stack     at normalize (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\package-json\lib\normalize.js:168:15)
+12 verbose stack     at PackageJson.normalize (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\node_modules\@npmcli\package-json\lib\index.js:263:11)
+12 verbose stack     at init (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\node_modules\init-package-json\lib\init-package-json.js:80:13)
+12 verbose stack     at async Init.template (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\lib\commands\init.js:167:20)
+12 verbose stack     at async Init.exec (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\lib\commands\init.js:48:5)
+12 verbose stack     at async Npm.exec (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\lib\npm.js:207:9)
+12 verbose stack     at async module.exports (C:\Users\mumer\AppData\Roaming\npm\node_modules\npm\lib\cli\entry.js:69:5)
+13 error Invalid name: ".tmp-claude"
+14 verbose cwd E:\React\wordpress\.tmp-claude
+15 verbose os Windows_NT 10.0.19045
+16 verbose node v22.11.0
+17 verbose npm  v11.0.0
+18 verbose exit 1
+19 verbose code 1
+20 error A complete log of this run can be found in: E:\React\wordpress\.tmp-claude\npm-cache\_logs\2026-10-01T10_52_53_508Z-debug-0.log

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Checkout Customization &amp; Tracking Recovery | Moeed Irfan</title>
+    <meta name="description" content="Shopify upgraded non-Plus Thank you and Order status pages on August 26, 2026 and Additional Scripts stopped running. I find what broke and rebuild it with web pixels and checkout blocks.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moeedbuilds.dev/services/shopify-checkout-customization/">
+    <meta property="og:title" content="Shopify Checkout Customization &amp; Tracking Recovery | Moeed Irfan">
+    <meta property="og:description" content="Shopify upgraded non-Plus Thank you and Order status pages on August 26, 2026 and Additional Scripts stopped running. I find what broke and rebuild it with web pixels and checkout blocks.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/services/shopify-checkout-customization/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <link rel="stylesheet" href="../../css/service-page.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "name": "Shopify Checkout Customization and Tracking Recovery", "serviceType": "Shopify checkout extensibility and conversion tracking", "description": "Shopify upgraded non-Plus Thank you and Order status pages on August 26, 2026 and Additional Scripts stopped running. I find what broke and rebuild it with web pixels and checkout blocks.", "url": "https://moeedbuilds.dev/services/shopify-checkout-customization/", "areaServed": ["United States", "United Kingdom", "Canada", "Australia", "Worldwide"], "provider": {"@type": "Person", "name": "Moeed Irfan", "url": "https://moeedbuilds.dev", "jobTitle": "Shopify Expert & Liquid Developer"}}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://moeedbuilds.dev/"}, {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://moeedbuilds.dev/#services"}, {"@type": "ListItem", "position": 3, "name": "Checkout Solutions", "item": "https://moeedbuilds.dev/services/shopify-checkout-customization/"}]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What changed on August 26, 2026?", "acceptedAnswer": {"@type": "Answer", "text": "That was Shopify's deadline for stores on non-Plus plans to upgrade their Thank you and Order status pages. Pages that had not been upgraded were switched to the new versions automatically, and customisations built with Additional Scripts or script tag apps do not run on them."}}, {"@type": "Question", "name": "Is my checkout broken?", "acceptedAnswer": {"@type": "Answer", "text": "Almost certainly not. Customers can still buy and orders still come in. What usually breaks is tracking and anything shown on the Thank you page, which is why many stores have not noticed yet."}}, {"@type": "Question", "name": "I am on Shopify Plus. Does this apply to me?", "acceptedAnswer": {"@type": "Answer", "text": "Plus stores had an earlier deadline, August 28, 2025, so if you are on Plus this change has already happened to your store. The same audit and rebuild applies if your tracking was never moved over."}}, {"@type": "Question", "name": "Can I paste my old scripts somewhere else?", "acceptedAnswer": {"@type": "Answer", "text": "Not as they were. The new pages do not run arbitrary scripts. Tracking has to be rebuilt as web pixels, which run in a sandbox and listen to customer events, and on-page content has to be rebuilt as blocks."}}, {"@type": "Question", "name": "How do you prove the tracking works?", "acceptedAnswer": {"@type": "Answer", "text": "With real test orders, checked in Google Tag Assistant, Meta Events Manager and each platform's own debugger. You see every event fire before sign-off, and I monitor for 48 hours after launch."}}, {"@type": "Question", "name": "How long does it take?", "acceptedAnswer": {"@type": "Answer", "text": "It depends on how much was in your old checkout. A store with a few standard pixels is quick; one with custom affiliate postbacks and Thank you page extras takes longer. Send your store URL and you will get a scoped quote within 24 hours."}}]}</script>
+</head>
+<body class="sv-page">
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="../../index.html?quote=open" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="../../index.html?quote=open" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+    <main>
+        <section class="sv-hero" aria-labelledby="sv-title">
+            <div class="sv-wrap sv-hero-grid">
+                <div>
+                    <nav class="sv-crumbs sv-rise" aria-label="Breadcrumb"><a href="../../index.html">Home</a><span>/</span><a href="../../index.html#services">Services</a><span>/</span>Checkout Solutions</nav>
+                    <h1 class="sv-h1 sv-rise" id="sv-title">Shopify checkout customization <span class="sv-grad">after the August cutover</span></h1>
+                    <p class="sv-lede sv-rise">On August 26, 2026 Shopify upgraded every remaining non-Plus Thank you and Order status page. Code in Additional Scripts stopped running that day. I find what broke and rebuild it properly.</p>
+                    <div class="sv-ctas sv-rise">
+                        <a href="../../index.html?quote=open" class="sv-btn sv-btn--main">Get a quote in 24 hours <i class="fas fa-arrow-right"></i></a>
+                        <a href="#how" class="sv-btn sv-btn--ghost">See how it works</a>
+                    </div>
+                    <div class="sv-chips sv-rise"><span class="sv-chip"><b>450+</b> projects shipped</span><span class="sv-chip"><b>#1</b> in Shopify Community</span><span class="sv-chip"><b>6+</b> years on Shopify</span></div>
+                </div>
+                <div>
+                    <div class="sv-window" data-demo="scan">
+                        <div class="sv-window-bar"><i></i><i></i><i></i><span>Thank you page / tracking check</span></div>
+                        <div class="sv-scan">
+                            <div class="sv-scan-top">
+                                <b>Purchase events<small>What fires when an order is placed</small></b>
+                                <button type="button" class="sv-scan-btn" data-phase="scan">Run the check</button>
+                            </div>
+                            <div class="sv-scan-row" data-state="dead" data-label="Silent" data-fixed="Firing"><span class="sv-scan-ico"><i class="fab fa-meta"></i></span><span class="sv-scan-name">Meta Pixel<small>Purchase</small></span><span class="sv-status">Not checked</span></div>
+                            <div class="sv-scan-row" data-state="dead" data-label="Silent" data-fixed="Firing"><span class="sv-scan-ico"><i class="fab fa-google"></i></span><span class="sv-scan-name">Google Ads<small>Conversion</small></span><span class="sv-status">Not checked</span></div>
+                            <div class="sv-scan-row" data-state="ok" data-label="Firing" data-fixed="Firing"><span class="sv-scan-ico"><i class="fas fa-chart-line"></i></span><span class="sv-scan-name">GA4<small>Via Google channel app</small></span><span class="sv-status">Not checked</span></div>
+                            <div class="sv-scan-row" data-state="dead" data-label="Silent" data-fixed="Firing"><span class="sv-scan-ico"><i class="fab fa-tiktok"></i></span><span class="sv-scan-name">TikTok Pixel<small>CompletePayment</small></span><span class="sv-status">Not checked</span></div>
+                            <div class="sv-scan-row" data-state="dead" data-label="Silent" data-fixed="Firing"><span class="sv-scan-ico"><i class="fas fa-link"></i></span><span class="sv-scan-name">Affiliate postback<small>Custom script</small></span><span class="sv-status">Not checked</span></div>
+                            <p class="sv-scan-foot">An example store. Anything that lived in Additional Scripts is the first thing to check.</p>
+                        </div>
+                    </div>
+                    <p class="sv-hint"><i class="fas fa-hand-pointer"></i> Press the button. This is the kind of audit I run on your store.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="sv-marquee" aria-hidden="true"><div class="sv-marquee-track"><span>Web pixels</span><span>Customer events</span><span>Thank you page blocks</span><span>Order status blocks</span><span>Checkout UI extensions</span><span>Google Ads conversions</span><span>Meta Pixel</span><span>TikTok events</span><span>GA4 purchase</span><span>Affiliate postbacks</span><span>Post purchase surveys</span><span>Consent mode</span><span>Web pixels</span><span>Customer events</span><span>Thank you page blocks</span><span>Order status blocks</span><span>Checkout UI extensions</span><span>Google Ads conversions</span><span>Meta Pixel</span><span>TikTok events</span><span>GA4 purchase</span><span>Affiliate postbacks</span><span>Post purchase surveys</span><span>Consent mode</span></div></div>
+        <section class="sv-section" id="how">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">What changed</div>
+                        <h2 class="sv-h2">The deadline passed quietly</h2>
+                    </div>
+                    <p class="sv-sub">Most stores did not notice anything on August 26. That is exactly the problem.</p>
+                </div>
+                <div class="sv-story">
+                    <div class="sv-stage" aria-hidden="true"><div class="sv-scene"><span class="sv-scene-num"><b>01</b> / 04</span><div class="sv-glyph"><div class="sv-glyph-big sv-grad">Aug 26</div><p class="sv-glyph-cap">Old Thank you and Order status pages switched off</p></div></div><div class="sv-scene"><span class="sv-scene-num"><b>02</b> / 04</span><div class="sv-glyph"><div class="sv-bars"><div>Real orders<i style="--w:.92"></i></div><div>Ads can see<i class="is-grey" style="--w:.35"></i></div></div><p class="sv-glyph-cap">Orders keep coming. The data does not.</p></div></div><div class="sv-scene"><span class="sv-scene-num"><b>03</b> / 04</span><div class="sv-glyph"><div class="sv-stack"><span><i class="fas fa-code"></i>Custom web pixel</span><span><i class="fas fa-bolt"></i>Customer events</span><span><i class="fas fa-cube"></i>Page blocks</span></div></div></div><div class="sv-scene"><span class="sv-scene-num"><b>04</b> / 04</span><div class="sv-glyph"><div class="sv-glyph-big" style="color:#34d399"><i class="fas fa-circle-check"></i></div><p class="sv-glyph-cap">Verified on a real test order</p></div></div></div>
+                    <div class="sv-steps"><article class="sv-step"><div class="sv-step-n">01</div><h3>The old pages were replaced</h3><p>Shopify set August 26, 2026 as the deadline for non-Plus stores to upgrade their Thank you and Order status pages. Any store that had not upgraded was switched over automatically, and code in Additional Scripts does not run on the new pages.</p></article><article class="sv-step"><div class="sv-step-n">02</div><h3>Checkout kept working, so nobody noticed</h3><p>Customers still check out and orders still arrive. What stops is the reporting: conversion pixels, affiliate postbacks and post-purchase extras that lived in that box. Ad platforms simply start seeing fewer sales than you actually made.</p></article><article class="sv-step"><div class="sv-step-n">03</div><h3>Rebuilt the supported way</h3><p>Tracking moves to web pixels and customer events, and on-page content moves to Thank you and Order status page blocks. Both are Shopify's supported foundation, so the next platform update does not wipe them out again.</p></article><article class="sv-step"><div class="sv-step-n">04</div><h3>Proven with a real order</h3><p>Every event is checked with a live test order using Tag Assistant, Meta Events Manager and each platform's own debugger. You see it firing before we call it done.</p></article></div>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-top:40px">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Am I affected?</div>
+                        <h2 class="sv-h2">Check your store in thirty seconds</h2>
+                    </div>
+                    <p class="sv-sub">Tick anything that applies to your store. It is a rough guide, not a diagnosis, but it will tell you whether an audit is worth it.</p>
+                </div>
+                <div class="sv-reveal"><div class="sv-tool" data-tool="quiz">
+                    <div class="sv-quiz">
+                        <div class="sv-quiz-list">
+                            <label class="sv-q"><input type="checkbox"><span>Someone pasted code into Additional Scripts<small>Settings, then Checkout. Tracking snippets usually lived here.</small></span></label>
+                            <label class="sv-q"><input type="checkbox"><span>You run Meta, Google or TikTok ads<small>And rely on them to report purchases.</small></span></label>
+                            <label class="sv-q"><input type="checkbox"><span>You use affiliate or influencer tracking<small>Anything that fires a postback when an order completes.</small></span></label>
+                            <label class="sv-q"><input type="checkbox"><span>Your Thank you page had extras<small>A survey, an upsell, a custom message or a review prompt.</small></span></label>
+                            <label class="sv-q"><input type="checkbox"><span>You never clicked Upgrade yourself<small>Before August 26, 2026.</small></span></label>
+                        </div>
+                        <div class="sv-verdict" aria-live="polite">
+                            <div class="sv-field-label">Your result</div>
+                            <div class="sv-meter"><i></i></div>
+                            <div class="sv-verdict-level">Probably fine</div>
+                            <p class="sv-verdict-text">Nothing here points to broken tracking.</p>
+                            <a href="../../index.html?quote=open" class="sv-btn sv-btn--main" style="align-self:flex-start">Get it checked <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div></div>
+            </div>
+        </section>
+        <section class="sv-section" style="background:var(--bg-card)">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">What I handle</div>
+                        <h2 class="sv-h2">Audit, rebuild, verify</h2>
+                    </div>
+                    <p class="sv-sub">Everything that used to live in the old checkout, moved to the supported setup and proven to work.</p>
+                </div>
+                <div class="sv-bento sv-reveal-stagger">
+                    <div class="service-feature is-wide">
+                        <div class="sv-ico"><i class="fas fa-magnifying-glass-chart"></i></div>
+                        <h3>Full tracking audit</h3>
+                        <p>I go through what was in Additional Scripts, which apps inject into checkout, and what each platform is actually receiving now. You get a clear list of what broke and what still works.</p>
+                        <div class="sv-tags"><span>Additional Scripts</span><span>Apps</span><span>Pixels</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-code"></i></div>
+                        <h3>Web pixel rebuild</h3>
+                        <p>Google Ads, Meta, TikTok and GA4 purchase events moved to web pixels and customer events.</p>
+                        <div class="sv-tags"><span>Web pixels</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-plug"></i></div>
+                        <h3>Custom pixels</h3>
+                        <p>For affiliate networks and tools with no official app, I write custom pixels that run in Shopify's sandbox.</p>
+                        <div class="sv-tags"><span>Affiliates</span><span>Postbacks</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-cube"></i></div>
+                        <h3>Thank you page blocks</h3>
+                        <p>Surveys, messages, upsells and order status content rebuilt with blocks in the checkout and accounts editor.</p>
+                        <div class="sv-tags"><span>Blocks</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-cart-shopping"></i></div>
+                        <h3>Checkout customisation</h3>
+                        <p>Checkout UI extensions for custom fields, banners and logic. Full checkout extensions require Shopify Plus.</p>
+                        <div class="sv-tags"><span>Shopify Plus</span></div>
+                    </div>
+                    <div class="service-feature">
+                        <div class="sv-ico"><i class="fas fa-circle-check"></i></div>
+                        <h3>Verification</h3>
+                        <p>Live test orders checked in each platform's debugger, then 48 hours of monitoring after launch.</p>
+                        <div class="sv-tags"><span>Test orders</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">How it works</div>
+                        <h2 class="sv-h2">From silent to firing</h2>
+                    </div>
+                    <p class="sv-sub">Your live checkout keeps taking orders the whole time.</p>
+                </div>
+                <div class="sv-process">
+                    <div class="sv-node">
+                        <div class="sv-node-dot">1</div>
+                        <h3>Audit</h3>
+                        <small>First</small>
+                        <p>I document every script, pixel and customisation your checkout used to rely on, and check what is firing today.</p>
+                    </div>
+                    <div class="sv-node">
+                        <div class="sv-node-dot">2</div>
+                        <h3>Rebuild</h3>
+                        <small>Supported tools only</small>
+                        <p>Tracking goes to web pixels and customer events. Page content goes to Thank you and Order status blocks.</p>
+                    </div>
+                    <div class="sv-node">
+                        <div class="sv-node-dot">3</div>
+                        <h3>Test</h3>
+                        <small>With real orders</small>
+                        <p>Test orders confirm every conversion event and data point before you sign off on anything.</p>
+                    </div>
+                    <div class="sv-node">
+                        <div class="sv-node-dot">4</div>
+                        <h3>Monitor</h3>
+                        <small>48 hours after launch</small>
+                        <p>I watch the numbers for two days after go-live to catch anything that only shows up with real traffic.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-top:40px">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Proof, not promises</div>
+                        <h2 class="sv-h2">Know exactly what changed</h2>
+                    </div>
+                </div>
+                <div class="sv-proof sv-reveal-stagger">
+                    <a href="../../blog/shopify-checkout-migration-non-plus-stores/index.html" class="sv-case" style="background:radial-gradient(circle at 80% 10%, rgba(236,0,110,.35), transparent 55%), linear-gradient(160deg,#1a1a1d,#0e0e10)">
+                        
+                        <div class="sv-case-body">
+                            <small>Free guide</small>
+                            <h3>The checkout migration guide for non-Plus stores</h3>
+                            <p>What Shopify changed, what stops working, and how to check your own store before you pay anyone for anything.</p>
+                            <span>Read the guide <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <figure class="sv-quote">
+                        <div>
+                            <div class="sv-quote-mark">&ldquo;</div>
+                            <blockquote>Moeed is very professional and quick to respond. He fixed the bugs of my online store shortly with a series of code. He's very good with the technique. I'll look for him next time for sure!</blockquote>
+                        </div>
+                        <figcaption class="sv-quote-who">
+                            <span class="author-name">SC</span>
+                            <div><b>Sherry Chan</b><small>Hong Kong &middot; <span class="sv-stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</span></small></div>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="background:var(--bg-card)">
+            <div class="sv-wrap sv-faq-grid">
+                <div class="sv-head sv-reveal">
+                    <div class="sv-kicker">FAQ</div>
+                    <h2 class="sv-h2">Checkout and tracking questions</h2>
+                    <p class="sv-sub">Still unsure? <a href="https://wa.me/923353061236" style="color:var(--primary-light);font-weight:600">Message me on WhatsApp</a> and you will get a straight answer, usually the same day.</p>
+                </div>
+                <div class="sv-faq sv-reveal">
+                        <details>
+                            <summary>What changed on August 26, 2026?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>That was Shopify's deadline for stores on non-Plus plans to upgrade their Thank you and Order status pages. Pages that had not been upgraded were switched to the new versions automatically, and customisations built with Additional Scripts or script tag apps do not run on them.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>Is my checkout broken?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Almost certainly not. Customers can still buy and orders still come in. What usually breaks is tracking and anything shown on the Thank you page, which is why many stores have not noticed yet.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>I am on Shopify Plus. Does this apply to me?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Plus stores had an earlier deadline, August 28, 2025, so if you are on Plus this change has already happened to your store. The same audit and rebuild applies if your tracking was never moved over.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>Can I paste my old scripts somewhere else?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>Not as they were. The new pages do not run arbitrary scripts. Tracking has to be rebuilt as web pixels, which run in a sandbox and listen to customer events, and on-page content has to be rebuilt as blocks.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>How do you prove the tracking works?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>With real test orders, checked in Google Tag Assistant, Meta Events Manager and each platform's own debugger. You see every event fire before sign-off, and I monitor for 48 hours after launch.</p></div></div>
+                        </details>
+                        <details>
+                            <summary>How long does it take?<i class="fas fa-plus" aria-hidden="true"></i></summary>
+                            <div class="sv-faq-a"><div><p>It depends on how much was in your old checkout. A store with a few standard pixels is quick; one with custom affiliate postbacks and Thank you page extras takes longer. Send your store URL and you will get a scoped quote within 24 hours.</p></div></div>
+                        </details>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-bottom:60px">
+            <div class="sv-wrap">
+                <div class="sv-head sv-reveal">
+                    <div>
+                        <div class="sv-kicker">Keep exploring</div>
+                        <h2 class="sv-h2">Related services and guides</h2>
+                    </div>
+                </div>
+                <div class="related-grid sv-reveal-stagger">
+                    <a href="../shopify-liquid-development/index.html" class="related-card">
+                        <span class="tag">Service</span>
+                        <h3>Shopify Liquid Development</h3>
+                        <p>Custom theme functionality, metafields, cart logic and app replacements.</p>
+                        <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="../custom-shopify-sections/index.html" class="related-card">
+                        <span class="tag">Service</span>
+                        <h3>Custom Shopify Sections</h3>
+                        <p>Editable, app free sections built to your design.</p>
+                        <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                    <a href="../../blog/shopify-checkout-migration-non-plus-stores/index.html" class="related-card">
+                        <span class="tag">Guide</span>
+                        <h3>Checkout Migration Guide</h3>
+                        <p>The full breakdown of what changed for non-Plus stores and how to check yours.</p>
+                        <span class="read-more">Read guide <i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="sv-section" style="padding-top:40px">
+            <div class="sv-wrap">
+                <div class="sv-cta sv-reveal">
+                    <div>
+                        <h2>Find out what stopped firing</h2>
+                        <p>Send your store URL. I will tell you what broke on August 26 and what it takes to fix it, within 24 hours.</p>
+                    </div>
+                    <div class="sv-cta-btns">
+                        <a href="../../index.html?quote=open" class="sv-btn sv-btn--main">Get a quote <i class="fas fa-arrow-right"></i></a>
+                        <a href="https://wa.me/923353061236" target="_blank" rel="noopener noreferrer" class="sv-btn sv-btn--ghost"><i class="fab fa-whatsapp"></i> WhatsApp me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="../shopify-liquid-development/index.html">Liquid Development</a></li>
+                        <li><a href="index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../../blog/shopify-contact-form-custom-fields/index.html">Contact Form Custom Fields</a></li>
+                        <li><a href="../../blog/shopify-checkout-migration-non-plus-stores/index.html">Checkout Migration Guide</a></li>
+                        <li><a href="../../blog/shopify-metafields-product-page-liquid/index.html">Metafields Tutorial</a></li>
+                        <li><a href="../../blog/custom-sections-shopify-dawn-theme/index.html">Dawn Sections Guide</a></li>
+                        <li><a href="../../case-studies/clear-id-laboratory/index.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../../js/service-page.js"></script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

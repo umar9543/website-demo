@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use Shopify Metafields on Product Pages with Liquid Code (2026 Guide)</title>
+    <meta name="description" content="Learn how to add custom data to Shopify product pages using metafields and Liquid. Practical examples: tabs, badges, specs tables, and size charts with code snippets.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moeedbuilds.dev/blog/shopify-metafields-product-page-liquid/">
+    <meta property="og:title" content="How to Use Shopify Metafields on Product Pages with Liquid Code (2026 Guide)">
+    <meta property="og:description" content="Learn how to add custom data to Shopify product pages using metafields and Liquid. Practical examples: tabs, badges, specs tables, and size charts with code snippets.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/blog/shopify-metafields-product-page-liquid/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Use Shopify Metafields on Product Pages with Liquid Code","author":{"@type":"Person","name":"Moeed Irfan","url":"https://moeedbuilds.dev"},"datePublished":"2026-05-11","description":"Practical guide to using Shopify metafields on product pages with Liquid code examples."}</script>
+</head>
+<body> 
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="mailto:moeed.shopify@gmail.com" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="mailto:moeed.shopify@gmail.com" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+<div class="breadcrumbs"><div class="container"><a href="../../index.html">Home</a><span class="sep">/</span><a href="../../index.html#blog">Blog</a><span class="sep">/</span><span class="current">Metafields on Product Pages</span></div></div>
+
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge"><i class="fas fa-database"></i> Shopify Development</div>
+            <h1>How to Use Shopify Metafields on <span class="text-gradient">Product Pages</span> with Liquid</h1>
+            <p class="subtitle">Metafields let you add custom data to products that Shopify does not include by default. Here is how to set them up, display them with Liquid, and use them for tabs, badges, specs tables, and more.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="article-content">
+                <h2>What Are Metafields?</h2>
+                <p>A metafield is a custom data field attached to a Shopify resource. For product pages, you are almost always working with product metafields. They let you store information that does not fit into the default Shopify fields: care instructions, sizing details, material specs, video URLs, badge labels, or any custom data unique to your store.</p>
+                <p>Before Online Store 2.0, metafields required a developer and a third-party app just to manage. Now you can create definitions directly in the Shopify admin, fill them in on each product, and display them on your storefront using Liquid or the theme editor's dynamic sources.</p>
+
+                <h2>Setting Up a Metafield Definition</h2>
+                <p>Go to <strong>Settings > Custom data > Products</strong> in your Shopify admin. Click "Add definition." Give it a name, choose a type (single line text, multi-line text, true/false, number, file, etc.), and save. Once the definition exists, the field appears on every product edit page under a "Metafields" section.</p>
+
+                <div class="info-box tip">
+                    <div class="info-box-title"><i class="fas fa-lightbulb"></i> Key Point</div>
+                    <p>Creating the definition does not make it show up on your storefront. You have to connect it to your theme using Liquid code or dynamic sources in the theme editor.</p>
+                </div>
+
+                <h2>Example 1: Custom Product Tabs</h2>
+                <p>The most requested metafield use case. You want separate tabs for "Details," "Care Instructions," and "Shipping Info" on your product page, each with different content per product.</p>
+                <p>Create three metafield definitions: <code>custom.details_tab</code>, <code>custom.care_tab</code>, and <code>custom.shipping_tab</code>. Set each as "Multi-line text" type with rich text enabled. Then add this Liquid to your product template:</p>
+                <pre><code>{%- if product.metafields.custom.details_tab != blank -%}
+  &lt;div class="product-tab"&gt;
+    &lt;h4&gt;Details&lt;/h4&gt;
+    {{ product.metafields.custom.details_tab | metafield_tag }}
+  &lt;/div&gt;
+{%- endif -%}</code></pre>
+                <p>The <code>metafield_tag</code> filter renders rich text content with proper HTML. Without it, you would get raw text without formatting.</p>
+
+                <h2>Example 2: Product Badges</h2>
+                <p>Create a metafield definition called <code>custom.badge_text</code> as single line text. Fill it with values like "New Arrival" or "Best Seller" on specific products. Display it with:</p>
+                <pre><code>{%- if product.metafields.custom.badge_text != blank -%}
+  &lt;span class="product-badge"&gt;
+    {{ product.metafields.custom.badge_text }}
+  &lt;/span&gt;
+{%- endif -%}</code></pre>
+                <p>Keep badge text to two words maximum. "New Arrival" works. "Recently Added to Our Collection" does not render well at small sizes.</p>
+
+                <h2>Example 3: Specifications Table</h2>
+                <p>For products where physical details matter (dimensions, weight, materials), create a JSON metafield called <code>custom.specs</code>. Store structured data like:</p>
+                <pre><code>{"Weight": "450g", "Material": "316L Stainless Steel", "Dimensions": "12 x 8 x 3 cm"}</code></pre>
+                <p>Display it as a formatted table:</p>
+                <pre><code>{%- if product.metafields.custom.specs != blank -%}
+  &lt;table class="specs-table"&gt;
+    {%- for spec in product.metafields.custom.specs.value -%}
+      &lt;tr&gt;
+        &lt;td&gt;{{ spec.first }}&lt;/td&gt;
+        &lt;td&gt;{{ spec.last }}&lt;/td&gt;
+      &lt;/tr&gt;
+    {%- endfor -%}
+  &lt;/table&gt;
+{%- endif -%}</code></pre>
+
+                <h2>Example 4: Dynamic Sources (No Code Required)</h2>
+                <p>If you are using an Online Store 2.0 theme, you can connect metafields without writing Liquid. In the theme editor, click on any text block and look for the "Connect dynamic source" icon. Select your metafield from the list. The value will automatically populate for each product.</p>
+                <p>This works great for simple text fields. For anything more complex (conditional logic, custom HTML, formatted tables), you still need Liquid.</p>
+
+                <h2>Common Mistakes</h2>
+                <ul>
+                    <li><strong>Forgetting the blank check.</strong> Always wrap metafield output in an <code>if != blank</code> condition. Otherwise empty metafields will render empty HTML elements on products where you did not fill in the value.</li>
+                    <li><strong>Using the wrong metafield type.</strong> Rich text requires <code>metafield_tag</code> to render properly. JSON requires iterating through <code>.value</code>. Single line text can be output directly.</li>
+                    <li><strong>Not using the namespace.</strong> Metafields created in the admin use the <code>custom</code> namespace by default. If you are referencing a metafield created by an app, it will have a different namespace.</li>
+                </ul>
+
+                <h2>Need Help Implementing This?</h2>
+                <p>If you want metafield-driven product pages built for your store, I handle the full implementation: definition setup, Liquid coding, styling, and testing. <a href="../../services/shopify-liquid-development/index.html">Check out my Liquid development service</a> or <a href="mailto:moeed.shopify@gmail.com">send me your requirements</a>.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-section">
+        <div class="container">
+            <h2>Related Resources</h2>
+            <div class="related-grid">
+                <a href="../custom-sections-shopify-dawn-theme/index.html" class="related-card">
+                    <span class="tag">Blog</span>
+                    <h3>Build Custom Sections in Shopify Dawn Theme</h3>
+                    <p>Step-by-step guide to creating custom sections with Liquid, schemas, and blocks.</p>
+                    <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../services/shopify-liquid-development/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Shopify Liquid Development</h3>
+                    <p>Custom Liquid coding for themes, sections, templates, and advanced store functionality.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../case-studies/tanning-club/index.html" class="related-card">
+                    <span class="tag">Case Study</span>
+                    <h3>Tanning Club: Product Experience Revamp</h3>
+                    <p>Rebuilt navigation, metafield-driven product pages, and custom sections for a sun care brand.</p>
+                    <span class="read-more">View case study <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Want Custom <span class="text-gradient">Metafield Pages?</span></h2>
+            <p>I will set up your metafield definitions, write the Liquid, style everything, and test it across your catalog.</p>
+            <a href="../../index.html?quote=open" class="btn-primary">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../../services/custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="../../services/shopify-liquid-development/index.html">Liquid Development</a></li>
+                        <li><a href="../../services/shopify-checkout-customization/index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="../shopify-checkout-migration-non-plus-stores/index.html">Checkout Migration Guide</a></li>
+                        <li><a href="index.html">Metafields Tutorial</a></li>
+                        <li><a href="../custom-sections-shopify-dawn-theme/index.html">Dawn Sections Guide</a></li>
+                        <li><a href="../../case-studies/clear-id-laboratory/index.html">Case Studies</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Nav scroll behavior
+        const nav = document.getElementById('nav');
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+            lastScroll = y;
+        });
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileBackdrop').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+        }
+    </script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

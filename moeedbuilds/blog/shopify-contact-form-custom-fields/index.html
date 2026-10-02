@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Custom Fields to the Shopify Contact Form Without an App (2026)</title>
+    <meta name="description" content="Add custom fields, dropdowns, checkboxes and conditional logic to the Shopify contact form with one Liquid section. No app, no monthly fee. Full code for Dawn, Horizon and any Online Store 2.0 theme.">
+    <meta name="author" content="Moeed Irfan">
+    <meta name="robots" content="index, follow">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://moeedbuilds.dev/blog/shopify-contact-form-custom-fields/">
+    <meta property="og:title" content="Add Custom Fields to the Shopify Contact Form Without an App">
+    <meta property="og:description" content="One Liquid section gives you extra fields, dropdowns and conditional logic on the native Shopify contact form. No app, no monthly fee.">
+    <meta property="og:image" content="https://moeedbuilds.dev/images/og-image.jpg">
+    <meta name="theme-color" content="#0a0a0b">
+    <link rel="canonical" href="https://moeedbuilds.dev/blog/shopify-contact-form-custom-fields/">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="../../css/shared.css">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ19X5WN9K"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-SJ19X5WN9K");</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Add Custom Fields to the Shopify Contact Form Without an App","author":{"@type":"Person","name":"Moeed Irfan","url":"https://moeedbuilds.dev"},"datePublished":"2026-09-14","dateModified":"2026-09-14","description":"Add custom fields, dropdowns and conditional logic to the Shopify contact form with one Liquid section. No app required.","mainEntityOfPage":"https://moeedbuilds.dev/blog/shopify-contact-form-custom-fields/"}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can you add custom fields to the Shopify contact form without an app?","acceptedAnswer":{"@type":"Answer","text":"Yes. Any input inside a Shopify contact form named contact[Your Label] is included in the notification email automatically. You do not register the field anywhere first, so extra fields, dropdowns and checkboxes can be added with a single Liquid section and no app."}},{"@type":"Question","name":"Where do Shopify contact form submissions get sent?","acceptedAnswer":{"@type":"Answer","text":"To the Sender email under Settings then Notifications. That is the only setting that controls it. The Store contact email under Store details is a different field and does not affect where form submissions arrive."}},{"@type":"Question","name":"Can you add a file upload to the Shopify contact form?","acceptedAnswer":{"@type":"Answer","text":"No. Adding enctype multipart form-data and a file input appears to work, but Shopify has nowhere to store the attachment so it is discarded silently. File uploads need a form builder app, your own endpoint, or a text field asking for a file sharing link."}},{"@type":"Question","name":"Does this work on Dawn and Horizon?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is a standard section file, so it works on Dawn, Horizon and any other Online Store 2.0 theme that supports sections."}}]}</script>
+    <style>
+        /* ===== Page layout: article plus a sticky contents rail ===== */
+        .cbx-layout { display: block; }
+
+        @media (min-width: 1180px) {
+            .cbx-layout {
+                display: grid;
+                grid-template-columns: minmax(0, 760px) 240px;
+                gap: 64px;
+                align-items: start;
+            }
+        }
+
+        .cbx-toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 32px;
+        }
+
+        @media (min-width: 1180px) {
+            .cbx-toc {
+                position: sticky;
+                top: 120px;
+                margin-bottom: 0;
+                background: none;
+                border: none;
+                border-left: 1px solid var(--border-subtle);
+                border-radius: 0;
+                padding: 4px 0 4px 20px;
+            }
+        }
+
+        .cbx-toc summary {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.92rem;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .cbx-toc summary::-webkit-details-marker { display: none; }
+
+        .cbx-toc summary i {
+            color: var(--primary);
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .cbx-toc[open] summary i { transform: rotate(180deg); }
+
+        @media (min-width: 1180px) {
+            .cbx-toc summary {
+                cursor: default;
+                font-size: 0.75rem;
+                letter-spacing: 0.06em;
+                color: var(--text-muted);
+                font-weight: 600;
+                margin-bottom: 14px;
+            }
+            .cbx-toc summary i { display: none; }
+        }
+
+        .cbx-toc ol {
+            list-style: none;
+            margin: 14px 0 0;
+            padding: 0;
+            counter-reset: tocnum;
+        }
+
+        @media (min-width: 1180px) {
+            .cbx-toc ol { margin-top: 0; }
+        }
+
+        .cbx-toc li { margin-bottom: 10px; }
+
+        .cbx-toc a {
+            display: block;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .cbx-toc a:hover { color: var(--text-primary); }
+
+        .cbx-toc a.current {
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        /* ===== Article meta strip ===== */
+        .article-content h2[id] { scroll-margin-top: 120px; }
+
+        .cbx-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .cbx-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            background: var(--bg-card);
+        }
+
+        .cbx-meta i { color: var(--primary); font-size: 0.75rem; }
+
+        /* ===== Code block ===== */
+        .cbx-code {
+            margin: 24px 0 28px;
+            border: 1px solid var(--border-medium);
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+
+        .cbx-code-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .cbx-file {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-width: 0;
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .cbx-file i { color: var(--primary); font-size: 0.72rem; flex-shrink: 0; }
+
+        .cbx-file b {
+            font-weight: 400;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+
+        .cbx-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            padding: 7px 14px;
+            background: rgba(236, 0, 110, 0.1);
+            border: 1px solid rgba(236, 0, 110, 0.3);
+            border-radius: 8px;
+            color: var(--primary-light);
+            font-family: var(--font-body);
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }
+
+        .cbx-copy:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .cbx-copy.done {
+            background: #10b981;
+            border-color: #10b981;
+            color: #fff;
+        }
+
+        .cbx-scroll {
+            position: relative;
+            max-height: 460px;
+            overflow: auto;
+        }
+
+        .cbx-code.open .cbx-scroll { max-height: 72vh; }
+
+        .article-content .cbx-code pre {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            background: none;
+            padding: 20px 22px;
+            font-size: 0.82rem;
+            line-height: 1.65;
+            overflow: visible;
+        }
+
+        .article-content .cbx-code pre code {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+            color: var(--text-secondary);
+        }
+
+        .cbx-fade {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 110px;
+            background: linear-gradient(to top, var(--bg-card) 15%, rgba(17, 17, 19, 0));
+            pointer-events: none;
+        }
+
+        .cbx-code.open .cbx-fade { display: none; }
+
+        .cbx-more {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            border: none;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.25s ease, background 0.25s ease;
+        }
+
+        .cbx-more:hover { color: var(--primary-light); background: rgba(236, 0, 110, 0.06); }
+
+        /* syntax colors */
+        .cb-lq  { color: #e2e8f0; }
+        .cb-liq { color: #ff6bb0; }
+        .cb-fn  { color: #6ee7b7; }
+        .cb-tag { color: #7dd3fc; }
+        .cb-str { color: #f0b429; }
+        .cb-atr { color: #c4b5fd; }
+        .cb-num { color: #fca5a5; }
+        .cb-kw  { color: #93c5fd; }
+        .cb-com { color: #5f6169; font-style: italic; }
+
+        /* ===== Numbered steps ===== */
+        .article-content ol.cbx-steps {
+            counter-reset: cbxstep;
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0 28px;
+        }
+
+        .article-content ol.cbx-steps li {
+            counter-increment: cbxstep;
+            position: relative;
+            padding-left: 46px;
+            margin-bottom: 16px;
+        }
+
+        .article-content ol.cbx-steps li::before {
+            content: counter(cbxstep);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(236, 0, 110, 0.1);
+            border: 1px solid rgba(236, 0, 110, 0.32);
+            color: var(--primary-light);
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== Source note ===== */
+        .cbx-source {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin: 36px 0 8px;
+            padding: 18px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-subtle);
+            border-radius: 14px;
+        }
+
+        .cbx-source i {
+            color: var(--primary);
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        .article-content .cbx-source p {
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* ===== FAQ ===== */
+        .cbx-faq {
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 8px;
+            margin-top: 8px;
+        }
+
+        .cbx-faq details {
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .cbx-faq summary {
+            cursor: pointer;
+            list-style: none;
+            padding: 18px 40px 18px 0;
+            position: relative;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .cbx-faq summary::-webkit-details-marker { display: none; }
+
+        .cbx-faq summary::after {
+            content: '+';
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 1;
+        }
+
+        .cbx-faq details[open] summary::after { content: '\2212'; }
+
+        .article-content .cbx-faq p {
+            font-size: 0.98rem;
+            padding-bottom: 18px;
+            margin: 0;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .cbx-toc summary i,
+            .cbx-copy,
+            .cbx-toc a { transition: none; }
+        }
+    </style>
+</head>
+<body> 
+    <nav class="nav" id="nav">
+        <div class="nav-wrapper">
+            <div class="nav-inner">
+                <a href="../../index.html" class="nav-logo">Moeed<span>.</span></a>
+                <ul class="nav-links">
+                    <li><a href="../../index.html#about">About</a></li>
+                    <li><a href="../../index.html#services">Services</a></li>
+                    <li><a href="../../index.html#portfolio">Work</a></li>
+                    <li><a href="../../index.html#case-studies">Cases</a></li>
+                    <li><a href="../../index.html#pricing">Pricing</a></li>
+                </ul>
+                <div class="nav-right">
+                    <a href="../../index.html?quote=open" class="nav-cta"><span>Book a Call <i class="fas fa-arrow-right"></i></span></a>
+                </div>
+                <button class="nav-mobile-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">&times;</button>
+        <a href="../../index.html#about" onclick="toggleMobileMenu()">About</a>
+        <a href="../../index.html#services" onclick="toggleMobileMenu()">Services</a>
+        <a href="../../index.html#portfolio" onclick="toggleMobileMenu()">Work</a>
+        <a href="../../index.html#case-studies" onclick="toggleMobileMenu()">Cases</a>
+        <a href="../../index.html#pricing" onclick="toggleMobileMenu()">Pricing</a>
+        <a href="../../index.html?quote=open" style="color: var(--primary);">Book a Call</a>
+        <div class="mobile-menu-socials">
+            <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+            <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </div>
+    <div class="mobile-menu-backdrop" id="mobileBackdrop" onclick="toggleMobileMenu()"></div>
+
+<div class="breadcrumbs"><div class="container"><a href="../../index.html">Home</a><span class="sep">/</span><a href="../../index.html#blog">Blog</a><span class="sep">/</span><span class="current">Contact Form Custom Fields</span></div></div>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="badge"><i class="fas fa-envelope-open-text"></i> No App Needed</div>
+            <h1>Add Custom Fields to the Shopify Contact Form <span class="text-gradient">Without an App</span></h1>
+            <p class="subtitle">One Liquid section gives you extra fields, dropdowns, checkboxes and conditional logic, all editable from the theme editor. No app, no monthly fee, and it works on Dawn, Horizon and any Online Store 2.0 theme.</p>
+            <div class="cbx-meta">
+                <span><i class="fas fa-calendar-day"></i> Updated 14 September 2026</span>
+                <span><i class="fas fa-clock"></i> 8 minute read</span>
+                <span><i class="fas fa-code"></i> Copy and paste, 584 lines</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="cbx-layout">
+            <div class="article-content">
+
+                <h2 id="why">Why the default form runs out of road</h2>
+                <p>Shopify's built in contact form collects a name, an email, a phone number and a message. That holds up right until enquiries actually start arriving, at which point every message turns into a guessing game. Someone writes "my order is wrong" and you burn three emails working out which order they mean. If you sell made to order or personalised products it gets worse, because the details you need in order to quote anything are exactly the details the form never asks for.</p>
+                <p>The usual response is to install a form builder app. Those apps work, and if you need file uploads or a searchable database of submissions you should probably pay for one. But if all you want is a few extra fields, a dropdown and some conditional logic, Shopify already does that. You would be paying a recurring fee for something the platform hands you for free.</p>
+
+                <h2 id="naming">The one behaviour this is built on</h2>
+                <p>Here is the part most guides skip. Any input inside a Shopify contact form named <code>contact[Anything You Want]</code> is included in the notification email automatically. You do not register the field anywhere first. Shopify does not need to know it exists. Name it correctly and it turns up in your inbox.</p>
+                <p>That is it. That single behaviour is what every technique on this page rests on, and it is why you do not need an app to ask better questions.</p>
+
+                <div class="info-box tip">
+                    <div class="info-box-title"><i class="fas fa-lightbulb"></i> Naming rules worth knowing</div>
+                    <p>Whatever you put between the brackets becomes the label in your email, so write it the way you want to read it at 9am: <code>contact[Order number]</code>, not <code>contact[ord_no]</code>. Keep labels unique inside one form, since two fields with the same name will collide. And remember <code>contact[email]</code> is special: Shopify uses it as the reply-to address on the message you receive, so never remove it.</p>
+                </div>
+
+                <h2 id="what-you-get">What you get after pasting it once</h2>
+                <p>This matters more than the code itself, because it is the difference between a snippet you regret and something your team can live with.</p>
+                <p>Every field is a <strong>block</strong>. You add, rename, reorder and delete fields from the theme editor exactly like any other section. Colours, padding, border width, corner radius, font sizes, button styling and field spacing all live in the settings panel. After the initial paste, nobody needs to open Liquid again to change the form.</p>
+                <p>There are seven block types:</p>
+                <ul>
+                    <li><strong>Name, Email, Phone and Message</strong>, which map to Shopify's built in fields so submissions are attributed correctly</li>
+                    <li><strong>Custom text field, Custom dropdown and Custom checkbox</strong>, which automatically become <code>contact[Your Label]</code></li>
+                </ul>
+                <p>Every block has a label, a required toggle, and a half or full width setting. The three custom types also get a "Show only when" pair of settings, which is how you get conditional fields without touching JavaScript.</p>
+
+                <h2 id="the-code">The code</h2>
+                <ol class="cbx-steps">
+                    <li>In your Shopify admin go to <strong>Online Store</strong>, then <strong>Themes</strong>.</li>
+                    <li>Click the three dots next to your theme, then <strong>Edit code</strong>.</li>
+                    <li>Under the <strong>Sections</strong> folder click <strong>Add a new section</strong>.</li>
+                    <li>Name it <code>custom-contact-form</code>, delete the placeholder content Shopify generates, and paste the code below.</li>
+                </ol>
+
+                <div class="cbx-code" id="cbxCode">
+                    <div class="cbx-code-head">
+                        <span class="cbx-file"><i class="fas fa-file-code"></i> sections/custom-contact-form.liquid <b>584 lines</b></span>
+                        <button class="cbx-copy" type="button" id="cbxCopy"><i class="fas fa-copy"></i> <span>Copy code</span></button>
+                    </div>
+                    <div class="cbx-scroll">
+                        <pre><code id="cbxSource"><span class="cb-com">{% comment %}
+  Custom contact form
+  Works on Dawn, Horizon and any Online Store 2.0 theme
+{% endcomment %}</span>
+
+<span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">liquid</span>
+  <span class="cb-kw">assign</span> s = <span class="cb-kw">section</span>.settings
+  <span class="cb-kw">assign</span> ccf_form_id = <span class="cb-str">&#x27;ccf-form-&#x27;</span> <span class="cb-fn">| append</span>: <span class="cb-kw">section</span>.id
+
+  <span class="cb-kw">assign</span> c_section_bg = s.section_bg <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;transparent&#x27;</span>
+  <span class="cb-kw">assign</span> c_form_bg = s.form_bg <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;transparent&#x27;</span>
+  <span class="cb-kw">assign</span> c_form_border = s.form_border_color <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;transparent&#x27;</span>
+  <span class="cb-kw">assign</span> c_heading = s.heading_color <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;inherit&#x27;</span>
+  <span class="cb-kw">assign</span> c_label = s.label_color <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;inherit&#x27;</span>
+  <span class="cb-kw">assign</span> c_field_bg = s.field_bg <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;transparent&#x27;</span>
+  <span class="cb-kw">assign</span> c_field_text = s.field_text <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;inherit&#x27;</span>
+  <span class="cb-kw">assign</span> c_placeholder = s.field_placeholder_color <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;inherit&#x27;</span>
+  <span class="cb-kw">assign</span> c_field_border = s.field_border_color <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;#d9d9d9&#x27;</span>
+  <span class="cb-kw">assign</span> c_field_focus = s.field_border_focus <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;#121212&#x27;</span>
+  <span class="cb-kw">assign</span> c_btn_bg = s.button_bg <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;#121212&#x27;</span>
+  <span class="cb-kw">assign</span> c_btn_text = s.button_text <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;#ffffff&#x27;</span>
+  <span class="cb-kw">assign</span> c_btn_bg_hover = s.button_bg_hover <span class="cb-fn">| default</span>: c_btn_bg
+  <span class="cb-kw">assign</span> c_btn_text_hover = s.button_text_hover <span class="cb-fn">| default</span>: c_btn_text
+  <span class="cb-kw">assign</span> c_success_text = s.success_text <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;inherit&#x27;</span>
+  <span class="cb-kw">assign</span> c_success_bg = s.success_bg <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;transparent&#x27;</span>
+  <span class="cb-kw">assign</span> c_error_text = s.error_text <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;#b00020&#x27;</span>
+  <span class="cb-kw">assign</span> c_error_bg = s.error_bg <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;transparent&#x27;</span>
+<span class="cb-liq">-%}</span></span>
+
+<span class="cb-tag">&lt;div</span>
+  <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf&quot;</span>
+  <span class="cb-atr">id</span>=<span class="cb-str">&quot;ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span>&quot;</span>
+  <span class="cb-atr">style</span>=<span class="cb-str">&quot;background: <span class="cb-lq"><span class="cb-liq">{{</span> c_section_bg <span class="cb-liq">}}</span></span>; padding: <span class="cb-lq"><span class="cb-liq">{{</span> s.padding_top <span class="cb-liq">}}</span></span>px <span class="cb-lq"><span class="cb-liq">{{</span> s.padding_horizontal <span class="cb-liq">}}</span></span>px <span class="cb-lq"><span class="cb-liq">{{</span> s.padding_bottom <span class="cb-liq">}}</span></span>px;&quot;</span>&gt;
+
+  <span class="cb-tag">&lt;div</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__inner&quot;</span>&gt;
+
+    <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> s.heading != <span class="cb-kw">blank</span> <span class="cb-liq">-%}</span></span>
+      <span class="cb-tag">&lt;h2</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__heading&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> s.heading <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/h2</span>&gt;
+    <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+
+    <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">form</span> <span class="cb-str">&#x27;contact&#x27;</span>, id: ccf_form_id <span class="cb-liq">%}</span></span>
+
+      <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> <span class="cb-kw">form</span>.posted_successfully? <span class="cb-liq">-%}</span></span>
+        <span class="cb-tag">&lt;p</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__success&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> s.success_message <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/p</span>&gt;
+      <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+
+      <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> <span class="cb-kw">form</span>.errors <span class="cb-liq">-%}</span></span>
+        <span class="cb-tag">&lt;ul</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__errors&quot;</span>&gt;
+          <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">for</span> field <span class="cb-kw">in</span> <span class="cb-kw">form</span>.errors <span class="cb-liq">-%}</span></span>
+            <span class="cb-tag">&lt;li</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">form</span>.errors.translated_fields[field] <span class="cb-liq">}}</span></span> <span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">form</span>.errors.messages[field] <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/li</span>&gt;
+          <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endfor</span> <span class="cb-liq">-%}</span></span>
+        <span class="cb-tag">&lt;/ul</span>&gt;
+      <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+
+      <span class="cb-tag">&lt;div</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__grid&quot;</span>&gt;
+        <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">for</span> block <span class="cb-kw">in</span> <span class="cb-kw">section</span>.blocks <span class="cb-liq">-%}</span></span>
+
+          <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">liquid</span>
+            <span class="cb-kw">assign</span> label = block.settings.label <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;Field&#x27;</span>
+            <span class="cb-kw">assign</span> uid = <span class="cb-str">&#x27;ccf-&#x27;</span> <span class="cb-fn">| append</span>: <span class="cb-kw">section</span>.id <span class="cb-fn">| append</span>: <span class="cb-str">&#x27;-&#x27;</span> <span class="cb-fn">| append</span>: block.id
+
+            <span class="cb-kw">case</span> block.type
+              <span class="cb-kw">when</span> <span class="cb-str">&#x27;name&#x27;</span>
+                <span class="cb-kw">assign</span> field_name = <span class="cb-str">&#x27;contact[name]&#x27;</span>
+              <span class="cb-kw">when</span> <span class="cb-str">&#x27;email&#x27;</span>
+                <span class="cb-kw">assign</span> field_name = <span class="cb-str">&#x27;contact[email]&#x27;</span>
+              <span class="cb-kw">when</span> <span class="cb-str">&#x27;phone&#x27;</span>
+                <span class="cb-kw">assign</span> field_name = <span class="cb-str">&#x27;contact[phone]&#x27;</span>
+              <span class="cb-kw">when</span> <span class="cb-str">&#x27;message&#x27;</span>
+                <span class="cb-kw">assign</span> field_name = <span class="cb-str">&#x27;contact[body]&#x27;</span>
+              <span class="cb-kw">else</span>
+                <span class="cb-kw">assign</span> field_name = <span class="cb-str">&#x27;contact[&#x27;</span> <span class="cb-fn">| append</span>: label <span class="cb-fn">| append</span>: <span class="cb-str">&#x27;]&#x27;</span>
+            <span class="cb-kw">endcase</span>
+
+            <span class="cb-kw">assign</span> is_conditional = <span class="cb-kw">false</span>
+            <span class="cb-kw">if</span> block.settings.show_when_field != <span class="cb-kw">blank</span> <span class="cb-kw">and</span> block.settings.show_when_value != <span class="cb-kw">blank</span>
+              <span class="cb-kw">assign</span> is_conditional = <span class="cb-kw">true</span>
+            <span class="cb-kw">endif</span>
+
+            <span class="cb-kw">assign</span> cond_attr = <span class="cb-str">&#x27;&#x27;</span>
+            <span class="cb-kw">if</span> is_conditional
+              <span class="cb-kw">assign</span> cond_attr = <span class="cb-str">&#x27;disabled&#x27;</span>
+            <span class="cb-kw">endif</span>
+
+            <span class="cb-kw">assign</span> width_class = block.settings.width <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;full&#x27;</span>
+          <span class="cb-liq">-%}</span></span>
+
+          <span class="cb-tag">&lt;div</span>
+            <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__field ccf__field--<span class="cb-lq"><span class="cb-liq">{{</span> width_class <span class="cb-liq">}}</span></span>&quot;</span>
+            <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> is_conditional <span class="cb-liq">%}</span></span>data-ccf-cond <span class="cb-atr">data-ccf-parent</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.show_when_field <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span> <span class="cb-atr">data-ccf-value</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.show_when_value <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span> hidden<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>
+            <span class="cb-lq"><span class="cb-liq">{{</span> block.shopify_attributes <span class="cb-liq">}}</span></span>
+          &gt;
+
+            <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">case</span> block.type <span class="cb-liq">-%}</span></span>
+
+              <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">when</span> <span class="cb-str">&#x27;message&#x27;</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> s.show_labels <span class="cb-liq">-%}</span></span><span class="cb-tag">&lt;label</span> <span class="cb-atr">for</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/label</span>&gt;<span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-tag">&lt;textarea</span>
+                  <span class="cb-atr">id</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> field_name <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">rows</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.rows <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">placeholder</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.placeholder <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">data-ccf-name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-lq"><span class="cb-liq">{{</span> cond_attr <span class="cb-liq">}}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> block.settings.required <span class="cb-liq">%}</span></span>required<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">form</span>.body <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/textarea</span>&gt;
+
+              <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">when</span> <span class="cb-str">&#x27;select&#x27;</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> s.show_labels <span class="cb-liq">-%}</span></span><span class="cb-tag">&lt;label</span> <span class="cb-atr">for</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/label</span>&gt;<span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-tag">&lt;select</span>
+                  <span class="cb-atr">id</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> field_name <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">data-ccf-name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-lq"><span class="cb-liq">{{</span> cond_attr <span class="cb-liq">}}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> block.settings.required <span class="cb-liq">%}</span></span>required<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>&gt;
+                  <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> block.settings.placeholder != <span class="cb-kw">blank</span> <span class="cb-liq">-%}</span></span>
+                    <span class="cb-tag">&lt;option</span> <span class="cb-atr">value</span>=<span class="cb-str">&quot;&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.placeholder <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/option</span>&gt;
+                  <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">assign</span> ccf_options = block.settings.options <span class="cb-fn">| newline_to_br</span> <span class="cb-fn">| split</span>: <span class="cb-str">&#x27;&lt;br /&gt;&#x27;</span> <span class="cb-liq">-%}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">for</span> opt <span class="cb-kw">in</span> ccf_options <span class="cb-liq">-%}</span></span>
+                    <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">assign</span> opt_clean = opt <span class="cb-fn">| strip</span> <span class="cb-liq">-%}</span></span>
+                    <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> opt_clean != <span class="cb-kw">blank</span> <span class="cb-liq">-%}</span></span>
+                      <span class="cb-tag">&lt;option</span> <span class="cb-atr">value</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> opt_clean <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> opt_clean <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/option</span>&gt;
+                    <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endfor</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-tag">&lt;/select</span>&gt;
+
+              <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">when</span> <span class="cb-str">&#x27;checkbox&#x27;</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-tag">&lt;label</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__checkbox&quot;</span> <span class="cb-atr">for</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>&gt;
+                  <span class="cb-tag">&lt;input</span>
+                    <span class="cb-atr">type</span>=<span class="cb-str">&quot;checkbox&quot;</span>
+                    <span class="cb-atr">id</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>
+                    <span class="cb-atr">name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> field_name <span class="cb-liq">}}</span></span>&quot;</span>
+                    <span class="cb-atr">value</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.checked_value <span class="cb-fn">| default</span>: <span class="cb-str">&#x27;Yes&#x27;</span> <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                    <span class="cb-atr">data-ccf-name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                    <span class="cb-lq"><span class="cb-liq">{{</span> cond_attr <span class="cb-liq">}}</span></span>
+                    <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> block.settings.required <span class="cb-liq">%}</span></span>required<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>&gt;
+                  <span class="cb-tag">&lt;span</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/span</span>&gt;
+                <span class="cb-tag">&lt;/label</span>&gt;
+
+              <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">else</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">liquid</span>
+                  <span class="cb-kw">case</span> block.type
+                    <span class="cb-kw">when</span> <span class="cb-str">&#x27;email&#x27;</span>
+                      <span class="cb-kw">assign</span> input_type = <span class="cb-str">&#x27;email&#x27;</span>
+                    <span class="cb-kw">when</span> <span class="cb-str">&#x27;phone&#x27;</span>
+                      <span class="cb-kw">assign</span> input_type = <span class="cb-str">&#x27;tel&#x27;</span>
+                    <span class="cb-kw">else</span>
+                      <span class="cb-kw">assign</span> input_type = <span class="cb-str">&#x27;text&#x27;</span>
+                  <span class="cb-kw">endcase</span>
+
+                  <span class="cb-kw">assign</span> prefill = <span class="cb-str">&#x27;&#x27;</span>
+                  <span class="cb-kw">if</span> block.type == <span class="cb-str">&#x27;name&#x27;</span>
+                    <span class="cb-kw">assign</span> prefill = <span class="cb-kw">form</span>.name <span class="cb-fn">| default</span>: customer.name
+                  <span class="cb-kw">elsif</span> block.type == <span class="cb-str">&#x27;email&#x27;</span>
+                    <span class="cb-kw">assign</span> prefill = <span class="cb-kw">form</span>.email <span class="cb-fn">| default</span>: customer.email
+                  <span class="cb-kw">elsif</span> block.type == <span class="cb-str">&#x27;phone&#x27;</span>
+                    <span class="cb-kw">assign</span> prefill = <span class="cb-kw">form</span>.phone <span class="cb-fn">| default</span>: customer.phone
+                  <span class="cb-kw">endif</span>
+                <span class="cb-liq">-%}</span></span>
+                <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">if</span> s.show_labels <span class="cb-liq">-%}</span></span><span class="cb-tag">&lt;label</span> <span class="cb-atr">for</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/label</span>&gt;<span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endif</span> <span class="cb-liq">-%}</span></span>
+                <span class="cb-tag">&lt;input</span>
+                  <span class="cb-atr">type</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> input_type <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">id</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> uid <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> field_name <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">value</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> prefill <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">placeholder</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> block.settings.placeholder <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-atr">data-ccf-name</span>=<span class="cb-str">&quot;<span class="cb-lq"><span class="cb-liq">{{</span> label <span class="cb-fn">| escape</span> <span class="cb-liq">}}</span></span>&quot;</span>
+                  <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> block.type == <span class="cb-str">&#x27;email&#x27;</span> <span class="cb-liq">%}</span></span><span class="cb-atr">autocomplete</span>=<span class="cb-str">&quot;email&quot;</span><span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{{</span> cond_attr <span class="cb-liq">}}</span></span>
+                  <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> block.settings.required <span class="cb-liq">%}</span></span>required<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>&gt;
+
+            <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endcase</span> <span class="cb-liq">-%}</span></span>
+
+          <span class="cb-tag">&lt;/div</span>&gt;
+
+        <span class="cb-lq"><span class="cb-liq">{%-</span> <span class="cb-kw">endfor</span> <span class="cb-liq">-%}</span></span>
+      <span class="cb-tag">&lt;/div</span>&gt;
+
+      <span class="cb-tag">&lt;div</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__actions&quot;</span>&gt;
+        <span class="cb-tag">&lt;button</span> <span class="cb-atr">type</span>=<span class="cb-str">&quot;submit&quot;</span> <span class="cb-atr">class</span>=<span class="cb-str">&quot;ccf__submit&quot;</span>&gt;<span class="cb-lq"><span class="cb-liq">{{</span> s.button_label <span class="cb-liq">}}</span></span><span class="cb-tag">&lt;/button</span>&gt;
+      <span class="cb-tag">&lt;/div</span>&gt;
+
+    <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endform</span> <span class="cb-liq">%}</span></span>
+
+  <span class="cb-tag">&lt;/div</span>&gt;
+<span class="cb-tag">&lt;/div</span>&gt;
+
+<span class="cb-tag">&lt;style</span>&gt;
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> {
+    <span class="cb-atr">--ccf-gap</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.field_gap <span class="cb-liq">}}</span></span>px;
+
+    <span class="cb-atr">--ccf-heading-size</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.heading_size <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-heading-color</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_heading <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-heading-margin</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.heading_margin <span class="cb-liq">}}</span></span>px;
+
+    <span class="cb-atr">--ccf-label-size</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.label_size <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-label-color</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_label <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-label-weight</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.label_weight <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-label-margin</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.label_margin <span class="cb-liq">}}</span></span>px;
+
+    <span class="cb-atr">--ccf-field-bg</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_field_bg <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-field-text</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_field_text <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-field-placeholder</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_placeholder <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-field-border</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_field_border <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-field-focus</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_field_focus <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-field-border-width</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.field_border_width <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-field-radius</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.field_radius <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-field-padding-y</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.field_padding_y <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-field-padding-x</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.field_padding_x <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-field-size</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.field_font_size <span class="cb-liq">}}</span></span>px;
+
+    <span class="cb-atr">--ccf-btn-bg</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_btn_bg <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-btn-text</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_btn_text <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-btn-bg-hover</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_btn_bg_hover <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-btn-text-hover</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_btn_text_hover <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">--ccf-btn-radius</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.button_radius <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-btn-padding-y</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.button_padding_y <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-btn-padding-x</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.button_padding_x <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">--ccf-btn-size</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.button_font_size <span class="cb-liq">}}</span></span>px;
+
+    <span class="cb-atr">--ccf-msg-radius</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.message_radius <span class="cb-liq">}}</span></span>px;
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__inner {
+    <span class="cb-atr">max-width</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.form_width <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">margin</span>: <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> s.form_align == <span class="cb-str">&#x27;center&#x27;</span> <span class="cb-liq">%}</span></span><span class="cb-num">0</span> auto<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">else</span> <span class="cb-liq">%}</span></span><span class="cb-num">0</span><span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>;
+    <span class="cb-atr">background</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_form_bg <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">border</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.form_border_width <span class="cb-liq">}}</span></span>px solid <span class="cb-lq"><span class="cb-liq">{{</span> c_form_border <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">border-radius</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.form_radius <span class="cb-liq">}}</span></span>px;
+    <span class="cb-atr">padding</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.form_padding <span class="cb-liq">}}</span></span>px;
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__heading {
+    <span class="cb-atr">font-size</span>: <span class="cb-kw">var</span>(--ccf-heading-size);
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-heading-color);
+    <span class="cb-atr">text-align</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.heading_align <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">margin</span>: <span class="cb-num">0</span> <span class="cb-num">0</span> <span class="cb-kw">var</span>(--ccf-heading-margin);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__grid {
+    <span class="cb-atr">display</span>: flex;
+    <span class="cb-atr">flex-wrap</span>: wrap;
+    <span class="cb-atr">gap</span>: <span class="cb-kw">var</span>(--ccf-gap);
+    <span class="cb-atr">margin-bottom</span>: <span class="cb-kw">var</span>(--ccf-gap);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field--full { <span class="cb-atr">flex</span>: <span class="cb-num">0</span> <span class="cb-num">0</span> <span class="cb-num">100</span>%; }
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field--half { <span class="cb-atr">flex</span>: <span class="cb-num">1</span> <span class="cb-num">1</span> calc(<span class="cb-num">50</span>% - (<span class="cb-kw">var</span>(--ccf-gap) / <span class="cb-num">2</span>)); <span class="cb-atr">min-width</span>: 220px; }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field &gt; label {
+    <span class="cb-atr">display</span>: block;
+    <span class="cb-atr">font-size</span>: <span class="cb-kw">var</span>(--ccf-label-size);
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-label-color);
+    <span class="cb-atr">font-weight</span>: <span class="cb-kw">var</span>(--ccf-label-weight);
+    <span class="cb-atr">margin-bottom</span>: <span class="cb-kw">var</span>(--ccf-label-margin);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field input[<span class="cb-atr">type</span>=<span class="cb-str">&quot;text&quot;</span>],
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field input[<span class="cb-atr">type</span>=<span class="cb-str">&quot;email&quot;</span>],
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field input[<span class="cb-atr">type</span>=<span class="cb-str">&quot;tel&quot;</span>],
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field select,
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field textarea {
+    <span class="cb-atr">width</span>: <span class="cb-num">100</span>%;
+    <span class="cb-atr">box-sizing</span>: border-box;
+    <span class="cb-atr">padding</span>: <span class="cb-kw">var</span>(--ccf-field-padding-y) <span class="cb-kw">var</span>(--ccf-field-padding-x);
+    <span class="cb-atr">background</span>: <span class="cb-kw">var</span>(--ccf-field-bg);
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-field-text);
+    <span class="cb-atr">border</span>: <span class="cb-kw">var</span>(--ccf-field-border-width) solid <span class="cb-kw">var</span>(--ccf-field-border);
+    <span class="cb-atr">border-radius</span>: <span class="cb-kw">var</span>(--ccf-field-radius);
+    <span class="cb-atr">font-size</span>: <span class="cb-kw">var</span>(--ccf-field-size);
+    <span class="cb-atr">font-family</span>: inherit;
+    <span class="cb-atr">transition</span>: border-color <span class="cb-num">0</span>.15s ease;
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field <span class="cb-atr">input</span>::placeholder,
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field <span class="cb-atr">textarea</span>::placeholder {
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-field-placeholder);
+    <span class="cb-atr">opacity</span>: <span class="cb-num">0.7</span>;
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field <span class="cb-atr">input</span>:focus,
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field <span class="cb-atr">select</span>:focus,
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__field <span class="cb-atr">textarea</span>:focus {
+    <span class="cb-atr">outline</span>: none;
+    <span class="cb-atr">border-color</span>: <span class="cb-kw">var</span>(--ccf-field-focus);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__checkbox {
+    <span class="cb-atr">display</span>: flex;
+    <span class="cb-atr">align-items</span>: center;
+    <span class="cb-atr">gap</span>: 10px;
+    <span class="cb-atr">cursor</span>: pointer;
+    <span class="cb-atr">font-size</span>: <span class="cb-kw">var</span>(--ccf-label-size);
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-label-color);
+  }
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__checkbox input { <span class="cb-atr">width</span>: auto; <span class="cb-atr">margin</span>: <span class="cb-num">0</span>; }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__actions { <span class="cb-atr">text-align</span>: <span class="cb-lq"><span class="cb-liq">{{</span> s.button_align <span class="cb-liq">}}</span></span>; }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__submit {
+    <span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">if</span> s.button_full_width <span class="cb-liq">%}</span></span><span class="cb-atr">width</span>: <span class="cb-num">100</span>%;<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endif</span> <span class="cb-liq">%}</span></span>
+    <span class="cb-atr">padding</span>: <span class="cb-kw">var</span>(--ccf-btn-padding-y) <span class="cb-kw">var</span>(--ccf-btn-padding-x);
+    <span class="cb-atr">background</span>: <span class="cb-kw">var</span>(--ccf-btn-bg);
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-btn-text);
+    <span class="cb-atr">border</span>: none;
+    <span class="cb-atr">border-radius</span>: <span class="cb-kw">var</span>(--ccf-btn-radius);
+    <span class="cb-atr">font-size</span>: <span class="cb-kw">var</span>(--ccf-btn-size);
+    <span class="cb-atr">font-family</span>: inherit;
+    <span class="cb-atr">cursor</span>: pointer;
+    <span class="cb-atr">transition</span>: background <span class="cb-num">0</span>.15s ease, color <span class="cb-num">0</span>.15s ease;
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .<span class="cb-atr">ccf__submit</span>:hover {
+    <span class="cb-atr">background</span>: <span class="cb-kw">var</span>(--ccf-btn-bg-hover);
+    <span class="cb-atr">color</span>: <span class="cb-kw">var</span>(--ccf-btn-text-hover);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__success {
+    <span class="cb-atr">padding</span>: 12px;
+    <span class="cb-atr">margin</span>: <span class="cb-num">0</span> <span class="cb-num">0</span> <span class="cb-kw">var</span>(--ccf-gap);
+    <span class="cb-atr">color</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_success_text <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">background</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_success_bg <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">border-radius</span>: <span class="cb-kw">var</span>(--ccf-msg-radius);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> .ccf__errors {
+    <span class="cb-atr">padding</span>: 12px 12px 12px 32px;
+    <span class="cb-atr">margin</span>: <span class="cb-num">0</span> <span class="cb-num">0</span> <span class="cb-kw">var</span>(--ccf-gap);
+    <span class="cb-atr">color</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_error_text <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">background</span>: <span class="cb-lq"><span class="cb-liq">{{</span> c_error_bg <span class="cb-liq">}}</span></span>;
+    <span class="cb-atr">border-radius</span>: <span class="cb-kw">var</span>(--ccf-msg-radius);
+  }
+
+  #ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span> [hidden] { <span class="cb-atr">display</span>: none !important; }
+<span class="cb-tag">&lt;/style</span>&gt;
+
+<span class="cb-tag">&lt;script</span>&gt;
+  (<span class="cb-kw">function</span> () {
+    <span class="cb-kw">var</span> <span class="cb-atr">root</span> = document.getElementById(<span class="cb-str">&#x27;ccf-<span class="cb-lq"><span class="cb-liq">{{</span> <span class="cb-kw">section</span>.id <span class="cb-liq">}}</span></span>&#x27;</span>);
+    <span class="cb-kw">if</span> (!root) <span class="cb-kw">return</span>;
+
+    <span class="cb-kw">var</span> <span class="cb-atr">conds</span> = root.querySelectorAll(<span class="cb-str">&#x27;[data-ccf-cond]&#x27;</span>);
+    <span class="cb-kw">if</span> (!conds.length) <span class="cb-kw">return</span>;
+
+    <span class="cb-kw">function</span> currentValue(name) {
+      <span class="cb-kw">var</span> <span class="cb-atr">el</span> = root.querySelector(<span class="cb-str">&#x27;[data-ccf-name=&quot;&#x27;</span> + name + <span class="cb-str">&#x27;&quot;]&#x27;</span>);
+      <span class="cb-kw">if</span> (!el) <span class="cb-kw">return</span> <span class="cb-kw">null</span>;
+      <span class="cb-kw">if</span> (el.<span class="cb-atr">type</span> === <span class="cb-str">&#x27;checkbox&#x27;</span>) <span class="cb-kw">return</span> el.checked ? el.<span class="cb-atr">value</span> : <span class="cb-str">&#x27;&#x27;</span>;
+      <span class="cb-kw">return</span> el.value;
+    }
+
+    <span class="cb-kw">function</span> apply() {
+      Array.prototype.forEach.call(conds, <span class="cb-kw">function</span> (wrap) {
+        <span class="cb-kw">var</span> <span class="cb-atr">parent</span> = wrap.getAttribute(<span class="cb-str">&#x27;data-ccf-parent&#x27;</span>);
+        <span class="cb-kw">var</span> <span class="cb-atr">wants</span> = (wrap.getAttribute(<span class="cb-str">&#x27;data-ccf-value&#x27;</span>) || <span class="cb-str">&#x27;&#x27;</span>).split(<span class="cb-str">&#x27;,&#x27;</span>).map(<span class="cb-kw">function</span> (v) {
+          <span class="cb-kw">return</span> v.trim();
+        });
+        <span class="cb-kw">var</span> <span class="cb-atr">now</span> = currentValue(parent);
+        <span class="cb-kw">var</span> <span class="cb-atr">show</span> = now !== <span class="cb-kw">null</span> &amp;&amp; wants.indexOf(now) !== -<span class="cb-num">1</span>;
+
+        wrap.<span class="cb-atr">hidden</span> = !show;
+
+        Array.prototype.forEach.call(wrap.querySelectorAll(<span class="cb-str">&#x27;input, select, textarea&#x27;</span>), <span class="cb-kw">function</span> (el) {
+          el.<span class="cb-atr">disabled</span> = !show;
+          <span class="cb-kw">if</span> (!show) {
+            <span class="cb-kw">if</span> (el.<span class="cb-atr">type</span> === <span class="cb-str">&#x27;checkbox&#x27;</span>) {
+              el.<span class="cb-atr">checked</span> = <span class="cb-kw">false</span>;
+            } <span class="cb-kw">else</span> {
+              el.<span class="cb-atr">value</span> = <span class="cb-str">&#x27;&#x27;</span>;
+            }
+          }
+        });
+      });
+    }
+
+    root.addEventListener(<span class="cb-str">&#x27;change&#x27;</span>, apply);
+    apply();
+  })();
+<span class="cb-tag">&lt;/script</span>&gt;
+
+<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">schema</span> <span class="cb-liq">%}</span></span>
+{
+  <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Custom contact form&quot;</span>,
+  <span class="cb-str">&quot;max_blocks&quot;</span>: <span class="cb-num">20</span>,
+  <span class="cb-str">&quot;settings&quot;</span>: [
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Layout&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_width&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">320</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">1200</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">20</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">640</span> },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_align&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form position&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;center&quot;</span>,
+      <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;left&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Left&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;center&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Centre&quot;</span> }]
+    },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_gap&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">40</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Space between fields&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">16</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;padding_top&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">120</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">4</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Padding top&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">40</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;padding_bottom&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">120</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">4</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Padding bottom&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">40</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;padding_horizontal&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">80</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">4</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Padding left and right&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">20</span> },
+
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Background&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;section_bg&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Section background&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_bg&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form card background&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_padding&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">60</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form card padding&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">0</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_border_color&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form card border&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_border_width&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">6</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form card border width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">0</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;form_radius&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">40</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Form card corner radius&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">0</span> },
+
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Heading&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;heading&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Heading&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Get in touch&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;heading_size&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">16</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">56</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Heading size&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">28</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;heading_color&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Heading colour&quot;</span> },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;heading_align&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Heading alignment&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;left&quot;</span>,
+      <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;left&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Left&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;center&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Centre&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;right&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Right&quot;</span> }]
+    },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;heading_margin&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">60</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Space below heading&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">20</span> },
+
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Labels&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_labels&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Show field labels&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">true</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label_size&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">10</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">22</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label size&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">14</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label_color&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label colour&quot;</span> },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label_weight&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label weight&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;500&quot;</span>,
+      <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;400&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Regular&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;500&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Medium&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;600&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Semibold&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;700&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Bold&quot;</span> }]
+    },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label_margin&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">20</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Space below label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">6</span> },
+
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Fields&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_bg&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field background&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_text&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field text colour&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_placeholder_color&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Placeholder colour&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_border_color&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field border&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;#d9d9d9&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_border_focus&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field border when focused&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;#121212&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_border_width&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">4</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field border width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">1</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_radius&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">40</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field corner radius&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">4</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_padding_y&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">4</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">28</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field padding top and bottom&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">12</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_padding_x&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">4</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">28</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field padding left and right&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">12</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;field_font_size&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">12</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">20</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Field text size&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">16</span> },
+
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Button&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Send message&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_bg&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button background&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;#121212&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_text&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button text&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;#ffffff&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_bg_hover&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button background on hover&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_text_hover&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button text on hover&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_radius&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">50</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button corner radius&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">4</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_padding_y&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">6</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">30</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button padding top and bottom&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">13</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_padding_x&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">10</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">80</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button padding left and right&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">28</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_font_size&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">12</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">22</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button text size&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">16</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_full_width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full width button&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">false</span> },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;button_align&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Button alignment&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;left&quot;</span>,
+      <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;left&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Left&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;center&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Centre&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;right&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Right&quot;</span> }]
+    },
+
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Messages&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;success_message&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Success message&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Thanks, we got your message. We will get back to you shortly.&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;success_text&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Success text colour&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;success_bg&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Success background&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;error_text&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Error text colour&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;#b00020&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;color&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;error_bg&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Error background&quot;</span> },
+    { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;message_radius&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">0</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">30</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">2</span>, <span class="cb-str">&quot;unit&quot;</span>: <span class="cb-str">&quot;px&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Message corner radius&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">4</span> }
+  ],
+  <span class="cb-str">&quot;blocks&quot;</span>: [
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;name&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Name field&quot;</span>,
+      <span class="cb-str">&quot;limit&quot;</span>: <span class="cb-num">1</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Name&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;placeholder&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Placeholder&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">true</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;half&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        }
+      ]
+    },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;email&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Email field&quot;</span>,
+      <span class="cb-str">&quot;limit&quot;</span>: <span class="cb-num">1</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;paragraph&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Keep this one. Shopify uses it as the reply-to address on the email you receive.&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Email&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;placeholder&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Placeholder&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">true</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;half&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        }
+      ]
+    },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;phone&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Phone field&quot;</span>,
+      <span class="cb-str">&quot;limit&quot;</span>: <span class="cb-num">1</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Phone&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;placeholder&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Placeholder&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">false</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;half&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        }
+      ]
+    },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;message&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Message field&quot;</span>,
+      <span class="cb-str">&quot;limit&quot;</span>: <span class="cb-num">1</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Message&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;placeholder&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Placeholder&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;range&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;rows&quot;</span>, <span class="cb-str">&quot;min&quot;</span>: <span class="cb-num">3</span>, <span class="cb-str">&quot;max&quot;</span>: <span class="cb-num">12</span>, <span class="cb-str">&quot;step&quot;</span>: <span class="cb-num">1</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Rows&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-num">6</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">true</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;full&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        }
+      ]
+    },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Custom text field&quot;</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;paragraph&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;The label is what shows up in your notification email, so name it something you will recognise.&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Order number&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;placeholder&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Placeholder&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">false</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;full&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Show only when&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_when_field&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label of the controlling field&quot;</span>, <span class="cb-str">&quot;info&quot;</span>: <span class="cb-str">&quot;Leave blank to always show. Type the exact label of a dropdown or checkbox in this same form.&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_when_value&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Value that reveals this field&quot;</span>, <span class="cb-str">&quot;info&quot;</span>: <span class="cb-str">&quot;Separate several values with commas.&quot;</span> }
+      ]
+    },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Custom dropdown&quot;</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;What is this about?&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;placeholder&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;First empty option&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Please choose&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;textarea&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;options&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Options&quot;</span>, <span class="cb-str">&quot;info&quot;</span>: <span class="cb-str">&quot;One per line.&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Problem with an order\nQuestion before buying\nReturns or exchange\nWholesale enquiry\nSomething else&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">true</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;full&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Show only when&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_when_field&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label of the controlling field&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_when_value&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Value that reveals this field&quot;</span> }
+      ]
+    },
+    {
+      <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>,
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Custom checkbox&quot;</span>,
+      <span class="cb-str">&quot;settings&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;label&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Sign me up for the newsletter&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;checked_value&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Value when ticked&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;Yes&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;checkbox&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;required&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Required&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-kw">false</span> },
+        {
+          <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;width&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Width&quot;</span>, <span class="cb-str">&quot;default&quot;</span>: <span class="cb-str">&quot;full&quot;</span>,
+          <span class="cb-str">&quot;options&quot;</span>: [{ <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;half&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Half&quot;</span> }, { <span class="cb-str">&quot;value&quot;</span>: <span class="cb-str">&quot;full&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Full&quot;</span> }]
+        },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;header&quot;</span>, <span class="cb-str">&quot;content&quot;</span>: <span class="cb-str">&quot;Show only when&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_when_field&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Label of the controlling field&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;text&quot;</span>, <span class="cb-str">&quot;id&quot;</span>: <span class="cb-str">&quot;show_when_value&quot;</span>, <span class="cb-str">&quot;label&quot;</span>: <span class="cb-str">&quot;Value that reveals this field&quot;</span> }
+      ]
+    }
+  ],
+  <span class="cb-str">&quot;presets&quot;</span>: [
+    {
+      <span class="cb-str">&quot;name&quot;</span>: <span class="cb-str">&quot;Custom contact form&quot;</span>,
+      <span class="cb-str">&quot;blocks&quot;</span>: [
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;name&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;email&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;select&quot;</span> },
+        { <span class="cb-str">&quot;type&quot;</span>: <span class="cb-str">&quot;message&quot;</span> }
+      ]
+    }
+  ]
+}
+<span class="cb-lq"><span class="cb-liq">{%</span> <span class="cb-kw">endschema</span> <span class="cb-liq">%}</span></span>
+</code></pre>
+                        <div class="cbx-fade" aria-hidden="true"></div>
+                    </div>
+                    <button class="cbx-more" type="button" id="cbxMore" aria-expanded="false" aria-controls="cbxCode">Expand full code</button>
+                </div>
+
+                <p>It is a long file, but you paste it once. Everything after this is done from the theme editor.</p>
+
+                <h2 id="add-to-page">Add it to a page</h2>
+                <p>Save the file, then go to <strong>Customize</strong>, open the page you want the form on, click <strong>Add section</strong> and pick <strong>Custom contact form</strong>. It drops in preconfigured with a name field, an email field, a dropdown and a message box, so you can see it working before you change anything.</p>
+
+                <h2 id="where-submissions-go">Where submissions actually go</h2>
+                <p>This trips up more people than the code does. Submissions are sent to your <strong>Sender email</strong>, found under <strong>Settings</strong> then <strong>Notifications</strong>. That is the only field that controls it, and no amount of Liquid will override it.</p>
+                <p>The <strong>Store contact email</strong> under Store details is a completely different setting. People check that one, see the correct address sitting there, and cannot work out why nothing is arriving. You may also find older forum answers pointing at a "Recipient email" field under Notifications. That field does not exist.</p>
+
+                <h2 id="conditional">Conditional fields in twenty seconds</h2>
+                <p>Say you only want to ask for an order number when someone selects "Problem with an order".</p>
+                <ol class="cbx-steps">
+                    <li>Add a <strong>Custom dropdown</strong> block and label it <code>What is this about?</code>, keeping the default options.</li>
+                    <li>Add a <strong>Custom text field</strong> block and label it <code>Order number</code>.</li>
+                    <li>In that text block, under <strong>Show only when</strong>, type <code>What is this about?</code> in the first box and <code>Problem with an order</code> in the second.</li>
+                </ol>
+                <p>For multiple triggers, separate the values with commas. The matching runs against the label text, so if you rename the controlling dropdown later, remember to update this too. Hidden fields are also disabled, which means they are left out of the submission entirely rather than arriving empty.</p>
+
+                <h2 id="file-uploads">Why file uploads cannot work</h2>
+                <div class="info-box warning">
+                    <div class="info-box-title"><i class="fas fa-triangle-exclamation"></i> This one wastes an afternoon</div>
+                    <p>You cannot add file uploads to the native Shopify contact form. Not with clever Liquid, not with JavaScript. You will find posts suggesting you add <code>enctype="multipart/form-data"</code> and a file input. It appears to work: the form submits, the success message shows, and the file simply never arrives.</p>
+                    <p>Shopify's backend has nowhere to store an attachment so it discards it silently, which is the cruel part. Merchants ship it and find out weeks later that customers have been uploading artwork into nothing.</p>
+                </div>
+                <p>If you genuinely need files, there are three real options, in the order they are usually right:</p>
+                <ul>
+                    <li><strong>A form builder app.</strong> The monthly fee is essentially you renting their backend, which is a fair trade when you need one.</li>
+                    <li><strong>A plain HTML form</strong> without the Liquid form tag, pointed at your own endpoint that stores the file and emails you a link.</li>
+                    <li><strong>A text field asking for a Drive or Dropbox link.</strong> It sounds lazy. In practice it works better than you would expect, and it costs nothing.</li>
+                </ul>
+
+                <h2 id="when-app">When an app is still the right call</h2>
+                <p>To be straight about the limits of this approach, install an app if you need file uploads, a searchable database of past submissions, multi step forms with saved progress, payment collection inside the form, or automatic CRM syncing.</p>
+                <p>This section covers the case where you just need better questions asked at the point of enquiry, which is most stores.</p>
+
+                <h2 id="troubleshooting">If something looks wrong</h2>
+                <ul>
+                    <li><strong>The section does not appear in the theme editor.</strong> The file has to sit in the Sections folder and end in <code>.liquid</code>. If Shopify rejected the save, the schema at the bottom usually has a stray character in it.</li>
+                    <li><strong>Nothing arrives in your inbox.</strong> Check the Sender email under Settings then Notifications, then check spam. Shopify sends from its own servers, so early submissions sometimes get filtered.</li>
+                    <li><strong>A custom field is missing from the email.</strong> It was probably left blank, or the field was hidden by a "Show only when" rule at the moment of submitting. Blank fields are not included.</li>
+                    <li><strong>A conditional field never appears.</strong> The controlling label has to match exactly, including capitals and the question mark. Renaming the dropdown breaks the link until you update the rule.</li>
+                    <li><strong>The form looks unstyled.</strong> Everything is controlled in the section settings, which start deliberately neutral so the form inherits your theme rather than fighting it. Set the field and button colours there.</li>
+                </ul>
+
+                <h2 id="faq">Questions people ask</h2>
+                <div class="cbx-faq">
+                    <details>
+                        <summary>Does this work on Dawn and Horizon?</summary>
+                        <p>Yes. It is a standard section file, so it works on Dawn, Horizon and any other Online Store 2.0 theme that supports sections.</p>
+                    </details>
+                    <details>
+                        <summary>Will it survive a theme update?</summary>
+                        <p>The file is yours, not part of the theme, so updating the theme does not touch it. If you install a brand new copy of a theme rather than updating in place, you will need to add the section file to that copy and rebuild the blocks in the editor.</p>
+                    </details>
+                    <details>
+                        <summary>Can I use it on more than one page?</summary>
+                        <p>Yes. Add the section to as many pages as you like, each with its own fields. Every instance is scoped by its section ID, so the styling and conditional logic of one form cannot affect another.</p>
+                    </details>
+                    <details>
+                        <summary>Do submissions get stored anywhere in Shopify?</summary>
+                        <p>No. The native form emails you and keeps nothing. If you need a record you can search later, that is one of the clearest reasons to pay for a form app.</p>
+                    </details>
+                </div>
+
+                <div class="cbx-source">
+                    <i class="fas fa-circle-info"></i>
+                    <p>I first wrote this up as a thread on the Shopify Community after answering the same question in a dozen separate posts. If you want to ask something about your specific theme, <a href="https://community.shopify.com/t/how-to-add-custom-fields-to-your-shopify-contact-form-without-an-app/681580" target="_blank" rel="noopener noreferrer">reply on the original thread</a> and I will take a look.</p>
+                </div>
+
+                <p>If your form needs go past what this covers, or you would rather not touch theme code at all, <a href="../../services/shopify-liquid-development/index.html">I build custom Liquid sections</a> for exactly this sort of thing.</p>
+
+            </div>
+
+            <details class="cbx-toc" id="cbxToc" open>
+                <summary>On this page <i class="fas fa-chevron-down"></i></summary>
+                <ol>
+                        <li><a href="#why">Why the default form runs out of road</a></li>
+                        <li><a href="#naming">The one behaviour this is built on</a></li>
+                        <li><a href="#what-you-get">What you get after pasting it once</a></li>
+                        <li><a href="#the-code">The code</a></li>
+                        <li><a href="#add-to-page">Add it to a page</a></li>
+                        <li><a href="#where-submissions-go">Where submissions actually go</a></li>
+                        <li><a href="#conditional">Conditional fields in twenty seconds</a></li>
+                        <li><a href="#file-uploads">Why file uploads cannot work</a></li>
+                        <li><a href="#when-app">When an app is still the right call</a></li>
+                        <li><a href="#troubleshooting">If something looks wrong</a></li>
+                        <li><a href="#faq">Questions people ask</a></li>
+                </ol>
+            </details>
+            </div>
+        </div>
+    </section>
+
+    <section class="related-section">
+        <div class="container">
+            <h2>Related Resources</h2>
+            <div class="related-grid">
+                <a href="../custom-sections-shopify-dawn-theme/index.html" class="related-card">
+                    <span class="tag">Blog</span>
+                    <h3>Build Custom Sections in Shopify Dawn Theme</h3>
+                    <p>How schemas, blocks and scoped CSS fit together when you build a section from scratch.</p>
+                    <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../shopify-metafields-product-page-liquid/index.html" class="related-card">
+                    <span class="tag">Blog</span>
+                    <h3>Metafields on Product Pages with Liquid</h3>
+                    <p>Custom tabs, badges and spec tables driven by product metafields instead of hardcoded content.</p>
+                    <span class="read-more">Read article <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="../../services/shopify-liquid-development/index.html" class="related-card">
+                    <span class="tag">Service</span>
+                    <h3>Shopify Liquid Development</h3>
+                    <p>Custom Liquid coding for themes, sections, templates and advanced store functionality.</p>
+                    <span class="read-more">Learn more <i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Need a Form That Does <span class="text-gradient">More Than This?</span></h2>
+            <p>Multi step logic, custom endpoints, CRM syncing, or a form built around how your store actually sells. Tell me what it needs to do.</p>
+            <a href="../../index.html?quote=open" class="btn-primary">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Moeed<span>.</span></h3>
+                    <p>Top-ranked Shopify developer helping store owners build sites that actually sell. Based in Pakistan, working with clients everywhere.</p>
+                    <div class="footer-socials">
+                        <a href="https://www.instagram.com/moeedbuilds" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://community.shopify.com/u/moeed/activity" target="_blank" rel="noopener noreferrer" aria-label="Shopify Community"><i class="fab fa-shopify"></i></a>
+                        <a href="https://www.linkedin.com/in/moeed-irfan/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="../../services/custom-shopify-sections/index.html">Custom Sections</a></li>
+                        <li><a href="../../services/shopify-liquid-development/index.html">Liquid Development</a></li>
+                        <li><a href="../../services/shopify-checkout-customization/index.html">Checkout Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="index.html">Contact Form Custom Fields</a></li>
+                        <li><a href="../shopify-checkout-migration-non-plus-stores/index.html">Checkout Migration Guide</a></li>
+                        <li><a href="../shopify-metafields-product-page-liquid/index.html">Metafields Tutorial</a></li>
+                        <li><a href="../custom-sections-shopify-dawn-theme/index.html">Dawn Sections Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:moeed.shopify@gmail.com">moeed.shopify@gmail.com</a></li>
+                        <li><a href="https://wa.me/923353061236">+92-335-306-1236</a></li>
+                        <li><a href="../../index.html#pricing">View Pricing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Moeed Irfan. All rights reserved.</p>
+                <p>Built with <span style="color: var(--primary);">&#9829;</span> for Shopify merchants</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Nav scroll behavior
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            if (y > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+        }, { passive: true });
+
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileBackdrop').classList.toggle('open');
+            document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+        }
+
+        // Copy the section code
+        (function () {
+            const btn = document.getElementById('cbxCopy');
+            const src = document.getElementById('cbxSource');
+            if (!btn || !src) return;
+            const label = btn.querySelector('span');
+            let timer = null;
+
+            function flash(text) {
+                btn.classList.add('done');
+                label.textContent = text;
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    btn.classList.remove('done');
+                    label.textContent = 'Copy code';
+                }, 2200);
+            }
+
+            btn.addEventListener('click', () => {
+                const code = src.textContent;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(code).then(() => flash('Copied'), () => selectFallback());
+                } else {
+                    selectFallback();
+                }
+                if (typeof gtag === 'function') { gtag('event', 'code_copied', { page: 'contact_form_custom_fields' }); }
+            });
+
+            function selectFallback() {
+                const range = document.createRange();
+                range.selectNodeContents(src);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(range);
+                label.textContent = 'Press Ctrl C';
+            }
+        })();
+
+        // Expand and collapse the code block
+        (function () {
+            const wrap = document.getElementById('cbxCode');
+            const btn = document.getElementById('cbxMore');
+            if (!wrap || !btn) return;
+            btn.addEventListener('click', () => {
+                const open = wrap.classList.toggle('open');
+                btn.textContent = open ? 'Collapse code' : 'Expand full code';
+                btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+                if (!open) { wrap.scrollIntoView({ block: 'start' }); }
+            });
+        })();
+
+        // Contents rail: collapse on small screens, highlight the section in view
+        (function () {
+            const toc = document.getElementById('cbxToc');
+            if (!toc) return;
+            const wide = window.matchMedia('(min-width: 1180px)');
+            if (!wide.matches) { toc.open = false; }
+
+            const links = Array.from(toc.querySelectorAll('a'));
+            const headings = links
+                .map(a => document.getElementById(a.getAttribute('href').slice(1)))
+                .filter(Boolean);
+            if (!('IntersectionObserver' in window) || !headings.length) return;
+
+            const seen = new Set();
+            function paint() {
+                let idx = -1;
+                headings.forEach((h, i) => { if (seen.has(h)) idx = i; });
+                if (idx === -1) {
+                    // between bands, or past the last heading: keep the nearest one above
+                    for (let i = 0; i < headings.length; i++) {
+                        if (headings[i].getBoundingClientRect().top < 160) idx = i;
+                    }
+                }
+                links.forEach((a, i) => a.classList.toggle('current', i === idx));
+            }
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) { seen.add(e.target); } else { seen.delete(e.target); }
+                });
+                paint();
+            }, { rootMargin: '-120px 0px -70% 0px', threshold: 0 });
+
+            headings.forEach(h => io.observe(h));
+        })();
+    </script>
+    <script src="../../js/lenis.min.js"></script>
+    <script src="../../js/smooth-scroll.js"></script>
+    <script src="../../js/cursor.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+import { spawn } from 'node:child_process'; import fs from 'node:fs';
+const [,, url, out] = process.argv;
+const chrome = spawn('C:/Program Files/Google/Chrome/Application/chrome.exe', ['--headless=new','--remote-debugging-port=9334',`--user-data-dir=E:/React/wordpress/.tmp-claude/sh/prof`,'--enable-unsafe-swiftshader','--use-angle=swiftshader','--window-size=600,400','about:blank']);
+const sleep = ms => new Promise(r => setTimeout(r, ms)); await sleep(2500);
+const list = await (await fetch('http://127.0.0.1:9334/json')).json();
+const ws = new WebSocket(list.find(t => t.type === 'page').webSocketDebuggerUrl); await new Promise(r => ws.onopen = r);
+let id = 0; const pend = {}; ws.onmessage = e => { const m = JSON.parse(e.data); if (m.id && pend[m.id]) { pend[m.id](m.result || m.error); delete pend[m.id]; } };
+const send = (method, params = {}) => new Promise(r => { const i = ++id; pend[i] = r; ws.send(JSON.stringify({ id: i, method, params })); });
+await send('Page.enable'); await send('Emulation.setDeviceMetricsOverride', { width: 600, height: 400, deviceScaleFactor: 1, mobile: false });
+await send('Page.navigate', { url }); await sleep(6000);
+const s = await send('Page.captureScreenshot', { format: 'jpeg', quality: 70 }); fs.writeFileSync(out, Buffer.from(s.data, 'base64'));
+ws.close(); chrome.kill();

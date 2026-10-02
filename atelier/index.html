@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Northbeam · Design &amp; Build</title>
+<meta name="description" content="Northbeam designs and builds private residences. Scroll from the first drawn line to the finished house, then walk through it.">
+<meta name="theme-color" content="#0d0f12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <div class="loader__in">
+    <span class="loader__brand">Northbeam</span>
+    <span class="loader__line"><i id="loaderBar"></i></span>
+    <span class="loader__pct mono" id="loaderPct">00</span>
+  </div>
+</div>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top">Northbeam<small>Design &amp; Build</small></a>
+  <nav class="nav__links mono">
+    <a href="#top" data-goto="0.36">Residence</a>
+    <a href="#approach">Approach</a>
+    <a href="#services">Services</a>
+    <a href="#spaces">Spaces</a>
+  </nav>
+  <a class="nav__cta mono" href="#contact">Enquire</a>
+</header>
+
+<!-- Fixed stage: real footage scrubbed by scroll, with a blueprint drawn from the same frames -->
+<div class="stage" id="stage" aria-hidden="true">
+  <canvas id="film"></canvas>
+  <div class="stage__paper" id="paper"></div>
+  <canvas id="lines"></canvas>
+  <div class="stage__grade" id="grade"></div>
+  <div class="stage__scrim"></div>
+</div>
+
+<div class="caps" id="caps">
+  <section class="cap cap--hero" data-from="-1" data-to="0.058">
+    <p class="tag mono"><b>01</b> Concept · Residential design &amp; build</p>
+    <h1>Architecture<br><em>shaped by line.</em></h1>
+    <p class="lede">Every Northbeam house starts as a drawing we are prepared to build exactly. Scroll to watch one leave the page.</p>
+    <div class="actions"><a class="btn" href="#contact">Start a project</a><a class="btn btn--line" href="#top" data-goto="0.36">Walk the residence</a></div>
+  </section>
+  <section class="cap cap--hero" data-from="0.075" data-to="0.14">
+    <p class="tag mono"><b>02</b> Structure · Set out on site</p>
+    <h2 class="h1">From line to<br><em>living structure.</em></h2>
+    <p class="lede">The drawing is set out on the ground to the millimetre, then frame, roof and glazing follow the same lines.</p>
+    <ul class="spec mono"><li><span>Frame</span>Steel &amp; engineered timber</li><li><span>Ridge</span>+7.85 m</li><li><span>Glazing</span>3.2 m sliding, triple</li></ul>
+  </section>
+  <section class="cap cap--hero" data-from="0.16" data-to="0.24">
+    <p class="tag mono"><b>03</b> Realised · Hillcrest Residence</p>
+    <h2 class="h1">Enduring<br><em>residential craft.</em></h2>
+    <p class="lede">Cedar, stone and render over a frame built to outlast its first owners. 412 m², completed in fourteen months.</p>
+  </section>
+  <section class="cap cap--room" data-from="0.262" data-to="0.33">
+    <p class="tag mono"><b>—</b> The threshold</p>
+    <h2>Step inside.</h2>
+  </section>
+  <section class="cap cap--room" data-from="0.37" data-to="0.505">
+    <p class="tag mono"><b>04</b> The living volume</p>
+    <h2>One room, <em>forty feet of light.</em></h2>
+    <p>A clear-span oak floor from the entry to the garden wall, with exposed beams carrying the floor above.</p>
+  </section>
+  <section class="cap cap--room" data-from="0.54" data-to="0.64">
+    <p class="tag mono"><b>05</b> The kitchen</p>
+    <h2>Stone, oak <em>and a long view.</em></h2>
+    <p>A five-metre island in honed quartzite, clerestory glazing above the cabinetry, appliances built in flush.</p>
+  </section>
+  <section class="cap cap--room" data-from="0.665" data-to="0.73">
+    <p class="tag mono"><b>06</b> Dining</p>
+    <h2>Set for <em>twelve.</em></h2>
+    <p>Hand-blown pendants over a glass table, placed where the evening sun crosses the room.</p>
+  </section>
+  <section class="cap cap--room" data-from="0.75" data-to="0.805">
+    <p class="tag mono"><b>07</b> The principal suite</p>
+    <h2>Quiet, <em>by construction.</em></h2>
+    <p>Acoustic separation tested on site, with a private terrace facing west.</p>
+  </section>
+  <section class="cap cap--room" data-from="0.825" data-to="0.885">
+    <p class="tag mono"><b>08</b> The bath</p>
+    <h2>Marble, glass <em>and morning light.</em></h2>
+    <p>Book-matched slabs, a freestanding tub and a frameless wet room, tanked and tested before a tile was laid.</p>
+  </section>
+  <section class="cap cap--hero cap--end" data-from="0.925" data-to="1.5">
+    <p class="tag mono"><b>09</b> Handed over</p>
+    <h2 class="h1">Built once.<br><em>Lived in for generations.</em></h2>
+    <div class="actions"><a class="btn" href="#contact">Arrange a consultation</a></div>
+  </section>
+</div>
+
+<aside class="reel" id="reel" aria-label="Chapters">
+  <div class="reel__tabs mono" id="tabs"></div>
+  <div class="reel__time mono"><span id="tc">00:00</span> / 01:32</div>
+  <div class="reel__bar"><i id="reelBar"></i></div>
+</aside>
+
+<main id="top">
+  <div class="journey" id="journey"></div>
+
+  <div class="content">
+    <section class="approach" id="approach">
+      <div class="approach__text" data-reveal>
+        <p class="tag tag--dark mono"><b>The approach</b></p>
+        <h2>A house is judged<br><em>in its first ten steps.</em></h2>
+        <p>We design the walk from the gate to the door before we draw a wall. Sightlines, shade, the sound of the latch: these are set first, and the structure is engineered around them.</p>
+        <p>One team carries the house from first sketch to final key, so the drawing and the building never drift apart.</p>
+        <a class="link mono" href="#contact">Talk to an architect →</a>
+      </div>
+      <div class="approach__card" data-tilt>
+        <img src="media/door/077.webp" alt="Covered entry terrace with stone wall and sliding glass doors" loading="lazy">
+        <span class="mono">Hillcrest Residence · Entry terrace</span>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <header data-reveal>
+        <p class="tag tag--dark mono"><b>Services</b></p>
+        <h2>Comprehensive design,<br><em>from concept to delivery.</em></h2>
+      </header>
+      <div class="services__grid">
+        <article data-reveal><span class="mono">01</span><h3>Architecture</h3><p>Site appraisal, concept, planning and a fully coordinated drawing set.</p><ul class="mono"><li>Feasibility &amp; planning</li><li>3D design reviews</li><li>Interior architecture</li></ul></article>
+        <article data-reveal><span class="mono">02</span><h3>Construction</h3><p>Our own site teams build what our architects draw, under one contract.</p><ul class="mono"><li>Structure &amp; envelope</li><li>Joinery &amp; stone</li><li>Fixed-price delivery</li></ul></article>
+        <article data-reveal><span class="mono">03</span><h3>Aftercare</h3><p>A two-year defects period and a ten-year structural warranty on every house.</p><ul class="mono"><li>Seasonal inspections</li><li>Maintenance plans</li><li>Extensions &amp; refits</li></ul></article>
+      </div>
+    </section>
+
+    <section class="spaces" id="spaces">
+      <header data-reveal>
+        <p class="tag mono"><b>Hillcrest Residence</b></p>
+        <h2>Six spaces, <em>one line of thought.</em></h2>
+      </header>
+      <div class="spaces__row" id="spacesRow">
+        <figure class="space" data-hover><img src="media/living/084.webp" alt="Living room" loading="lazy"><figcaption><b>Living</b><span class="mono">86 m²</span></figcaption></figure>
+        <figure class="space" data-hover><img src="media/kitchen/052.webp" alt="Kitchen" loading="lazy"><figcaption><b>Kitchen</b><span class="mono">41 m²</span></figcaption></figure>
+        <figure class="space" data-hover><img src="media/dining/022.webp" alt="Dining room" loading="lazy"><figcaption><b>Dining</b><span class="mono">32 m²</span></figcaption></figure>
+        <figure class="space" data-hover><img src="media/bed/008.webp" alt="Principal bedroom" loading="lazy"><figcaption><b>Principal suite</b><span class="mono">38 m²</span></figcaption></figure>
+        <figure class="space" data-hover><img src="media/bath/052.webp" alt="Bathroom" loading="lazy"><figcaption><b>Bath</b><span class="mono">19 m²</span></figcaption></figure>
+        <figure class="space" data-hover><img src="media/ext/070.webp" alt="Garden terrace" loading="lazy"><figcaption><b>Terrace</b><span class="mono">64 m²</span></figcaption></figure>
+      </div>
+      <dl class="figures">
+        <div data-reveal><dt>37</dt><dd class="mono">Years building</dd></div>
+        <div data-reveal><dt>214</dt><dd class="mono">Houses handed over</dd></div>
+        <div data-reveal><dt>96%</dt><dd class="mono">Delivered on programme</dd></div>
+        <div data-reveal><dt>10 yr</dt><dd class="mono">Structural warranty</dd></div>
+      </dl>
+    </section>
+
+    <section class="contact" id="contact">
+      <div data-reveal>
+        <p class="tag mono"><b>Enquire</b></p>
+        <h2>Arrange a<br><em>private consultation.</em></h2>
+        <p>Tell us about the site and the house you have in mind. An architect replies within two working days.</p>
+      </div>
+      <form class="form" id="form" novalidate data-reveal>
+        <label><span class="mono">Full name</span><input name="name" autocomplete="name" required></label>
+        <label><span class="mono">Email address</span><input name="email" type="email" autocomplete="email" required></label>
+        <label><span class="mono">About the project</span><textarea name="msg" rows="3"></textarea></label>
+        <button class="btn" type="submit">Request a consultation</button>
+        <p class="form__note mono" id="formNote" role="status"></p>
+      </form>
+    </section>
+
+    <footer class="foot">
+      <div class="foot__mark">Northbeam</div>
+      <div class="foot__row mono">
+        <span>© 2026 Northbeam Design &amp; Build</span>
+        <span>Footage: Kindel Media via Pexels</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
