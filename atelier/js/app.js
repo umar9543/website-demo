@@ -63,7 +63,22 @@
     const jobs = []; for (const step of [8, 4, 2, 1]) for (let i = 0; i < SEQ[id]; i += step) jobs.push([id, i]);
     queue.unshift(...jobs); pump();
   }
+  // Decoded copies of the frames around the playhead. Drawing a compressed image makes the browser decode it
+  // on the spot, which is what causes hitches; these are decoded ahead of time, off the main thread.
+  const bmp = new Map(), warming = new Set(), BMP_MAX = small ? 64 : 44;
+  function warm(id, i) {
+    if (i < 0 || i >= SEQ[id] || !window.createImageBitmap) return;
+    const k = id + '/' + i, im = store[id][i];
+    if (!im || bmp.has(k) || warming.has(k)) return;
+    warming.add(k);
+    createImageBitmap(im).then(b => {
+      warming.delete(k); bmp.set(k, b);
+      while (bmp.size > BMP_MAX) { const old = bmp.keys().next().value; bmp.get(old).close(); bmp.delete(old); }
+    }).catch(() => warming.delete(k));
+  }
   function frame(id, i) {
+    const k = id + '/' + i, b = bmp.get(k);
+    if (b) { bmp.delete(k); bmp.set(k, b); return b; }     // most recently used goes to the back of the queue
     const arr = store[id];
     if (arr[i]) return arr[i];
     for (let d = 1; d < arr.length; d++) { if (arr[i - d]) return arr[i - d]; if (arr[i + d]) return arr[i + d]; }
@@ -101,13 +116,16 @@
   addEventListener('resize', resize); resize();
   function cover(ctx, im, alpha, zoom = 1) {
     if (!im) return;
-    const s = Math.max(W / im.naturalWidth, H / im.naturalHeight) * zoom, w = im.naturalWidth * s, h = im.naturalHeight * s;
+    const iw = im.naturalWidth || im.width, ih = im.naturalHeight || im.height;
+    const s = Math.max(W / iw, H / ih) * zoom, w = iw * s, h = ih * s;
     ctx.globalAlpha = alpha; ctx.drawImage(im, (W - w) / 2, (H - h) / 2, w, h);
   }
-  let moving = false;
+  let moving = false, settle = 1, dir = 1;
   function drawSeq(ctx, id, f, alpha, zoom) {
     const max = SEQ[id] - 1; f = clamp(f, 0, max);
-    if (!moving) f = Math.round(f);            // at rest, show one sharp frame
+    f = lerp(f, Math.round(f), ease(settle));   // coming to rest, glide onto one sharp frame instead of snapping
+    const near = Math.round(f);
+    for (let d = -2; d <= 12; d++) warm(id, near + d * dir);
     const i0 = Math.floor(f), i1 = Math.min(max, i0 + 1), k = f - i0;
     cover(ctx, frame(id, i0), alpha, zoom);
     if (k > 0.03 && i1 !== i0) cover(ctx, frame(id, i1), alpha * k, zoom);   // blend to the next frame for silky motion
@@ -115,7 +133,7 @@
 
   /* ---------- scroll ---------- */
   let lenis = null;
-  if (window.Lenis && !reduced) lenis = new Lenis({ duration: 1.35, smoothWheel: true, wheelMultiplier: 0.85, touchMultiplier: 1.5 });
+  if (window.Lenis && !reduced) lenis = new Lenis({ lerp: 0.07, smoothWheel: true, wheelMultiplier: 0.85, touchMultiplier: 1.4 });   // lerp: every wheel notch glides to rest
   const track = $('#journey');
   const span = () => Math.max(1, track.offsetHeight - innerHeight);
   const goto = p => { const y = track.offsetTop + p * span(); lenis ? lenis.scrollTo(y, { duration: 2.2 }) : scrollTo({ top: y, behavior: 'smooth' }); };
@@ -138,22 +156,24 @@
   const tilt = $$('[data-tilt]'), row = $('#spacesRow');
 
   /* ---------- frame loop ---------- */
-  let p = -1, target = 0, lastP = -2, last = performance.now(), chapter = -1;
+  let p = -1, target = 0, lastP = -2, last = performance.now(), chapter = -1, lastSecs = -1;
   function tick(now) {
     requestAnimationFrame(tick);
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     lenis && lenis.raf(now);
     const r = track.getBoundingClientRect();
     target = clamp(-r.top / span());
-    p = p < 0 ? target : p + (target - p) * (1 - Math.exp(-dt * 9));
+    const prevP = p;
+    p = p < 0 ? target : p + (target - p) * (1 - Math.exp(-dt * 6));
+    if (Math.abs(p - prevP) > 1e-6) dir = p > prevP ? 1 : -1;
     const onStage = r.bottom > -40;
     stage.style.visibility = onStage ? 'visible' : 'hidden';
     document.body.classList.toggle('past', r.bottom < innerHeight * 0.55);
     nav.classList.toggle('is-solid', r.bottom < 80);
 
     { let ti = 0; while (ti < SEGS.length - 1 && target >= SEGS[ti].b) ti++; demand(SEGS[ti].id); }
-    const wasMoving = moving; moving = Math.abs(target - p) > 0.0004;
-    if (wasMoving && !moving) dirty = true;
+    moving = Math.abs(target - p) > 0.0004;
+    if (moving) settle = 0; else if (settle < 1) { settle = Math.min(1, settle + dt * 3.5); dirty = true; }
     if (onStage && (dirty || Math.abs(p - lastP) > 0.00002)) {
       dirty = false; lastP = p;
       /* footage */
@@ -162,6 +182,7 @@
       const t = range(p, S.a, S.b);
       drawSeq(fctx, S.id, lerp(S.from, S.to, t), 1, 1);
       if (N && p > S.b - FADE) drawSeq(fctx, N.id, N.from, ease(range(p, S.b - FADE, S.b)), 1);
+      else if (N && dir > 0 && p > S.b - 0.04) for (let d = 0; d < 8; d++) warm(N.id, N.from + d * Math.sign(N.to - N.from));   // next room, ready before the cut
 
       /* blueprint -> structure -> realised (first segment only) */
       const bp = 1 - ease(range(p, 0.05, 0.105));          // navy paper
@@ -169,9 +190,14 @@
       const mono = 1 - ease(range(p, 0.105, 0.17));        // footage still in monochrome
       paper.style.opacity = bp.toFixed(3);
       lines.style.opacity = ln.toFixed(3);
-      if (ln > 0.002 && i === 0) { lctx.globalAlpha = 1; lctx.clearRect(0, 0, W, H); drawSeq(lctx, 'bp', lerp(S.from, S.to, t), 1, 1); }
+      if (ln > 0.002 && i === 0) {
+        lctx.globalCompositeOperation = 'source-over'; lctx.globalAlpha = 1; lctx.clearRect(0, 0, W, H);
+        drawSeq(lctx, 'bp', lerp(S.from, S.to, t), 1, 1);
+        lctx.globalCompositeOperation = 'lighter'; drawSeq(lctx, 'bp', lerp(S.from, S.to, t), 0.7, 1);   // brighter lines without a CSS filter
+      }
       const night = ease(range(p, 0.9, 0.95));
-      film.style.filter = mono > 0.002 ? `grayscale(${mono.toFixed(3)}) brightness(${lerp(1, 0.62, mono).toFixed(3)}) contrast(${lerp(1, 1.15, mono).toFixed(3)})` : (night > 0.002 ? `saturate(${lerp(1, 1.15, night).toFixed(3)})` : 'none');
+      const ff = mono > 0.002 ? `grayscale(${mono.toFixed(3)}) brightness(${lerp(1, 0.62, mono).toFixed(3)}) contrast(${lerp(1, 1.15, mono).toFixed(3)})` : 'none';
+      if (ff !== film.dataset.f) film.style.filter = film.dataset.f = ff;
       grade.style.opacity = (night * 0.9).toFixed(3);
 
       /* captions */
@@ -186,8 +212,8 @@
       let ch = 0; while (ch < CHAPTERS.length - 1 && p >= CHAPTERS[ch + 1][1]) ch++;
       if (ch !== chapter) { chapter = ch; tabEls.forEach((b, k) => b.classList.toggle('is-on', k === ch)); }
       const secs = Math.round(p * 92);
-      tc.textContent = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
-      reelBar.style.width = (p * 100).toFixed(2) + '%';
+      if (secs !== lastSecs) { lastSecs = secs; tc.textContent = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`; }
+      reelBar.style.transform = `scaleX(${p.toFixed(4)})`;
     }
 
     /* editorial motion below the film */

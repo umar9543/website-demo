@@ -71,7 +71,7 @@
     const key = `${tx.toFixed(1)},${ty.toFixed(1)},${s.toFixed(4)},${vw},${vh}`;
     if (key !== lastKey && towerEl.complete && towerEl.naturalWidth) {
       lastKey = key;
-      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const dpr = Math.min(devicePixelRatio || 1, 1.5);
       if (base.width !== Math.round(vw * dpr) || base.height !== Math.round(vh * dpr)) { base.width = Math.round(vw * dpr); base.height = Math.round(vh * dpr); }
       bctx.setTransform(1, 0, 0, 1, 0, 0); bctx.fillStyle = '#0b0d11'; bctx.fillRect(0, 0, base.width, base.height);
       bctx.setTransform(dpr * s, 0, 0, dpr * s, dpr * tx, dpr * ty);
@@ -82,7 +82,7 @@
     frame.style.visibility = overlays ? 'inherit' : 'hidden';
     if (overlays) frame.style.transform = `translate3d(${tx.toFixed(2)}px,${ty.toFixed(2)}px,0) scale(${s.toFixed(5)})`;
   }
-  let lastKey = '';
+  let lastKey = '', lastFilter = '', lastLayer = null;
 
   /* ---------- 360° rooms as CSS 3D cubes ---------- */
   const FACES = ['front', 'right', 'back', 'left', 'top', 'bottom'];
@@ -137,7 +137,7 @@
     const dt = Math.min((now - last) / 1000, 0.05); last = now;
     const r = track.getBoundingClientRect();
     const target = clamp(-r.top / Math.max(1, r.height - vh));
-    p += (target - p) * (1 - Math.exp(-dt * 7));
+    p += (target - p) * (1 - Math.exp(-dt * 5.5));
     mouse.sx += (mouse.x - mouse.sx) * (1 - Math.exp(-dt * 3)); mouse.sy += (mouse.y - mouse.sy) * (1 - Math.exp(-dt * 3));
     const onScreen = r.bottom > 0;
     document.body.classList.toggle('past-journey', r.bottom < vh * 0.6);
@@ -159,7 +159,8 @@
     placeExterior(Z, focusT);
     ext.style.opacity = extO; ext.style.visibility = extO > 0.001 ? 'visible' : 'hidden';
     const isNight = p > 0.85;
-    base.style.filter = isNight ? 'brightness(.32) saturate(.7) contrast(1.1)' : `brightness(${(1 - xr * 0.68).toFixed(3)}) saturate(${(1 - xr * 0.6).toFixed(3)})`;
+    const bf = isNight ? 'brightness(.32) saturate(.7) contrast(1.1)' : xr > 0.002 ? `brightness(${(1 - xr * 0.68).toFixed(3)}) saturate(${(1 - xr * 0.6).toFixed(3)})` : 'none';
+    if (bf !== lastFilter) base.style.filter = lastFilter = bf;   // no filter layer unless one is needed
     strips.style.opacity = xr > 0.001 ? 1 : 0;
     bandEls.forEach((b, j) => { b.style.transform = `translateY(${(-(BANDS.length - 1 - j) * 36 * xr).toFixed(2)}px)`; });
     strips.style.setProperty('--xr', xr.toFixed(3));
@@ -195,7 +196,9 @@
         viewCube(cubes[0], yaw, pit, lerp(fov, fov * 0.5, ease(toPhoto)), 1);
         cubes[1].view.style.visibility = 'hidden';
       }
-      pano.style.filter = (swap > 0 && swap < 1) || toPhoto > 0 ? `blur(${(Math.sin(Math.max(swap, toPhoto) * Math.PI) * 3).toFixed(2)}px)` : (p < 0.31 ? `blur(${((1 - range(p, 0.27, 0.31)) * 4).toFixed(2)}px)` : 'none');
+      const blur = (swap > 0 && swap < 1) || toPhoto > 0 ? Math.sin(Math.max(swap, toPhoto) * Math.PI) * 3 : (p < 0.31 ? (1 - range(p, 0.27, 0.31)) * 4 : 0);
+      const pf = blur > 0.15 ? `blur(${blur.toFixed(1)}px)` : 'none';
+      if (pf !== pano.dataset.f) pano.style.filter = pano.dataset.f = pf;
     }
 
     /* section + foundations (real photos, slow camera moves) */
@@ -209,8 +212,8 @@
     /* captions + HUD */
     caps.forEach(c => { const k = clamp((p - c.a) / 0.012) * clamp((c.b - p) / 0.012); c.el.style.opacity = k.toFixed(3); c.el.style.visibility = k > 0.001 ? 'visible' : 'hidden'; });
     const L = LAYERS.find(l => p < l[0]) || LAYERS[LAYERS.length - 1];
-    hudLayer.textContent = L[1]; hudWhere.textContent = L[2]; hudBar.style.width = (p * 100).toFixed(1) + '%';
-    document.documentElement.style.setProperty('--jp', p.toFixed(4));
+    if (L !== lastLayer) { lastLayer = L; hudLayer.textContent = L[1]; hudWhere.textContent = L[2]; }
+    hudBar.style.transform = `scaleX(${p.toFixed(4)})`;
   }
 
   // tell the page loader when the first view is ready

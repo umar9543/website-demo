@@ -43,7 +43,6 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
 /* stage */
 .stage { position: fixed; inset: 0; height: 100lvh; z-index: 0; background: #07090c; overflow: hidden; }
 .stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-#film { will-change: filter; }
 .stage__paper { position: absolute; inset: 0; opacity: 0;
   background:
     linear-gradient(rgba(190, 220, 255, .09) 1px, transparent 1px) 0 0 / 100% 48px,
@@ -51,7 +50,7 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
     linear-gradient(rgba(190, 220, 255, .045) 1px, transparent 1px) 0 0 / 100% 12px,
     linear-gradient(90deg, rgba(190, 220, 255, .045) 1px, transparent 1px) 0 0 / 12px 100%,
     radial-gradient(120% 90% at 60% 40%, #123a7a, var(--navy) 55%, #061a3c); }
-#lines { mix-blend-mode: screen; opacity: 0; filter: drop-shadow(0 0 2px rgba(170, 215, 255, .9)) brightness(1.5); }
+#lines { mix-blend-mode: screen; opacity: 0; }
 .stage__grade { position: absolute; inset: 0; opacity: 0; pointer-events: none;
   background: linear-gradient(180deg, rgba(14, 22, 48, .78) 0%, rgba(38, 30, 46, .5) 45%, rgba(201, 122, 60, .34) 100%); mix-blend-mode: multiply; }
 .stage__scrim { position: absolute; inset: 0; pointer-events: none;
@@ -91,7 +90,7 @@ h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--gold); }
 .reel__tabs button.is-on { color: var(--cream); } .reel__tabs button.is-on i { color: var(--gold); }
 .reel__time { color: rgba(243, 239, 232, .7); font-variant-numeric: tabular-nums; padding: 6px 0; }
 .reel__bar { grid-column: 1 / -1; height: 1px; background: rgba(243, 239, 232, .22); }
-.reel__bar i { display: block; height: 100%; width: 0; background: var(--gold); }
+.reel__bar i { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: 0 50%; background: var(--gold); }
 body.past .reel, body.past .caps { opacity: 0; visibility: hidden; }
 
 /* journey track + content */

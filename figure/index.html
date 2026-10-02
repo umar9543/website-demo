@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Limit Breaker · 1/6 Scale Statue</title>
+<meta name="description" content="A concept product page: scroll to turn a collector statue through 360 degrees and move in on the sculpt, the paint and the base.">
+<meta name="theme-color" content="#191919">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="intro">
+
+<div class="loader" id="loader"><div><b>LB</b><span class="mono" id="loaderPct">Loading 0%</span><i><em id="loaderBar"></em></i></div></div>
+
+<header class="nav">
+  <a class="nav__brand" href="#top">Limit<span>/</span>Breaker</a>
+  <nav class="nav__links mono"><a href="#top" data-goto="0.2">Sculpt</a><a href="#top" data-goto="0.44">Paint</a><a href="#top" data-goto="0.66">Base</a><a href="#details">Details</a></nav>
+  <a class="nav__cta mono" href="#reserve">Reserve</a>
+</header>
+
+<!-- Fixed stage: the statue turns as you scroll (120 frames = one full turn); drag it to spin it yourself -->
+<div class="stage" id="stage">
+  <div class="ghost" id="ghost" aria-hidden="true"><span>LIMIT</span><span>BREAKER</span></div>
+  <div class="aura" id="aura" aria-hidden="true"></div>
+  <canvas id="embers" aria-hidden="true"></canvas>
+  <canvas id="spin" aria-label="Statue, turning through 360 degrees"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+  <div class="ring mono" id="ring" aria-hidden="true"><span id="deg">000°</span></div>
+</div>
+
+<div class="caps">
+  <section class="cap cap--hero" data-from="-1" data-to="0.1">
+    <p class="tag mono"><b>1/6 scale</b> Collector statue · Edition of 500</p>
+    <h1>Limit<br><em>Breaker</em></h1>
+    <p class="lede">42 cm of hand-painted polystone, caught at the instant the ground gives way. Scroll to turn it. Drag to spin it yourself.</p>
+    <div class="actions"><a class="btn" href="#reserve">Reserve yours</a><a class="btn btn--line" href="#top" data-goto="0.2">See the sculpt</a></div>
+  </section>
+  <section class="cap cap--right" data-from="0.15" data-to="0.3">
+    <p class="tag mono"><b>01</b> The sculpt</p>
+    <h2>One line of force.</h2>
+    <p>From the planted back foot to the open palm, every fold of the torn gi follows a single diagonal. Turn it and the pose holds from every side.</p>
+    <ul class="spec mono"><li><span>Height</span>42 cm</li><li><span>Parts</span>14, pinned and magnetised</li></ul>
+  </section>
+  <section class="cap cap--left" data-from="0.38" data-to="0.54">
+    <p class="tag mono"><b>02</b> The paint</p>
+    <h2>Eleven layers, by hand.</h2>
+    <p>Silver hair shaded from pearl to steel, skin tones airbrushed then glazed, and matt varnish everywhere except the eyes.</p>
+    <ul class="spec mono"><li><span>Finish</span>Matt, satin eyes</li><li><span>Painters</span>Six per statue</li></ul>
+  </section>
+  <section class="cap cap--right" data-from="0.6" data-to="0.76">
+    <p class="tag mono"><b>03</b> The base</p>
+    <h2>Shattered ground.</h2>
+    <p>Thirty-eight rock shards cast separately and set by hand, so no two bases break the same way.</p>
+    <ul class="spec mono"><li><span>Diameter</span>31 cm</li><li><span>Weight</span>4.8 kg</li></ul>
+  </section>
+  <section class="cap cap--hero cap--end" data-from="0.9" data-to="1.5">
+    <p class="tag mono"><b>360°</b> Nothing hidden</p>
+    <h2 class="h1">Every<br><em>angle.</em></h2>
+    <div class="actions"><a class="btn" href="#reserve">Reserve yours</a></div>
+  </section>
+</div>
+
+<aside class="hud mono" id="hud" aria-hidden="true">
+  <span id="hudLabel">00 · Intro</span>
+  <i><em id="hudBar"></em></i>
+  <span>Scroll · Drag</span>
+</aside>
+
+<main id="top">
+  <div class="journey" id="journey"></div>
+
+  <div class="content">
+    <section class="details" id="details">
+      <header data-reveal>
+        <p class="tag mono"><b>Details</b></p>
+        <h2>Built to be <em>looked at closely.</em></h2>
+      </header>
+      <div class="details__grid">
+        <figure data-reveal data-tilt><div class="shot shot--a"></div><figcaption><b>Front</b><span class="mono">Frame 000</span></figcaption></figure>
+        <figure data-reveal data-tilt><div class="shot shot--b"></div><figcaption><b>Three-quarter</b><span class="mono">Frame 040</span></figcaption></figure>
+        <figure data-reveal data-tilt><div class="shot shot--c"></div><figcaption><b>Back</b><span class="mono">Frame 075</span></figcaption></figure>
+      </div>
+      <dl class="figures">
+        <div data-reveal><dt>42<small>cm</small></dt><dd class="mono">Total height</dd></div>
+        <div data-reveal><dt>500</dt><dd class="mono">Numbered pieces</dd></div>
+        <div data-reveal><dt>11</dt><dd class="mono">Paint layers</dd></div>
+        <div data-reveal><dt>4.8<small>kg</small></dt><dd class="mono">Shipping weight</dd></div>
+      </dl>
+    </section>
+
+    <section class="reserve" id="reserve">
+      <div data-reveal>
+        <p class="tag mono"><b>Reserve</b></p>
+        <h2>Claim a <em>number.</em></h2>
+        <p>Leave your email and we will hold one of the 500 for you for seven days.</p>
+      </div>
+      <form class="form" id="form" novalidate data-reveal>
+        <label><span class="mono">Email address</span><input name="email" type="email" autocomplete="email" required></label>
+        <button class="btn" type="submit">Hold my statue</button>
+        <p class="form__note mono" id="formNote" role="status"></p>
+      </form>
+    </section>
+
+    <footer class="foot mono">
+      <span>Concept page · product details are placeholders</span>
+      <span>3D model generated with Tripo AI</span>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

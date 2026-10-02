@@ -15,15 +15,15 @@
 .j-band { position: absolute; background-image: url(../media/tower.jpg); background-size: 2400px 1600px; background-repeat: no-repeat;
   box-shadow: 0 0 0 2px rgba(143, 208, 255, calc(var(--xr) * .7)), 0 22px 40px rgba(0, 0, 0, calc(var(--xr) * .55)); will-change: transform; }
 .j-band__x { position: absolute; inset: 0; width: 100%; height: 100%; opacity: var(--xr); overflow: visible; }
-.jx { fill: none; stroke: var(--xray); stroke-width: 2; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 4px rgba(143,208,255,.8)); }
+.jx { fill: none; stroke: var(--xray); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .jx--soft { stroke: rgba(143, 208, 255, .45); stroke-width: 1; }
-.jx--amber { stroke: var(--amber); filter: drop-shadow(0 0 6px rgba(242,169,59,.9)); }
+.jx--amber { stroke: var(--amber); stroke-width: 3; }
 .jx--draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
 .j-xray, .j-night { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .j-xray { opacity: 0; }
 .j-xray text { fill: var(--concrete); font: 500 18px var(--f-mono); letter-spacing: 1.5px; opacity: 0; paint-order: stroke; stroke: rgba(10,12,16,.6); stroke-width: 4px; }
 .j-xray .jt-amber { fill: var(--amber); }
-.j-night { opacity: 0; mix-blend-mode: screen; filter: blur(.6px) drop-shadow(0 0 4px rgba(255, 186, 110, .7)); }
+.j-night { opacity: 0; mix-blend-mode: screen; }
 
 /* real 360° rooms as CSS 3D cubes */
 .j-pano { position: absolute; inset: 0; overflow: hidden; visibility: hidden; background: #0b0d11; }
@@ -37,12 +37,11 @@
 .j-face--top { transform: rotateX(-90deg) translateZ(-512px); }
 .j-face--bottom { transform: rotateX(90deg) translateZ(-512px); }
 
-.j-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; visibility: hidden; will-change: transform, opacity; filter: saturate(.92) contrast(1.04); }
+.j-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; visibility: hidden; will-change: transform, opacity; }
 .j-flash { position: absolute; inset: 0; opacity: 0; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(255,242,224,.95), rgba(255,242,224,0) 70%); }
-.j-grain { position: absolute; inset: -50%; pointer-events: none; opacity: .07; mix-blend-mode: overlay;
+.j-grain { position: absolute; inset: 0; pointer-events: none; opacity: .045;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: jgrain 1s steps(6) infinite; }
-@keyframes jgrain { 0% { transform: translate(0,0); } 33% { transform: translate(-6%,4%); } 66% { transform: translate(5%,-3%); } 100% { transform: translate(-2%,6%); } }
+  }
 .j-vignette { position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(9,11,15,.55) 0%, rgba(9,11,15,.15) 40%, transparent 60%), radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(0,0,0,.5)); }
 
@@ -59,8 +58,7 @@
 .j-cap--hero { left: var(--gutter); bottom: clamp(36px, 11vh, 120px); width: min(820px, calc(100% - 2 * var(--gutter))); }
 .j-cap--end { pointer-events: auto; }
 .j-cap--side { left: max(var(--gutter), calc((100vw - var(--maxw)) / 2)); top: 50%; transform: translateY(-50%); width: min(440px, calc(100% - 2 * var(--gutter)));
-  padding: 28px 28px 24px; background: rgba(17, 21, 27, .62); border: 1px solid var(--line);
-  backdrop-filter: blur(16px) saturate(1.2); -webkit-backdrop-filter: blur(16px) saturate(1.2); }
+  padding: 28px 28px 24px; background: rgba(17, 21, 27, .84); border: 1px solid var(--line); }   /* solid: blurring live footage behind text costs a frame's budget */
 .j-cap--side::before { content: ""; position: absolute; top: -1px; left: -1px; width: 22px; height: 22px; border-top: 2px solid var(--amber); border-left: 2px solid var(--amber); }
 .j-cap--side h2 { font-size: clamp(2rem, 3.6vw, 3.3rem); }
 .j-cap--side p { margin: 14px 0 0; color: var(--concrete-2); }
@@ -69,12 +67,12 @@
 .j-cap dt { color: var(--muted); text-transform: uppercase; } .j-cap dd { margin: 0; }
 
 .j-hud { position: fixed; z-index: 20; right: var(--gutter); bottom: calc(28px + env(safe-area-inset-bottom, 0px)); width: 200px; padding: 13px 15px;
-  background: rgba(17,21,27,.55); border: 1px solid var(--line); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); display: grid; gap: 4px;
+  background: rgba(17,21,27,.82); border: 1px solid var(--line); display: grid; gap: 4px;
   transition: opacity .4s; }
 .j-hud div { display: flex; justify-content: space-between; color: var(--muted); }
 .j-hud b { color: var(--concrete); font-weight: 500; }
 .j-hud__bar { height: 2px; background: var(--line); margin-top: 6px; }
-.j-hud__bar i { display: block; height: 100%; width: 0; background: var(--amber); }
+.j-hud__bar i { display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: 0 50%; background: var(--amber); }
 body.past-journey .j-hud, body.past-journey .j-caps { opacity: 0; visibility: hidden; }
 
 @media (max-width: 860px) {
